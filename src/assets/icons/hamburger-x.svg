@@ -1,0 +1,37 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  data-open="false"
+  aria-hidden="true"
+  stroke="gray"
+>
+  <style>
+    svg path {
+      stroke-dasharray: 20;
+      transition: transform 0.1s cubic-bezier(0, .2, .7, 1), stroke-dashoffset 0.2s cubic-bezier(0, .2, .7, 1);
+    }
+
+    svg[data-open="false"] path {transform: rotate(0deg) translateX(0px) }
+    svg[data-open="true"] .left-top {transform: rotate(45deg) translateX(1.5px) !important;}
+    svg[data-open="true"] .right-top {transform: rotate(-45deg) translateX(-1.5px) !important;}
+    svg[data-open="true"] .left-bottom {transform: rotate(-45deg) translateX(1.5px) !important;}
+    svg[data-open="true"] .right-bottom {transform: rotate(45deg) translateX(-1.5px) !important;}
+    svg[data-open="true"] .left-center {stroke-dashoffset: -9.5 !important;}
+    svg[data-open="true"] .right-center {stroke-dashoffset: -9.5 !important;}
+  </style>
+  <g
+    stroke-width="1.5"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-dasharray="20"
+  >
+    <path class="left-top" d="M2.5 6.5 L12 6.5" style="transform-origin: 6.5px 6.5px;"/>
+    <path class="right-top" d="M21.5 6.5 L12 6.5" style="transform-origin: 17.5px 6.5px;"/>
+    <path class="left-center" d="M2.5 12 L12 12" stroke-dasharray="9.5"/>
+    <path class="right-center" d="M21.5 12 L12 12" stroke-dasharray="9.5"/>
+    <path class="left-bottom" d="M2.5 17.5 L12 17.5" style="transform-origin: 6.5px 17.5px;"/>
+    <path class="right-bottom" d="M21.5 17.5 L12 17.5" style="transform-origin: 17.5px 17.5px;"/>
+  </g>
+</svg>
