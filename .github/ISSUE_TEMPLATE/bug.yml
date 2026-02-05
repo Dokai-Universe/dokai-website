@@ -1,0 +1,51 @@
+name: "🐛 Bug"
+description: "버그 기록"
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: symptom
+    attributes:
+      label: "현상"
+      placeholder: "예) Safari에서 fixed 헤더 z-index가 먹지 않음"
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: "재현"
+      placeholder: |
+        1)
+        2)
+        3)
+    validations:
+      required: false
+
+  - type: textarea
+    id: env
+    attributes:
+      label: "환경"
+      placeholder: "OS / Browser / Device / commit"
+    validations:
+      required: false
+
+  - type: textarea
+    id: cause_fix
+    attributes:
+      label: "원인/해결"
+      placeholder: |
+        원인:
+        해결:
+        남은 것:
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: done
+    attributes:
+      label: "체크"
+      options:
+        - label: "로컬에서 재현 확인"
+        - label: "수정 후 재현 안 됨"
+        - label: "회귀(영향 범위) 간단 확인"
