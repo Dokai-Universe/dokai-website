@@ -1,8 +1,10 @@
 import Link from "next/link";
+import LogoSVG from "@/assets/dokai.svg";
 
 const Header = () => {
   return (
     <header>
+      <LogoSVG />
       <nav>
         <ul>
           <li>
