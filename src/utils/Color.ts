@@ -27,7 +27,6 @@ const hexToRgb = (hex: string): [number, number, number] => {
   return [r, g, b];
 };
 
-// WCAG relative luminance (0~1)
 const relativeLuminance = (hex: string): number => {
   const [r8, g8, b8] = hexToRgb(hex);
 
@@ -40,9 +39,19 @@ const relativeLuminance = (hex: string): number => {
   return 0.2126 * r + 0.7152 * g + 0.0722 * b;
 };
 
-// 배경이 어두우면 흰색 글씨, 밝으면 검정 글씨
 export const getReadableTextColor = (bgHex: string) => {
   const L = relativeLuminance(bgHex);
-  // 임계치: 0.5는 무난, 조금 더 “흰색을 더 자주” 쓰고 싶으면 0.6~0.7로 올려
+
   return L < 0.5 ? "white" : "black";
+};
+
+// Random Light Color(bg)
+const RandomLightColors = RandomColors.filter(
+  (e) => getReadableTextColor(e) === "black",
+);
+
+export const getRandomLightColor = () => {
+  return RandomLightColors[
+    Math.floor(Math.random() * RandomLightColors.length)
+  ];
 };

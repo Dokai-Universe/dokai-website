@@ -8,7 +8,10 @@ globalStyle("*, *::before, *::after", {
 globalStyle("html, body", {
   margin: 0,
   padding: 0,
-  fontSize: "1.111111vw",
+});
+
+globalStyle("html", {
+  fontSize: "clamp(7px, 1.111111vw, 2vw)",
 });
 
 globalStyle("body", {

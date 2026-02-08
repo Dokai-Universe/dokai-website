@@ -58,8 +58,21 @@ export const ItemSub = style({
   fontSize: vars.fontSize.md,
   fontWeight: "300",
   lineHeight: "1.166667em",
-  letterSpacing: "0.0em",
   whiteSpace: "pre-line",
+  transition: "opacity .2s ease",
+
+  selectors: {
+    "&.email": {
+      textDecoration: "underline",
+    },
+    "&.address": {
+      letterSpacing: "0.04em",
+    },
+
+    "&:hover": {
+      opacity: 0.5,
+    },
+  },
 });
 
 export const ItemSubAddress = style({
@@ -88,10 +101,25 @@ export const FooterTitle = style({
   gridColumn: "span 3",
 });
 
-export const FooterNav = style({
+export const SocialRow = style({
   gridColumn: "4 / span 4",
   display: "flex",
   justifyContent: "space-between",
+
+  fontSize: vars.fontSize.md,
+  fontWeight: "300",
+  lineHeight: "1.4em",
+  letterSpacing: "-0.03em",
+});
+
+export const SocialLink = style({
+  transition: "opacity .2s ease",
+
+  selectors: {
+    "&:hover": {
+      opacity: 0.5,
+    },
+  },
 });
 
 export const FooterIconButton = style({
