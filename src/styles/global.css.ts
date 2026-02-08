@@ -47,3 +47,7 @@ globalStyle("p", {
 globalStyle(".underline", {
   textDecoration: "underline",
 });
+
+globalStyle(".letter-spacing-4", {
+  letterSpacing: "0.04em",
+});
