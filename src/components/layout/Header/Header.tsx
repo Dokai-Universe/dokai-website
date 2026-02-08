@@ -17,11 +17,11 @@ const Header = () => {
         <LogoSVG className={Styles.LogoImage} />
       </Link>
       <nav className={Styles.NavContainer}>
+        <Link href="/works" className={Styles.NavLabel}>
+          Work
+        </Link>
         <Link href="/about" className={Styles.NavLabel}>
           About
-        </Link>
-        <Link href="/works" className={Styles.NavLabel}>
-          Works
         </Link>
         <SearchSVG className={Styles.NavIcon} />
 

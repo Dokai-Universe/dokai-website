@@ -6,8 +6,8 @@ export const Layout = style({
   padding: "2rem",
   columnGap: "1rem",
   display: "grid",
-  width: "100%",
   gridTemplateColumns: "repeat(8, minmax(0px, 1fr))",
+  width: "100%",
   alignItems: "start",
 });
 
@@ -32,6 +32,9 @@ export const NavContainer = style({
 
 export const NavLabel = style({
   fontSize: vars.fontSize.md,
+  fontWeight: "300",
+  lineHeight: "1.83em",
+  letterSpacing: "-0.03em",
 });
 
 export const NavIcon = style({

@@ -20,6 +20,10 @@ globalStyle("body", {
   textRendering: "optimizeLegibility",
   background: vars.color.bg, // theme vars 사용 가능
   color: vars.color.text,
+  minHeight: "100dvh",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-between",
 });
 
 globalStyle("img, picture, video, canvas, svg", {
@@ -38,4 +42,8 @@ globalStyle("a", {
 
 globalStyle("p", {
   margin: "0",
+});
+
+globalStyle(".underline", {
+  textDecoration: "underline",
 });

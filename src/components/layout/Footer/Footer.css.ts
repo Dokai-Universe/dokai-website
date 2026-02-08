@@ -1,0 +1,73 @@
+import { vars } from "@styles/theme.css";
+import { style } from "@vanilla-extract/css";
+
+export const Layout = style({
+  padding: "2rem",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-between",
+  minHeight: "80dvh",
+  background: "var(--footer-bg)",
+  color: "var(--footer-fg)",
+  gap: "2rem",
+
+  selectors: {
+    "&::before": {
+      content: '""',
+    },
+  },
+});
+
+export const Content = style({
+  columnGap: "1rem",
+  display: "grid",
+  gridTemplateColumns: "repeat(8, minmax(0px, 1fr))",
+});
+
+export const ContentTitle = style({
+  gridColumn: "span 2",
+  fontSize: vars.fontSize.xl,
+  fontWeight: "500",
+  lineHeight: "1em",
+  letterSpacing: "0em",
+  textTransform: "uppercase",
+});
+
+export const ContentWrapper = style({
+  gridColumn: "3 / span 4",
+  display: "flex",
+  flexDirection: "column",
+  gap: "3.25rem",
+});
+
+export const ItemContainer = style({
+  display: "flex",
+  flexDirection: "column",
+  gap: "0.875rem",
+});
+
+export const ItemTitle = style({
+  fontSize: vars.fontSize.md,
+  fontWeight: "500",
+  lineHeight: "1em",
+  letterSpacing: "0.04em",
+  textTransform: "uppercase",
+});
+
+export const ItemSub = style({
+  fontSize: vars.fontSize.md,
+  fontWeight: "300",
+  lineHeight: "1.166667em",
+  letterSpacing: "0.0em",
+  whiteSpace: "pre-line",
+});
+
+export const ItemSubAddress = style({
+  letterSpacing: "0.04em",
+});
+
+export const ItemMapContainer = style({
+  width: "100%",
+  aspectRatio: "8 / 3",
+  background: "gray",
+});
