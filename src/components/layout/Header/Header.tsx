@@ -1,16 +1,17 @@
 "use client";
 
 import Link from "next/link";
-import LogoSVG from "@/assets/dokai.svg";
-import SearchSVG from "@/assets/icons/search.svg";
+import LogoSVG from "@assets/dokai.svg";
+import SearchSVG from "@assets/icons/search.svg";
 import { useState } from "react";
-import HamburgerXSVG from "@/assets/icons/hamburger-x.svg";
+import HamburgerXSVG from "@assets/icons/hamburger-x.svg";
+import * as Style from "./Header.css";
 
 const Header = () => {
   const [openDrawer, setOpenDrawer] = useState(false);
 
   return (
-    <header className="flex items-center justify-between absolute top-0 z-50 w-full p-4 bg-white">
+    <header className={Style.Layout}>
       <Link href="/">
         <LogoSVG />
       </Link>
