@@ -13,3 +13,8 @@ export const [themeClass, vars] = createTheme({
   },
   fontSize: fontSize,
 });
+
+export const media = {
+  tablet: "(max-width: 1023px)",
+  mobile: "(max-width: 639px)",
+};

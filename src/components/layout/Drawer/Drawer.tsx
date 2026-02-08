@@ -18,6 +18,8 @@ const drawerMenuItems = [
   { label: "Careers", href: "" },
 ];
 
+import SearchSVG from "@assets/icons/search.svg";
+
 const DrawerMenu = ({ isOpen, handleClose }: DrawerMenuProps) => {
   const drawerBg = useMemo(() => getRandomLightColor(), []);
 
@@ -34,6 +36,7 @@ const DrawerMenu = ({ isOpen, handleClose }: DrawerMenuProps) => {
     >
       <div className={Styles.SectionGrid}>
         <div className={Styles.MenuColumn}>
+          <SearchSVG className={Styles.MenuSearch} />
           {drawerMenuItems.map((menu) => (
             <Link
               key={`DRAWER_MENU_${menu.label}`}
@@ -47,7 +50,7 @@ const DrawerMenu = ({ isOpen, handleClose }: DrawerMenuProps) => {
           ))}
         </div>
       </div>
-      <div className={Styles.SectionGrid}>
+      <div className={`${Styles.SectionGrid} ${Styles.FooterGrid}`}>
         <p className={Styles.FooterText}>© 2026 DOKAI</p>
         <div className={Styles.SocialRow}>
           {ExternalLinks.map((link) => (

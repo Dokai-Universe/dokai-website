@@ -1,4 +1,4 @@
-import { vars } from "@styles/theme.css";
+import { media, vars } from "@styles/theme.css";
 import { style } from "@vanilla-extract/css";
 
 export const Layout = style({
@@ -31,6 +31,15 @@ export const ContentTitle = style({
   lineHeight: "1em",
   letterSpacing: "0em",
   textTransform: "uppercase",
+
+  "@media": {
+    [media.tablet]: {
+      gridColumn: "2 / -2",
+    },
+    [media.mobile]: {
+      gridColumn: "1 / -1",
+    },
+  },
 });
 
 export const ContentWrapper = style({
@@ -38,16 +47,33 @@ export const ContentWrapper = style({
   display: "flex",
   flexDirection: "column",
   gap: "3.25rem",
+
+  "@media": {
+    [media.tablet]: {
+      gridColumn: "2 / -2",
+      marginTop: "2rem",
+      gap: "2.25rem",
+    },
+    [media.mobile]: {
+      gridColumn: "1 / -1",
+    },
+  },
 });
 
 export const ItemContainer = style({
   display: "flex",
   flexDirection: "column",
   gap: "0.875rem",
+  fontSize: vars.fontSize.md,
+
+  "@media": {
+    [media.tablet]: {
+      fontSize: vars.fontSize.sm,
+    },
+  },
 });
 
 export const ItemTitle = style({
-  fontSize: vars.fontSize.md,
   fontWeight: "500",
   lineHeight: "1em",
   letterSpacing: "0.04em",
@@ -55,7 +81,6 @@ export const ItemTitle = style({
 });
 
 export const ItemSub = style({
-  fontSize: vars.fontSize.md,
   fontWeight: "300",
   lineHeight: "1.166667em",
   whiteSpace: "pre-line",
@@ -84,6 +109,15 @@ export const ItemMapContainer = style({
   width: "100%",
   aspectRatio: "8 / 3",
   background: "gray",
+
+  "@media": {
+    [media.tablet]: {
+      aspectRatio: "9 / 4",
+    },
+    [media.mobile]: {
+      aspectRatio: "2 / 1",
+    },
+  },
 });
 
 export const Footer = style({
@@ -95,25 +129,59 @@ export const Footer = style({
   fontWeight: "300",
   lineHeight: "1.4em",
   letterSpacing: "-0.03em",
+  alignItems: "flex-end",
+
+  "@media": {
+    [media.mobile]: {
+      fontSize: vars.fontSize.sm,
+    },
+  },
 });
 
 export const FooterTitle = style({
   gridColumn: "span 3",
+  textIndent: "-1.5rem",
+  marginLeft: "1.5rem",
+
+  "@media": {
+    [media.mobile]: {
+      gridColumn: "1 / span 6",
+    },
+  },
 });
 
 export const SocialRow = style({
-  gridColumn: "4 / span 4",
+  gridColumn: "4 / -1",
   display: "flex",
   justifyContent: "space-between",
 
-  fontSize: vars.fontSize.md,
   fontWeight: "300",
   lineHeight: "1.4em",
   letterSpacing: "-0.03em",
+  height: "fit-content",
+  alignItems: "flex-end",
+
+  "@media": {
+    [media.mobile]: {
+      gridColumn: "1 / span 8",
+      justifyContent: "flex-start",
+      columnGap: "2rem",
+      rowGap: "0.5rem",
+      flexWrap: "wrap",
+    },
+    "(max-width: 439px)": {
+      flexDirection: "column",
+      alignItems: "flex-start",
+      marginTop: "1rem",
+      rowGap: "0.5rem",
+      marginLeft: "1.5rem",
+    },
+  },
 });
 
 export const SocialLink = style({
   transition: "opacity .2s ease",
+  height: "fit-content",
 
   selectors: {
     "&:hover": {
@@ -122,13 +190,24 @@ export const SocialLink = style({
   },
 });
 
-export const FooterIconButton = style({
-  gridColumn: "8 / span 1",
-  position: "relative",
+export const SocialSpacer = style({
+  display: "none",
+
+  "@media": {
+    [media.mobile]: {
+      display: "block",
+      flexGrow: "1",
+    },
+    "(max-width: 439px)": {
+      display: "none",
+    },
+  },
 });
 
+export const FooterIconButton = style({
+  position: "relative",
+});
 export const FooterIcon = style({
-  position: "absolute",
   right: "0",
   bottom: "0",
   width: "3.25rem",

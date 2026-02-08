@@ -1,4 +1,4 @@
-import { vars } from "@styles/theme.css";
+import { media, vars } from "@styles/theme.css";
 import { keyframes, style } from "@vanilla-extract/css";
 
 export const Layout = style({
@@ -9,18 +9,34 @@ export const Layout = style({
   gridTemplateColumns: "repeat(8, minmax(0px, 1fr))",
   width: "100%",
   alignItems: "start",
+
+  "@media": {
+    [media.mobile]: {
+      position: "static",
+    },
+  },
 });
 
 export const LogoContainer = style({
-  width: "100%",
-  height: "auto",
-  aspectRatio: "1 / 1",
   position: "relative",
   zIndex: "2",
+  display: "flex",
+  width: "7.5rem",
+  height: "auto",
+  aspectRatio: "1 / 1",
+
+  "@media": {
+    [media.mobile]: {
+      width: "4rem",
+    },
+  },
 });
 
 export const LogoImage = style({
-  width: "60%",
+  position: "absolute",
+  top: "0",
+  left: "0",
+  width: "100%",
   height: "auto",
   aspectRatio: "1 / 1",
 });
@@ -34,13 +50,29 @@ export const Clickable = style({
       opacity: 0.5,
     },
   },
+
+  "@media": {
+    [media.mobile]: {
+      display: "none",
+    },
+  },
 });
 
 export const NavContainer = style({
-  gridColumn: "7 / span 2",
+  gridColumn: "7 / -1",
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
+
+  "@media": {
+    [media.tablet]: {
+      gridColumn: "6 / -1",
+    },
+    [media.mobile]: {
+      gridColumn: "8 / -1",
+      justifyContent: "flex-end",
+    },
+  },
 });
 
 export const NavLabel = style({
@@ -74,7 +106,14 @@ export const MenuButton = style({
   margin: "0",
   padding: "0",
 
+  transition: "opacity .2s ease-in-out",
+  cursor: "pointer",
+
   selectors: {
+    "&:hover": {
+      opacity: 0.5,
+    },
+
     '&[data-floating="true"]': {
       position: "fixed",
       margin: "2rem 3rem",

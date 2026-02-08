@@ -68,10 +68,11 @@ const Footer = () => {
               {link.label}
             </Link>
           ))}
+          <span className={Styles.SocialSpacer} />
+          <Link href="/" className={Styles.FooterIconButton}>
+            <Image src={img} alt="logo" className={Styles.FooterIcon} />
+          </Link>
         </nav>
-        <Link href="/" className={Styles.FooterIconButton}>
-          <Image src={img} alt="logo" className={Styles.FooterIcon} />
-        </Link>
       </div>
     </footer>
   );

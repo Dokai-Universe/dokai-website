@@ -1,4 +1,4 @@
-import { vars } from "@styles/theme.css";
+import { media, vars } from "@styles/theme.css";
 import { style } from "@vanilla-extract/css";
 
 export const Overlay = style({
@@ -42,13 +42,44 @@ export const MenuColumn = style({
   letterSpacing: "0.03em",
   textTransform: "uppercase",
   overflow: "hidden",
+  display: "flex",
+  flexDirection: "column",
+  gap: "0.5rem",
+
+  "@media": {
+    [media.tablet]: {
+      fontSize: vars.fontSize.xl,
+      marginTop: "8rem",
+    },
+
+    [media.mobile]: {
+      gridColumn: "1 / -1",
+      fontSize: vars.fontSize.lg,
+      marginTop: "12rem",
+    },
+  },
+});
+
+export const MenuSearch = style({
+  width: "1em",
+  height: "auto",
+  aspectRatio: "1 / 1",
+  stroke: "black",
+  display: "none",
+  strokeWidth: "2px",
+
+  "@media": {
+    [media.mobile]: {
+      display: "block",
+    },
+  },
 });
 
 export const MenuLink = style({
   display: "flex",
   gap: "1rem",
   alignItems: "center",
-  transform: `translateX(calc(-1 * (${vars.fontSize.xxl} + 1rem)))`,
+  transform: `translateX(calc(-1 * (1em + 1rem)))`,
   transition: "opacity .3s ease, transform .2s ease",
 
   selectors: {
@@ -60,10 +91,20 @@ export const MenuLink = style({
 });
 
 export const MenuArrow = style({
-  width: vars.fontSize.xxl,
+  width: "1em",
   height: "auto",
   aspectRatio: "1 / 1",
   stroke: "black",
+});
+
+export const FooterGrid = style({
+  "@media": {
+    [media.mobile]: {
+      display: "flex",
+      flexDirection: "column-reverse",
+      gap: "1rem",
+    },
+  },
 });
 
 export const FooterText = style({
@@ -84,6 +125,22 @@ export const SocialRow = style({
   fontWeight: "300",
   lineHeight: "1.4em",
   letterSpacing: "-0.03em",
+
+  "@media": {
+    [media.tablet]: {
+      gridColumn: "4 / span 5",
+
+      "::after": {
+        content: "''",
+      },
+    },
+
+    [media.mobile]: {
+      display: "flex",
+      flexDirection: "column",
+      gap: "0.5rem",
+    },
+  },
 });
 
 export const SocialLink = style({

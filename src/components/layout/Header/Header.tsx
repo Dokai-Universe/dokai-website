@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import LogoSVG from "@assets/dokai.svg";
+import LogoPNG from "@assets/dokai.png";
 import SearchSVG from "@assets/icons/search.svg";
 import { useCallback, useState } from "react";
 import HamburgerXSVG from "@assets/icons/hamburger-x.svg";
@@ -10,6 +10,7 @@ import MenuBGSVG from "@assets/icons/menu-bg.svg";
 import DrawerMenu from "../Drawer/Drawer";
 import useLockBodyScroll from "@hooks/useLockBodyScroll";
 import useIsPastSentinel from "@hooks/useIsPastSentinel";
+import Image from "next/image";
 
 const Header = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -22,7 +23,7 @@ const Header = () => {
   return (
     <header className={Styles.Layout}>
       <Link href="/" className={Styles.LogoContainer}>
-        <LogoSVG className={Styles.LogoImage} />
+        <Image src={LogoPNG} alt="logo" className={Styles.LogoImage} />
       </Link>
       <nav ref={sentinelRef} className={Styles.NavContainer}>
         <Link
@@ -40,7 +41,7 @@ const Header = () => {
         <SearchSVG className={`${Styles.NavIcon} ${Styles.Clickable}`} />
         <button
           type="button"
-          className={`${Styles.MenuButton} ${Styles.Clickable}`}
+          className={Styles.MenuButton}
           data-floating={isFloatingMenu}
           onClick={() => setIsDrawerOpen((prev) => !prev)}
           aria-expanded={isDrawerOpen}
