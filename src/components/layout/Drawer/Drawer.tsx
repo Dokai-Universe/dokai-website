@@ -5,9 +5,11 @@ import { getRandomLightColor } from "@utils/Color";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 import * as Styles from "./Drawer.css";
+import LogoPNG from "@assets/dokai.png";
 
 import ArrowRightSVG from "@assets/icons/arrow-right.svg";
 import SearchSVG from "@assets/icons/search.svg";
+import Image from "next/image";
 
 type DrawerMenuProps = {
   isOpen: boolean;
@@ -57,19 +59,22 @@ const DrawerMenu = ({
           ))}
         </div>
       </div>
-      <div className={`${Styles.SectionGrid} ${Styles.FooterGrid}`}>
-        <p className={Styles.FooterText}>© 2026 DOKAI</p>
-        <div className={Styles.SocialRow}>
+      <div className={Styles.Footer}>
+        <p className={Styles.FooterTitle}>© 2026 DOKAI. All Rights Reserved.</p>
+        <nav className={Styles.SocialRow}>
           {ExternalLinks.map((link) => (
             <Link
-              key={`DRAWER_MENU_${link.label}`}
               href={link.href}
+              key={`FOOTER_LINK_${link.label}`}
               className={Styles.SocialLink}
             >
               {link.label}
             </Link>
           ))}
-        </div>
+        </nav>
+        <Link href="/" className={Styles.FooterIconButton}>
+          <Image src={LogoPNG} alt="logo" className={Styles.FooterIcon} />
+        </Link>
       </div>
     </div>
   );

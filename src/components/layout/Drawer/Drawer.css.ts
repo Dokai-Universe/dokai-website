@@ -56,6 +56,7 @@ export const MenuColumn = style({
       gridColumn: "1 / -1",
       fontSize: vars.fontSize.lg,
       marginTop: "12rem",
+      marginLeft: "1.5rem",
     },
   },
 });
@@ -97,59 +98,94 @@ export const MenuArrow = style({
   stroke: "black",
 });
 
-export const FooterGrid = style({
+export const Footer = style({
+  position: "relative",
+  columnGap: "1rem",
+  display: "grid",
+  gridTemplateColumns: "repeat(8, minmax(0px, 1fr))",
+  fontSize: vars.fontSize.md,
+  fontWeight: "300",
+  lineHeight: "1.4em",
+  letterSpacing: "-0.03em",
+  alignItems: "flex-end",
+  padding: "2rem",
+
   "@media": {
     [media.mobile]: {
-      display: "flex",
-      flexDirection: "column-reverse",
-      gap: "1rem",
+      fontSize: vars.fontSize.sm,
+      rowGap: "1rem",
     },
   },
 });
 
-export const FooterText = style({
+export const FooterTitle = style({
   gridColumn: "span 3",
-
-  fontSize: vars.fontSize.md,
-  fontWeight: "300",
-  lineHeight: "1.4em",
-  letterSpacing: "-0.03em",
-});
-
-export const SocialRow = style({
-  gridColumn: "4 / span 4",
-  display: "flex",
-  justifyContent: "space-between",
-
-  fontSize: vars.fontSize.md,
-  fontWeight: "300",
-  lineHeight: "1.4em",
-  letterSpacing: "-0.03em",
+  textIndent: "-1.5rem",
+  marginLeft: "1.5rem",
 
   "@media": {
     [media.tablet]: {
-      gridColumn: "4 / span 5",
-      fontSize: vars.fontSize.sm,
-
-      "::after": {
-        content: "''",
-      },
+      gridColumn: "1 / span 4",
     },
-
     [media.mobile]: {
-      display: "flex",
+      gridColumn: "1 / span 6",
+    },
+  },
+});
+
+export const SocialRow = style({
+  gridColumn: "4 / -2",
+  display: "flex",
+  justifyContent: "space-between",
+
+  fontWeight: "300",
+  lineHeight: "1.4em",
+  letterSpacing: "-0.03em",
+  height: "fit-content",
+  alignItems: "flex-end",
+
+  "@media": {
+    [media.tablet]: {
+      gridColumn: "5 / span 2",
       flexDirection: "column",
+      alignItems: "flex-start",
       gap: "0.5rem",
+    },
+    [media.mobile]: {
+      gridRow: "1",
+      gridColumn: "1 / -1",
+      flexDirection: "column",
+      alignItems: "flex-start",
+      marginLeft: "1.5rem",
     },
   },
 });
 
 export const SocialLink = style({
   transition: "opacity .2s ease",
+  height: "fit-content",
 
   selectors: {
     "&:hover": {
       opacity: 0.5,
     },
   },
+});
+
+export const FooterIconButton = style({
+  gridColumn: "8",
+  position: "relative",
+  marginLeft: "auto",
+
+  "@media": {
+    [media.tablet]: {
+      gridColumn: "7 / -1",
+    },
+  },
+});
+
+export const FooterIcon = style({
+  width: "3.25rem",
+  height: "auto",
+  aspectRatio: "1 / 1",
 });

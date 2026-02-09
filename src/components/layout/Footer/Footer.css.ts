@@ -19,9 +19,11 @@ export const Layout = style({
 });
 
 export const Content = style({
-  columnGap: "2rem",
+  columnGap: "1rem",
   display: "grid",
   gridTemplateColumns: "repeat(8, minmax(0px, 1fr))",
+  rowGap: "3rem",
+  margin: "auto 0",
 });
 
 export const ContentTitle = style({
@@ -51,7 +53,6 @@ export const ContentWrapper = style({
   "@media": {
     [media.desktop]: {
       gridColumn: "2 / -2",
-      marginTop: "2rem",
       gap: "2.25rem",
     },
     [media.tablet]: {
@@ -133,6 +134,7 @@ export const Footer = style({
   lineHeight: "1.4em",
   letterSpacing: "-0.03em",
   alignItems: "flex-end",
+  rowGap: "1rem",
 
   "@media": {
     [media.mobile]: {
@@ -148,7 +150,7 @@ export const FooterTitle = style({
 
   "@media": {
     [media.tablet]: {
-      gridColumn: "1 / span 6",
+      gridColumn: "1 / span 7",
     },
   },
 });
@@ -166,14 +168,17 @@ export const SocialRow = style({
 
   "@media": {
     [media.tablet]: {
+      gridRow: "1",
       gridColumn: "1 / span 6",
     },
     [media.mobile]: {
-      flexDirection: "column",
+      gridColumn: "1 / -1",
+      flexDirection: "row",
       alignItems: "flex-start",
       gap: "0.5rem",
-      marginTop: "1rem",
-      marginLeft: "1.5rem",
+      // marginLeft: "1.5rem",
+      justifyContent: "space-around",
+      flexWrap: "wrap",
     },
   },
 });
@@ -193,16 +198,13 @@ export const FooterIconButton = style({
   gridColumn: "8",
   position: "relative",
   marginLeft: "auto",
-
-  "@media": {
-    [media.tablet]: {
-      gridColumn: "7 / -1",
-    },
-  },
+  width: "3.25rem",
 });
 
 export const FooterIcon = style({
-  width: "3.25rem",
+  position: "absolute",
   height: "auto",
   aspectRatio: "1 / 1",
+  bottom: "0",
+  right: "0",
 });
