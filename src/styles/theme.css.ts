@@ -17,7 +17,7 @@ export const [themeClass, vars] = createTheme({
 });
 
 export const media = {
-  mobile: "(max-width: 480px)",
+  mobile: "(max-width: 540px)",
   tablet: "(max-width: 768px)",
   desktop: "(max-width: 1024px)",
 };

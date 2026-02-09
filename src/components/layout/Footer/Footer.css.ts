@@ -19,7 +19,7 @@ export const Layout = style({
 });
 
 export const Content = style({
-  columnGap: "1rem",
+  columnGap: "2rem",
   display: "grid",
   gridTemplateColumns: "repeat(8, minmax(0px, 1fr))",
 });
@@ -33,10 +33,10 @@ export const ContentTitle = style({
   textTransform: "uppercase",
 
   "@media": {
-    [media.tablet]: {
+    [media.desktop]: {
       gridColumn: "2 / -2",
     },
-    [media.mobile]: {
+    [media.tablet]: {
       gridColumn: "1 / -1",
     },
   },
@@ -49,10 +49,13 @@ export const ContentWrapper = style({
   gap: "3.25rem",
 
   "@media": {
-    [media.tablet]: {
+    [media.desktop]: {
       gridColumn: "2 / -2",
       marginTop: "2rem",
       gap: "2.25rem",
+    },
+    [media.tablet]: {
+      gridColumn: "1 / -2",
     },
     [media.mobile]: {
       gridColumn: "1 / -1",
@@ -144,14 +147,14 @@ export const FooterTitle = style({
   marginLeft: "1.5rem",
 
   "@media": {
-    [media.mobile]: {
+    [media.tablet]: {
       gridColumn: "1 / span 6",
     },
   },
 });
 
 export const SocialRow = style({
-  gridColumn: "4 / -1",
+  gridColumn: "4 / -2",
   display: "flex",
   justifyContent: "space-between",
 
@@ -162,18 +165,14 @@ export const SocialRow = style({
   alignItems: "flex-end",
 
   "@media": {
-    [media.mobile]: {
-      gridColumn: "1 / span 8",
-      justifyContent: "flex-start",
-      columnGap: "2rem",
-      rowGap: "0.5rem",
-      flexWrap: "wrap",
+    [media.tablet]: {
+      gridColumn: "1 / span 6",
     },
-    "(max-width: 439px)": {
+    [media.mobile]: {
       flexDirection: "column",
       alignItems: "flex-start",
+      gap: "0.5rem",
       marginTop: "1rem",
-      rowGap: "0.5rem",
       marginLeft: "1.5rem",
     },
   },
@@ -190,26 +189,19 @@ export const SocialLink = style({
   },
 });
 
-export const SocialSpacer = style({
-  display: "none",
+export const FooterIconButton = style({
+  gridColumn: "8",
+  position: "relative",
+  marginLeft: "auto",
 
   "@media": {
-    [media.mobile]: {
-      display: "block",
-      flexGrow: "1",
-    },
-    "(max-width: 439px)": {
-      display: "none",
+    [media.tablet]: {
+      gridColumn: "7 / -1",
     },
   },
 });
 
-export const FooterIconButton = style({
-  position: "relative",
-});
 export const FooterIcon = style({
-  right: "0",
-  bottom: "0",
   width: "3.25rem",
   height: "auto",
   aspectRatio: "1 / 1",

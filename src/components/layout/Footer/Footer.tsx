@@ -55,7 +55,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <span />
+      {/* <span /> */}
       <div className={Styles.Footer}>
         <p className={Styles.FooterTitle}>© 2026 DOKAI. All Rights Reserved.</p>
         <nav className={Styles.SocialRow}>
@@ -68,11 +68,10 @@ const Footer = () => {
               {link.label}
             </Link>
           ))}
-          <span className={Styles.SocialSpacer} />
-          <Link href="/" className={Styles.FooterIconButton}>
-            <Image src={img} alt="logo" className={Styles.FooterIcon} />
-          </Link>
         </nav>
+        <Link href="/" className={Styles.FooterIconButton}>
+          <Image src={img} alt="logo" className={Styles.FooterIcon} />
+        </Link>
       </div>
     </footer>
   );

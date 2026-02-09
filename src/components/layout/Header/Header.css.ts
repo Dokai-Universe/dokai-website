@@ -11,7 +11,7 @@ export const Layout = style({
   alignItems: "start",
 
   "@media": {
-    [media.mobile]: {
+    [media.desktop]: {
       position: "static",
     },
   },
@@ -26,6 +26,9 @@ export const LogoContainer = style({
   aspectRatio: "1 / 1",
 
   "@media": {
+    [media.tablet]: {
+      width: "6rem",
+    },
     [media.mobile]: {
       width: "4rem",
     },
@@ -65,8 +68,11 @@ export const NavContainer = style({
   alignItems: "center",
 
   "@media": {
-    [media.tablet]: {
+    [media.desktop]: {
       gridColumn: "6 / -1",
+    },
+    [media.tablet]: {
+      gridColumn: "5 / -1",
     },
     [media.mobile]: {
       gridColumn: "8 / -1",

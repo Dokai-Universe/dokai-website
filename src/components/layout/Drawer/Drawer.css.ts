@@ -129,6 +129,7 @@ export const SocialRow = style({
   "@media": {
     [media.tablet]: {
       gridColumn: "4 / span 5",
+      fontSize: vars.fontSize.sm,
 
       "::after": {
         content: "''",
