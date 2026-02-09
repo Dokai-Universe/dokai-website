@@ -19,10 +19,16 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@assets/*": ["./src/assets/*"],
+      "@components/*": ["./src/components/*"],
+      "@styles/*": ["./src/styles/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@ts/*": ["./src/ts/*"],
+      "@hooks/*": ["./src/hooks/*"]
     }
   },
   "include": [
+    "svgr.d.ts",
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
