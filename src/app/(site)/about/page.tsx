@@ -1,9 +1,10 @@
-const AboutPage = () => {
-  return (
-    <div>
-      <h1>About</h1>
-    </div>
-  );
+import AboutPageClient from "./client";
+import { fetchAbout } from "./fetch";
+
+const AboutPage = async () => {
+  const aboutInfo = await fetchAbout();
+
+  return <AboutPageClient aboutInfo={aboutInfo} />;
 };
 
 export default AboutPage;
