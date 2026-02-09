@@ -6,6 +6,7 @@ import * as FooterStyles from "@components/layout/Footer/Footer.css";
 import * as Styles from "./style.css";
 import Image from "next/image";
 import CompanyInfo from "@ts/company_info";
+import NaverMap from "@components/ui/NaverMap/NaverMap";
 
 const ContactPage = () => {
   const { email, tel, address } = CompanyInfo;
@@ -41,7 +42,9 @@ const ContactPage = () => {
             >
               {address.value}
             </Link>
-            <div className={FooterStyles.ItemMapContainer}></div>
+            <div className={FooterStyles.ItemMapContainer}>
+              <NaverMap />
+            </div>
           </div>
         </div>
       </div>

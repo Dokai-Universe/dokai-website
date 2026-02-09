@@ -6,6 +6,7 @@ import Image from "next/image";
 import ExternalLinks from "@ts/external_links";
 import { getRandomColor, getReadableTextColor } from "@utils/Color";
 import CompanyInfo from "@ts/company_info";
+import NaverMap from "@components/ui/NaverMap/NaverMap";
 
 const Footer = () => {
   const bg = getRandomColor();
@@ -51,7 +52,9 @@ const Footer = () => {
             >
               {address.value}
             </Link>
-            <div className={Styles.ItemMapContainer}></div>
+            <div className={Styles.ItemMapContainer}>
+              <NaverMap />
+            </div>
           </div>
         </div>
       </div>
