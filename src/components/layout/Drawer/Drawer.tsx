@@ -16,10 +16,10 @@ type DrawerMenuProps = {
 };
 
 const drawerMenuItems = [
-  { label: "Work", href: "/works" },
+  { label: "Work", href: "/work" },
   { label: "About", href: "/about" },
-  { label: "Contact", href: "" },
-  { label: "Careers", href: "" },
+  { label: "Contact", href: "/contact" },
+  { label: "Careers", href: "/careers" },
 ];
 
 const DrawerMenu = ({

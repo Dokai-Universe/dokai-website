@@ -1,12 +1,13 @@
 import * as Styles from "./Search.css";
 import Image from "next/image";
 import { getRandomColor, getReadableTextColor } from "@utils/Color";
-
-const MockFilter = ["All", "Work", "Research", "Posts", "Feed", "Jobs"];
+import categories from "@ts/categories";
+import { toTitleCase } from "@utils/Text";
+import ImageCaptionOverlay from "@components/ui/ImageCaptionOverlay/ImageCaptionOverlay";
 
 const MockResult = [
   {
-    filter: "Work",
+    filter: "ANIMATE",
     items: [
       {
         id: 0,
@@ -83,7 +84,7 @@ const MockResult = [
     ],
   },
   {
-    filter: "Feed",
+    filter: "CHARACTER",
     items: [
       {
         id: 9,
@@ -104,7 +105,7 @@ const MockResult = [
     ],
   },
   {
-    filter: "Jobs",
+    filter: "FILM",
     items: [
       {
         id: 11,
@@ -148,9 +149,9 @@ const SearchResult = ({ queries }: { queries: string[] }) => {
     <div className={Styles.Result}>
       <p className={Styles.FilterTitle}>Filter</p>
       <div className={Styles.FilterGroup}>
-        {MockFilter.map((filter, idx) => {
+        {categories.map((filter, idx) => {
           const count =
-            filter === "All"
+            filter === "EVERYTHING"
               ? searchResults.reduce((acc, r) => acc + r.items.length, 0)
               : searchResults.find((r) => r.filter === filter)?.items.length ||
                 0;
@@ -164,7 +165,7 @@ const SearchResult = ({ queries }: { queries: string[] }) => {
                 disabled={count === 0}
               />
               <p className={Styles.FilterText}>
-                {filter} ({count})
+                {toTitleCase(filter)} ({count})
               </p>
             </label>
           );
@@ -188,25 +189,12 @@ const SearchResult = ({ queries }: { queries: string[] }) => {
                   name={item.title}
                   onClick={handleItemClick}
                 >
-                  <div className={Styles.ResultItemImageContainer}>
-                    <Image
-                      src={item.image}
-                      alt={item.title}
-                      fill
-                      className={Styles.ResultItemImage}
-                    />
-                    <div
-                      className={Styles.ResultItemHoverOverlay}
-                      style={
-                        {
-                          "--hover-bg-color": bg,
-                          "--hover-fg-color": fg,
-                        } as React.CSSProperties
-                      }
-                    >
-                      <p>{item.summary}</p>
-                    </div>
-                  </div>
+                  <ImageCaptionOverlay
+                    className={Styles.ResultItemImageContainer}
+                    src={item.image}
+                    alt={item.title}
+                    caption={item.summary}
+                  />
                   <p className={Styles.ResultItemText}>{item.title}</p>
                 </button>
               );

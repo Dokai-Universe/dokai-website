@@ -7,7 +7,6 @@ export const Container = style({
   rowGap: "7.5rem",
   columnGap: "1rem",
   padding: "2rem",
-  minHeight: "100dvh",
   marginBottom: "15rem",
 });
 

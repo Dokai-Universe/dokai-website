@@ -267,6 +267,9 @@ export const FilterGroup = style({
     [media.desktop]: {
       gridColumn: "5 / span 2",
     },
+    [media.tablet]: {
+      gridColumn: "5 / -1",
+    },
     [media.mobile]: {
       gridColumn: "3 / -1",
     },
@@ -281,7 +284,6 @@ export const Filter = style({
   fontSize: vars.fontSize.sm,
   fontWeight: "300",
   letterSpacing: "0.04rem",
-  overflow: "hidden",
   transition: "opacity 0.2s ease-in-out",
   borderBottomColor: "transparent",
   borderBottomWidth: "1.5px",
@@ -314,8 +316,6 @@ export const FilterInput = style({
 });
 
 export const FilterText = style({
-  overflow: "hidden",
-  textOverflow: "ellipsis",
   whiteSpace: "nowrap",
 });
 
@@ -365,41 +365,22 @@ export const ResultItem = style({
 });
 
 export const ResultItemImageContainer = style({
-  position: "relative",
   width: "100%",
   height: "auto",
   aspectRatio: "6 / 7",
   overflow: "hidden",
+
+  fontSize: vars.fontSize.lg,
+  fontWeight: "300",
+  letterSpacing: "0.04rem",
+  textAlign: "left",
+  lineHeight: "1.33em",
 
   "@media": {
     [media.tablet]: {
       aspectRatio: "4 / 3",
     },
   },
-});
-
-export const ResultItemImage = style({
-  objectFit: "cover",
-  transition: "opacity 0.2s ease-in-out",
-});
-
-export const ResultItemHoverOverlay = style({
-  position: "absolute",
-  top: 0,
-  left: 0,
-  width: "100%",
-  height: "100%",
-  backgroundColor: "var(--hover-bg-color)",
-  opacity: 0,
-  color: "var(--hover-fg-color)",
-  transition: "opacity 0.2s ease-in-out, transform 0.2s ease-in-out",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  fontSize: vars.fontSize.md,
-  fontWeight: "500",
-  letterSpacing: "0.04rem",
-  transform: "translateY(-50%)",
 });
 
 export const ResultItemText = style({
@@ -410,15 +391,6 @@ export const ResultItemText = style({
   textAlign: "left",
 });
 
-globalStyle(`${ResultItem}:hover .${ResultItemImage}`, {
+globalStyle(`${ResultItem}:hover > p`, {
   opacity: 0.5,
-});
-
-globalStyle(`${ResultItem}:hover .${ResultItemText}`, {
-  opacity: 0.5,
-});
-
-globalStyle(`${ResultItemImageContainer}:hover .${ResultItemHoverOverlay}`, {
-  opacity: 1,
-  transform: "translateY(0)",
 });
