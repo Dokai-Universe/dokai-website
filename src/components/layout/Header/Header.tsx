@@ -45,10 +45,7 @@ const Header = () => {
         <Image src={LogoPNG} alt="logo" className={Styles.LogoImage} />
       </Link>
       <nav ref={sentinelRef} className={Styles.NavContainer}>
-        <Link
-          href="/works"
-          className={`${Styles.NavLabel} ${Styles.Clickable}`}
-        >
+        <Link href="/work" className={`${Styles.NavLabel} ${Styles.Clickable}`}>
           Work
         </Link>
         <Link

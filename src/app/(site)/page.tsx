@@ -1,6 +1,8 @@
 import { MockMainItems } from "@ts/mock";
 import Image from "next/image";
 import * as Styles from "./style.css";
+import { toTitleCase } from "@utils/Text";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -15,12 +17,12 @@ export default function Home() {
         const isWide = (isOdd && isEvenColumn) || (!isOdd && !isEvenColumn);
 
         return (
-          <button
-            type="button"
+          <Link
             key={item.id}
             className={Styles.ItemContainer}
             data-first-row={idx % 2 === 0}
             data-is-wide={isWide}
+            href={item.url}
           >
             <div className={Styles.ItemImageContainer}>
               <Image
@@ -31,13 +33,13 @@ export default function Home() {
               />
             </div>
             <div className={Styles.ItemTextContainer} data-is-wide={isWide}>
-              <p>{item.tag}</p>
+              <p>{toTitleCase(item.type)}</p>
               <div className={Styles.ItemTextContent}>
                 <p>{item.title}</p>
                 <p className={Styles.ItemTextSummary}>{item.summary}</p>
               </div>
             </div>
-          </button>
+          </Link>
         );
       })}
     </div>
