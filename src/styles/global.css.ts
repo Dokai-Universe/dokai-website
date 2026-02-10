@@ -1,5 +1,5 @@
-import { globalStyle } from "@vanilla-extract/css";
-import { vars } from "./theme.css"; // (테마 쓰는 경우)
+import { globalStyle, keyframes } from "@vanilla-extract/css";
+import { media, vars } from "./theme.css"; // (테마 쓰는 경우)
 
 globalStyle("*, *::before, *::after", {
   boxSizing: "border-box",
@@ -11,7 +11,7 @@ globalStyle("html, body", {
 });
 
 globalStyle("html", {
-  fontSize: "clamp(13px, 1.111111vw, 2vw)",
+  fontSize: "clamp(16px, 1.4889vw, 40px)",
 });
 
 globalStyle("body", {
@@ -26,7 +26,7 @@ globalStyle("body", {
   minHeight: "100dvh",
   display: "flex",
   flexDirection: "column",
-  justifyContent: "space-between",
+  overflowY: "scroll",
 });
 
 globalStyle("img, picture, video, canvas, svg", {
@@ -61,4 +61,32 @@ globalStyle("button", {
   outline: "none",
   background: "transparent",
   padding: "0",
+});
+
+globalStyle(".layout-wrapper", {
+  padding: "2rem",
+
+  "@media": {
+    [media.tablet]: {
+      padding: "24px",
+    },
+    [media.mobile]: {
+      padding: "20px",
+    },
+  },
+});
+
+const fadeInUp = keyframes({
+  from: {
+    opacity: 0,
+    transform: "translateY(1rem)",
+  },
+  to: {
+    opacity: 1,
+    transform: "translateY(0)",
+  },
+});
+
+globalStyle(".page-wrapper", {
+  animation: `${fadeInUp} 0.5s ease-in-out`,
 });

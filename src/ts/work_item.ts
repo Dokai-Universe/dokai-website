@@ -1,13 +1,11 @@
 import { Category } from "./categories";
-import { accentColors } from "../styles/palette";
+import { MediaSource } from "@components/ui/Media/types";
 
 export type WorkItem = {
   id: number;
   title: string;
   category: Category;
-  imageSrc: string;
-  imageType: "IMAGE" | "VIDEO";
+  media: MediaSource;
   href: string;
   summary: string;
-  bgColor: string;
 };

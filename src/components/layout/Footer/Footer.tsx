@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import LogoPNG from "@assets/dokai.png";
 import LogoWhitePNG from "@assets/dokai-white.png";
@@ -7,25 +9,31 @@ import ExternalLinks from "@ts/external_links";
 import { getRandomColor, getReadableTextColor } from "@utils/Color";
 import CompanyInfo from "@ts/company_info";
 import NaverMap from "@components/ui/NaverMap/NaverMap";
+import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 
 const Footer = () => {
-  const bg = getRandomColor();
-  const fg = getReadableTextColor(bg);
-
-  const img = fg == "black" ? LogoPNG : LogoWhitePNG;
+  const pathname = usePathname();
+  const footerRef = useRef<HTMLDivElement>(null);
 
   const { email, tel, address } = CompanyInfo;
 
+  useEffect(() => {
+    const bg = getRandomColor();
+    const fg = getReadableTextColor(bg);
+
+    if (footerRef.current) {
+      footerRef.current.style.setProperty("--footer-bg", bg);
+      footerRef.current.style.setProperty("--footer-fg", fg);
+      footerRef.current.style.setProperty(
+        "--footer-logo-invert",
+        fg === "black" ? "0" : "1",
+      );
+    }
+  }, [pathname]);
+
   return (
-    <footer
-      className={Styles.Layout}
-      style={
-        {
-          "--footer-bg": bg,
-          "--footer-fg": fg,
-        } as React.CSSProperties
-      }
-    >
+    <footer ref={footerRef} className={`${Styles.Layout} layout-wrapper`}>
       <div className={Styles.Content}>
         <p className={Styles.ContentTitle}>Contact</p>
         <div className={Styles.ContentWrapper}>
@@ -58,7 +66,6 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      {/* <span /> */}
       <div className={Styles.Footer}>
         <p className={Styles.FooterTitle}>© 2026 DOKAI. All Rights Reserved.</p>
         <nav className={Styles.SocialRow}>
@@ -73,7 +80,7 @@ const Footer = () => {
           ))}
         </nav>
         <Link href="/" className={Styles.FooterIconButton}>
-          <Image src={img} alt="logo" className={Styles.FooterIcon} />
+          <Image src={LogoPNG} alt="logo" className={Styles.FooterIcon} />
         </Link>
       </div>
     </footer>

@@ -2,6 +2,8 @@
 
 import Script from "next/script";
 import { useEffect, useRef, useState } from "react";
+import MascotPNG from "@assets/mascot.png";
+import Image from "next/image";
 
 declare global {
   interface Window {
@@ -36,12 +38,10 @@ export default function NaverMap({
     if (!mapElRef.current) return;
     if (!window.naver?.maps) return;
 
-    // (선택) 인증 실패 핸들러
     window.navermap_authFailure = () => {
       console.error("Naver Maps auth failure: 도메인/키 설정 확인");
     };
 
-    // 이미 생성했으면 재생성 방지
     if (mapRef.current) return;
 
     const bounds = new naver.maps.LatLngBounds(
@@ -102,11 +102,38 @@ export default function NaverMap({
       style={{ position: "relative", width: "100%", height: "100%" }}
     >
       <Script
+        id="naver-maps-sdk"
         src={`https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=${key}&language=en`}
         strategy="afterInteractive"
-        onLoad={() => setReady(true)}
+        onReady={() => setReady(true)}
       />
-      <div ref={mapElRef} style={{ width: "100%", height: "100%" }} />
+      <div
+        style={{
+          position: "absolute",
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Image
+          src={MascotPNG}
+          alt="mascot"
+          fill
+          style={{ objectFit: "contain", padding: "2rem" }}
+        />
+      </div>
+      <div
+        ref={mapElRef}
+        style={{
+          width: "100%",
+          height: "100%",
+          opacity: ready ? 1 : 0,
+          transition: "opacity .2s ease",
+        }}
+      />
     </div>
   );
 }

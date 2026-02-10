@@ -1,8 +1,8 @@
 export const fontSize = {
-  xs: "1.125rem", // 18px
-  sm: "1.375rem", // 22px
-  md: "1.5rem", // 24px
-  lg: "1.875rem", // 30px
-  xl: "3rem", // 48px
-  xxl: "4rem", // 64px
+  xs: "0.875rem", // 14px
+  sm: "1.000rem", // 16px
+  md: "1.25rem", // 20px
+  lg: "1.5rem", // 24px
+  xl: "2rem", // 32px
+  xxl: "3rem", // 48px
 } as const;

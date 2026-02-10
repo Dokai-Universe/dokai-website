@@ -2,7 +2,6 @@ import { media, vars } from "@styles/theme.css";
 import { style } from "@vanilla-extract/css";
 
 export const Layout = style({
-  padding: "2rem",
   display: "flex",
   flexDirection: "column",
   justifyContent: "space-between",
@@ -112,7 +111,6 @@ export const ItemMapContainer = style({
   marginTop: "1rem",
   width: "100%",
   aspectRatio: "8 / 3",
-  background: "lightgray",
 
   "@media": {
     [media.tablet]: {
@@ -134,7 +132,7 @@ export const Footer = style({
   lineHeight: "1.4em",
   letterSpacing: "-0.03em",
   alignItems: "flex-end",
-  rowGap: "1rem",
+  rowGap: "0.5rem",
 
   "@media": {
     [media.mobile]: {
@@ -170,13 +168,14 @@ export const SocialRow = style({
     [media.tablet]: {
       gridRow: "1",
       gridColumn: "1 / span 6",
+      fontSize: vars.fontSize.sm,
+      margin: "0 1rem",
     },
     [media.mobile]: {
-      gridColumn: "1 / -1",
+      gridColumn: "1 / span 7",
       flexDirection: "row",
       alignItems: "flex-start",
-      gap: "0.5rem",
-      // marginLeft: "1.5rem",
+      gap: "1rem",
       justifyContent: "space-around",
       flexWrap: "wrap",
     },
@@ -202,6 +201,7 @@ export const FooterIconButton = style({
   "@media": {
     [media.tablet]: {
       gridColumn: "7 / -1",
+      gridRow: "1 / span 2",
     },
   },
 });
@@ -210,4 +210,5 @@ export const FooterIcon = style({
   width: "3.25rem",
   height: "auto",
   aspectRatio: "1 / 1",
+  filter: "invert(var(--footer-logo-invert, 0))",
 });

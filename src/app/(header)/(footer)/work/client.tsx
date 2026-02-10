@@ -1,0 +1,81 @@
+"use client";
+
+import categories, { Category } from "@ts/categories";
+import { toTitleCase } from "@utils/Text";
+import Link from "next/link";
+import * as Styles from "./style.css";
+import { useEffect, useMemo, useState } from "react";
+import { WorkItem } from "@ts/work_item";
+import MoreButton from "@components/ui/Button/More";
+import MediaHoverOverlay from "@components/ui/Media/HoverOverlay/HoverOverlay";
+
+const WorkPageClient = ({ workItems }: { workItems: WorkItem[] }) => {
+  const [selectedCategory, setSelectedCategory] =
+    useState<Category>("EVERYTHING");
+
+  const categoryGroups = useMemo(
+    () =>
+      Array.from({ length: Math.ceil(categories.length / 4) }, (_, i) =>
+        categories.slice(i * 4, i * 4 + 4),
+      ),
+    [],
+  );
+
+  useEffect(() => {
+    console.log(selectedCategory);
+  }, [selectedCategory]);
+
+  return (
+    <div className={`${Styles.Container} page-wrapper layout-wrapper`}>
+      <div className={Styles.CategoryContainer}>
+        {categoryGroups.map((group, idx) => (
+          <div
+            key={`WORK_CATEGORY_GROUP_${idx}`}
+            className={Styles.CategoryGroup}
+          >
+            {group.map((category) => (
+              <label
+                key={`WORK_CATEGORY_${category}`}
+                className={Styles.Category}
+              >
+                <input
+                  type="radio"
+                  name="category"
+                  value={category}
+                  className={Styles.CategoryInput}
+                  checked={selectedCategory === category}
+                  onChange={() => setSelectedCategory(category)}
+                />
+                <p>{toTitleCase(category)}</p>
+              </label>
+            ))}
+          </div>
+        ))}
+      </div>
+      <div className={Styles.WorkItemsContainer}>
+        {workItems.map((item) => (
+          <Link
+            key={`WORK_ITEM_${item.id}`}
+            className={Styles.WorkItem}
+            href={item.href}
+          >
+            <MediaHoverOverlay
+              media={item.media}
+              className={Styles.WorkItemMedia}
+            >
+              <div className={Styles.WorkItemMediaOverlay}>
+                <p>{item.summary}</p>
+              </div>
+            </MediaHoverOverlay>
+            <p className={Styles.WorkItemText}>{item.title}</p>
+          </Link>
+        ))}
+      </div>
+      <div className={Styles.MoreButtonContainer}>
+        <MoreButton />
+      </div>
+    </div>
+  );
+};
+
+export default WorkPageClient;
