@@ -4,7 +4,7 @@ import { style } from "@vanilla-extract/css";
 export const Overlay = style({
   position: "fixed",
   inset: 0,
-  zIndex: 1,
+  zIndex: 101,
   display: "flex",
   flexDirection: "column",
   justifyContent: "space-between",

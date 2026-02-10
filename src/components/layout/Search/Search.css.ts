@@ -9,7 +9,7 @@ export const Overlay = style({
   transform: "translateY(25%)",
   opacity: 0,
   pointerEvents: "none",
-  zIndex: "2",
+  zIndex: "102",
   transition: "transform 250ms ease, opacity 250ms ease",
   willChange: "transform",
   background: "white",
@@ -28,7 +28,7 @@ export const Overlay = style({
 
   "@media": {
     [media.mobile]: {
-      zIndex: "1",
+      zIndex: "101",
     },
   },
 });

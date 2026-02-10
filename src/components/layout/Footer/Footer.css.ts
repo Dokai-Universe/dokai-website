@@ -112,7 +112,7 @@ export const ItemMapContainer = style({
   marginTop: "1rem",
   width: "100%",
   aspectRatio: "8 / 3",
-  background: "gray",
+  background: "lightgray",
 
   "@media": {
     [media.tablet]: {
@@ -150,7 +150,7 @@ export const FooterTitle = style({
 
   "@media": {
     [media.tablet]: {
-      gridColumn: "1 / span 7",
+      gridColumn: "1 / span 6",
     },
   },
 });
@@ -198,13 +198,16 @@ export const FooterIconButton = style({
   gridColumn: "8",
   position: "relative",
   marginLeft: "auto",
-  width: "3.25rem",
+
+  "@media": {
+    [media.tablet]: {
+      gridColumn: "7 / -1",
+    },
+  },
 });
 
 export const FooterIcon = style({
-  position: "absolute",
+  width: "3.25rem",
   height: "auto",
   aspectRatio: "1 / 1",
-  bottom: "0",
-  right: "0",
 });
