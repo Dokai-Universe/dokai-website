@@ -30,7 +30,7 @@ const Header = () => {
   }, []);
 
   return (
-    <header className={Styles.Layout}>
+    <header className={`${Styles.Layout} layout-wrapper`}>
       <HeaderLogo closeModals={closeModals} />
       <HeaderNav
         isDrawerOpen={isDrawerOpen}

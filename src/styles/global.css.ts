@@ -1,5 +1,5 @@
 import { globalStyle } from "@vanilla-extract/css";
-import { vars } from "./theme.css"; // (테마 쓰는 경우)
+import { media, vars } from "./theme.css"; // (테마 쓰는 경우)
 
 globalStyle("*, *::before, *::after", {
   boxSizing: "border-box",
@@ -61,4 +61,17 @@ globalStyle("button", {
   outline: "none",
   background: "transparent",
   padding: "0",
+});
+
+globalStyle(".layout-wrapper", {
+  padding: "2rem",
+
+  "@media": {
+    [media.tablet]: {
+      padding: "24px",
+    },
+    [media.mobile]: {
+      padding: "20px",
+    },
+  },
 });

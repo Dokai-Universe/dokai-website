@@ -37,12 +37,12 @@ const HeaderNav = ({
       </button>
       <button
         onClick={toggleDrawer}
-        className={Styles.NavMenuButton}
+        className={Styles.NavDrawerButton}
         data-floating={isFloatingMenu}
         aria-expanded={isDrawerOpen}
         aria-label="Open menu"
       >
-        <MenuBGSVG className={Styles.MenuDeco} />
+        <MenuBGSVG className={Styles.NavDrawerButtonDeco} />
         <HamburgerXSVG className={Styles.NavIcon} data-open={isDrawerOpen} />
       </button>
     </nav>

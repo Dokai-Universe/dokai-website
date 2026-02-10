@@ -3,7 +3,6 @@ import { keyframes, style } from "@vanilla-extract/css";
 
 export const Layout = style({
   position: "absolute",
-  padding: "2rem",
   columnGap: "1rem",
   display: "grid",
   gridTemplateColumns: "repeat(8, minmax(0px, 1fr))",
@@ -13,12 +12,6 @@ export const Layout = style({
   "@media": {
     [media.desktop]: {
       position: "static",
-    },
-    [media.tablet]: {
-      padding: "24px",
-    },
-    [media.mobile]: {
-      padding: "20px",
     },
   },
 });
@@ -117,7 +110,7 @@ export const pop = keyframes({
   "100%": { transform: "scale(1)" },
 });
 
-export const NavMenuButton = style({
+export const NavDrawerButton = style({
   position: "relative",
   zIndex: "102",
 
@@ -142,9 +135,15 @@ export const NavMenuButton = style({
       animation: `${pop} .2s ease-out`,
     },
   },
+
+  "@media": {
+    [media.mobile]: {
+      margin: "0.5rem",
+    },
+  },
 });
 
-export const MenuDeco = style({
+export const NavDrawerButtonDeco = style({
   position: "absolute",
   width: "100%",
   aspectRatio: "1 / 1",
