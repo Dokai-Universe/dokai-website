@@ -10,7 +10,7 @@ const CareersDetailPageClient = ({
   careersDetailInfo: CareersDetail;
 }) => {
   return (
-    <div className={Styles.Container}>
+    <div className={`${Styles.Container} page-wrapper layout-wrapper`}>
       <CareerDetailProfile profile={careersDetailInfo.profile} />
       <CareerDetailWorks works={careersDetailInfo.works} />
       <CareerDetailExperiences experiences={careersDetailInfo.experiences} />

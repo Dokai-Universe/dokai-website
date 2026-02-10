@@ -4,16 +4,12 @@ import { globalStyle, style } from "@vanilla-extract/css";
 export const Container = style({
   display: "grid",
   gridTemplateColumns: "repeat(8, 1fr)",
-  marginTop: "10rem",
-  marginBottom: "9rem",
   padding: "2rem",
   rowGap: "9rem",
   columnGap: "1rem",
+  marginBottom: "10rem",
 
   "@media": {
-    [media.desktop]: {
-      marginTop: "0",
-    },
     [media.tablet]: {
       rowGap: "6rem",
     },

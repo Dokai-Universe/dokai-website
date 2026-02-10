@@ -1,7 +1,7 @@
 import Header from "@components/layout/Header/Header";
 import * as Styles from "./style.css";
 
-const NoFooterLayout = ({ children }: { children: React.ReactNode }) => {
+const HeaderLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className={Styles.Layout}>
       <Header />
@@ -10,4 +10,4 @@ const NoFooterLayout = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default NoFooterLayout;
+export default HeaderLayout;

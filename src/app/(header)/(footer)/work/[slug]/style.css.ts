@@ -7,14 +7,7 @@ export const Container = style({
   rowGap: "9rem",
   columnGap: "1rem",
   padding: "2rem",
-  marginTop: "11.5rem",
-  marginBottom: "6rem",
-
-  "@media": {
-    [media.desktop]: {
-      marginTop: "0",
-    },
-  },
+  marginBottom: "10rem",
 });
 
 // Header

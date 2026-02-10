@@ -6,8 +6,7 @@ export const Container = style({
   flexDirection: "column",
   height: "100%",
   flexGrow: "1",
-  padding: "2rem",
-  marginTop: "-11.5rem",
+  justifyContent: "space-between",
 });
 
 export const Content = style({
@@ -15,7 +14,6 @@ export const Content = style({
   display: "grid",
   gridTemplateColumns: "repeat(8, minmax(0px, 1fr))",
   rowGap: "3rem",
-  margin: "auto 0",
 
   "@media": {
     [media.desktop]: {

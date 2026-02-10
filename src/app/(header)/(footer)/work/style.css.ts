@@ -7,7 +7,7 @@ export const Container = style({
   rowGap: "7.5rem",
   columnGap: "1rem",
   padding: "2rem",
-  marginBottom: "15rem",
+  marginBottom: "10rem",
 
   "@media": {
     [media.mobile]: {
@@ -20,13 +20,11 @@ export const CategoryContainer = style({
   gridColumn: "1 / span 4",
   display: "flex",
   flexDirection: "column",
-  marginTop: "12.5rem",
   gap: "0.5rem",
 
   "@media": {
     [media.desktop]: {
       gridColumn: "1 / span 5",
-      marginTop: "3rem",
     },
 
     [media.tablet]: {

@@ -7,17 +7,13 @@ export const Container = style({
   rowGap: "6rem",
   columnGap: "1rem",
   padding: "2rem",
-  marginTop: "10rem",
 
   fontSize: vars.fontSize.md,
   fontWeight: "300",
   lineHeight: "1.4583",
-  marginBottom: "9rem",
+  marginBottom: "10rem",
 
   "@media": {
-    [media.desktop]: {
-      marginTop: "0",
-    },
     [media.mobile]: {
       rowGap: "1rem",
     },

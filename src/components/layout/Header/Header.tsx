@@ -31,7 +31,9 @@ const Header = () => {
   }, []);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => handleCloseModals(), [pathname]);
+  useEffect(() => {
+    handleCloseModals();
+  }, [pathname]);
 
   return (
     <header className={`${Styles.Layout} layout-wrapper`}>

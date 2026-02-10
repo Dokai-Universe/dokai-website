@@ -2,6 +2,14 @@ import { useEffect } from "react";
 
 const useLockBodyScroll = (locked: boolean) => {
   useEffect(() => {
+    if (locked) return;
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, [locked]);
+
+  useEffect(() => {
     if (!locked) return;
 
     const scrollY = window.scrollY;

@@ -7,12 +7,21 @@ export const Layout = style({
   gridTemplateColumns: "repeat(8, minmax(0px, 1fr))",
   width: "100%",
   alignItems: "start",
+  position: "relative",
 });
 
 // Logo
 
 export const LogoContainer = style({
   position: "relative",
+});
+
+export const LogoImage = style({
+  position: "relative",
+  zIndex: "103",
+  width: "6rem",
+  height: "auto",
+  aspectRatio: "1 / 1",
 
   "@media": {
     [media.tablet]: {
@@ -22,14 +31,6 @@ export const LogoContainer = style({
       width: "3rem",
     },
   },
-});
-
-export const LogoImage = style({
-  position: "absolute",
-  zIndex: "103",
-  width: "5rem",
-  height: "auto",
-  aspectRatio: "1 / 1",
 });
 
 // Nav

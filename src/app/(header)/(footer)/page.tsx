@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className={Styles.Container}>
+    <div className={`${Styles.Container} page-wrapper layout-wrapper`}>
       <p className={Styles.Title}>
         DOKAI was founded by professionals from the commercial film industry as
         an AI-driven creative group.

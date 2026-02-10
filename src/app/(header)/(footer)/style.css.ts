@@ -6,14 +6,21 @@ export const Container = style({
   gridTemplateColumns: "repeat(8, 1fr)",
   rowGap: "7.5rem",
   columnGap: "1rem",
-  padding: "2rem",
-  marginBottom: "15rem",
+  marginBottom: "10rem",
+  marginTop: "-10rem",
+
+  "@media": {
+    [media.desktop]: {
+      marginTop: "0",
+    },
+  },
 });
 
 export const Title = style({
   gridColumn: "2 / span 4",
   fontSize: vars.fontSize.lg,
   fontWeight: "300",
+  lineHeight: "1.33",
 
   "@media": {
     [media.desktop]: {

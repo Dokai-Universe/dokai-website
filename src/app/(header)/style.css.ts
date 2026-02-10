@@ -10,7 +10,5 @@ export const Layout = style({
 export const Content = style({
   display: "flex",
   flexDirection: "column",
-  justifyContent: "space-between",
-  marginTop: "11.5rem",
   flexGrow: "1",
 });

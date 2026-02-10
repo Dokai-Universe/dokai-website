@@ -15,7 +15,7 @@ const careersCopy =
 
 const CareersPageClient = ({ careers }: CareersPageClientProps) => {
   return (
-    <div className={Styles.Container}>
+    <div className={`${Styles.Container} page-wrapper layout-wrapper`}>
       <p className={Styles.Title}>Careers</p>
       <p className={Styles.Copy}>{careersCopy}</p>
       <p className={Styles.Title}>Artists</p>

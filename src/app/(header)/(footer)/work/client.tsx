@@ -26,7 +26,7 @@ const WorkPageClient = ({ workItems }: { workItems: WorkItem[] }) => {
   }, [selectedCategory]);
 
   return (
-    <div className={Styles.Container}>
+    <div className={`${Styles.Container} page-wrapper layout-wrapper`}>
       <div className={Styles.CategoryContainer}>
         {categoryGroups.map((group, idx) => (
           <div

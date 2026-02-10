@@ -12,7 +12,7 @@ const ContactPage = () => {
   const { email, tel, address } = CompanyInfo;
 
   return (
-    <div className={Styles.Container}>
+    <div className={`${Styles.Container} page-wrapper layout-wrapper`}>
       <div className={Styles.Content}>
         <p className={FooterStyles.ContentTitle}>Contact</p>
         <div className={FooterStyles.ContentWrapper}>

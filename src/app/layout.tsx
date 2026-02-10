@@ -3,6 +3,7 @@ import { DM_Sans } from "next/font/google";
 import "@styles/global.css";
 import { themeClass } from "@styles/theme.css";
 import Providers from "./providers";
+import { usePathname } from "next/navigation";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],

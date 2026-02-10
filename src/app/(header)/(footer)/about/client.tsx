@@ -13,7 +13,7 @@ type AboutPageClientProps = {
 
 const AboutPageClient = ({ aboutInfo }: AboutPageClientProps) => {
   return (
-    <div className={Styles.Container}>
+    <div className={`${Styles.Container} page-wrapper layout-wrapper`}>
       <AboutPageIntro text={aboutInfo.intro} />
       <AboutPageManifesto manifesto={aboutInfo.manifesto} />
       <MediaCard

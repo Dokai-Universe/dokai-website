@@ -1,4 +1,4 @@
-import { globalStyle } from "@vanilla-extract/css";
+import { globalStyle, keyframes } from "@vanilla-extract/css";
 import { media, vars } from "./theme.css"; // (테마 쓰는 경우)
 
 globalStyle("*, *::before, *::after", {
@@ -74,4 +74,19 @@ globalStyle(".layout-wrapper", {
       padding: "20px",
     },
   },
+});
+
+const fadeInUp = keyframes({
+  from: {
+    opacity: 0,
+    transform: "translateY(1rem)",
+  },
+  to: {
+    opacity: 1,
+    transform: "translateY(0)",
+  },
+});
+
+globalStyle(".page-wrapper", {
+  animation: `${fadeInUp} 0.5s ease-in-out`,
 });

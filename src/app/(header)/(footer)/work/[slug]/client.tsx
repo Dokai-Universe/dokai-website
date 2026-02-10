@@ -9,7 +9,7 @@ import WorkDetailCredits from "./Credits";
 
 const WorkDetailPageClient = ({ workInfo }: { workInfo: WorkDetail }) => {
   return (
-    <div className={Styles.Container}>
+    <div className={`${Styles.Container} page-wrapper layout-wrapper`}>
       <WorkDetailHeader
         title={workInfo.title}
         date={workInfo.date}
