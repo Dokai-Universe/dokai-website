@@ -2,12 +2,12 @@
 
 import categories, { Category } from "@ts/categories";
 import { toTitleCase } from "@utils/Text";
-import ImageCaptionOverlay from "@components/ui/ImageCaptionOverlay/ImageCaptionOverlay";
 import Link from "next/link";
 import * as Styles from "./style.css";
 import { useEffect, useMemo, useState } from "react";
 import { WorkItem } from "@ts/work_item";
 import MoreButton from "@components/ui/MoreButton/MoreButton";
+import MediaHoverOverlay from "@components/ui/Media/HoverOverlay/HoverOverlay";
 
 const WorkPageClient = ({ workItems }: { workItems: WorkItem[] }) => {
   const [selectedCategory, setSelectedCategory] =
@@ -59,13 +59,14 @@ const WorkPageClient = ({ workItems }: { workItems: WorkItem[] }) => {
             className={Styles.WorkItem}
             href={item.href}
           >
-            <ImageCaptionOverlay
-              className={Styles.WorkItemImageContainer}
-              src={item.imageSrc}
-              alt={item.title}
-              caption={item.summary}
-              bg={item.bgColor}
-            />
+            <MediaHoverOverlay
+              media={item.media}
+              className={Styles.WorkItemMedia}
+            >
+              <div className={Styles.WorkItemMediaOverlay}>
+                <p>{item.summary}</p>
+              </div>
+            </MediaHoverOverlay>
             <p className={Styles.WorkItemText}>{item.title}</p>
           </Link>
         ))}

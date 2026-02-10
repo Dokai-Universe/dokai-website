@@ -1,4 +1,4 @@
-import { MediaSource } from "@app/(site)/work/[slug]/fetch";
+import { MediaSource } from "@components/ui/Media/types";
 import { getRandomColor } from "@utils/Color";
 
 export type Career = {

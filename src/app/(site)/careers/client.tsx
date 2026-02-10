@@ -1,10 +1,10 @@
 "use client";
 
 import { Career } from "./fetch";
-import ImageCard from "@components/ui/ImageCard";
 import * as Styles from "./style.css";
 import { getReadableTextColor } from "@utils/Color";
 import Link from "next/link";
+import MediaCard from "@components/ui/Media/MediaCard";
 
 type CareersPageClientProps = {
   careers: Career[];
@@ -31,13 +31,8 @@ const CareersPageClient = ({ careers }: CareersPageClientProps) => {
             className={Styles.ProfileItem}
             key={`CAREERS_${idx}`}
           >
-            <ImageCard
-              src={career.media.src}
-              alt={career.media.alt}
-              type={career.media.type}
-              loop={
-                career.media.type === "LOOP" ? career.media.loop : undefined
-              }
+            <MediaCard
+              media={career.media}
               className={Styles.ProfileItemImage}
             />
             <div

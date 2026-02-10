@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
 import "@styles/global.css";
 import { themeClass } from "@styles/theme.css";
+import Providers from "./providers";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -25,7 +26,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${dmSans.variable} ${themeClass}`}>{children}</body>
+      <body className={`${dmSans.variable} ${themeClass}`}>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }

@@ -1,4 +1,3 @@
-import ImageCard from "@components/ui/ImageCard";
 import { AboutInfo } from "./fetch";
 import AboutPageIntro from "./Intro";
 import AboutPageManifesto from "./Manifesto";
@@ -6,6 +5,7 @@ import * as Styles from "./style.css";
 import AboutPageServices from "./Services";
 import AboutPageTeam from "./Team";
 import AboutPageWorkflow from "./Workflow";
+import MediaCard from "@components/ui/Media/MediaCard";
 
 type AboutPageClientProps = {
   aboutInfo: AboutInfo;
@@ -16,25 +16,31 @@ const AboutPageClient = ({ aboutInfo }: AboutPageClientProps) => {
     <div className={Styles.Container}>
       <AboutPageIntro text={aboutInfo.intro} />
       <AboutPageManifesto manifesto={aboutInfo.manifesto} />
-      <ImageCard
+      <MediaCard
+        media={{
+          type: "IMAGE",
+          src: "/pantheon.png",
+          alt: "pantheon",
+        }}
         className={Styles.ImageRight}
-        src="/pantheon.png"
-        alt="pantheon"
-        type="IMAGE"
       />
       <AboutPageServices services={aboutInfo.services} />
-      <ImageCard
+      <MediaCard
+        media={{
+          type: "IMAGE",
+          src: "/pantheon.png",
+          alt: "pantheon",
+        }}
         className={Styles.ImageLeft}
-        src="/pantheon.png"
-        alt="pantheon"
-        type="IMAGE"
       />
       <AboutPageWorkflow workflow={aboutInfo.workflow} />
-      <ImageCard
+      <MediaCard
+        media={{
+          type: "IMAGE",
+          src: "/pantheon.png",
+          alt: "pantheon",
+        }}
         className={Styles.ImageRight}
-        src="/pantheon.png"
-        alt="pantheon"
-        type="IMAGE"
       />
       <AboutPageTeam team={aboutInfo.team} />
     </div>

@@ -1,3 +1,5 @@
+import { MediaSource } from "@components/ui/Media/types";
+
 export type ExtraInfo = {
   title: string;
   content: string;
@@ -101,16 +103,6 @@ const credits: Credit[] = [
     ],
   },
 ];
-
-export type MediaSource =
-  | { type: "IMAGE"; src: string; alt: string }
-  | { type: "VIDEO"; src: string; alt: string }
-  | {
-      type: "LOOP";
-      src: string;
-      alt: string;
-      loop: { start: number; end: number };
-    };
 
 export type WorkDetail = {
   title: string;

@@ -1,18 +1,12 @@
 import { Profile } from "./fetch";
-import ImageCard from "@components/ui/ImageCard";
 import * as Styles from "./style.css";
 import { Fragment } from "react/jsx-runtime";
+import MediaCard from "@components/ui/Media/MediaCard";
 
 const CareerDetailProfile = ({ profile }: { profile: Profile }) => {
   return (
     <div className={Styles.ProfileContainer}>
-      <ImageCard
-        className={Styles.ProfileImage}
-        src={profile.media.src}
-        alt={profile.media.alt}
-        type={profile.media.type}
-        loop={profile.media.type === "LOOP" ? profile.media.loop : undefined}
-      />
+      <MediaCard media={profile.media} className={Styles.ProfileImage} />
 
       <p className={Styles.ProfileIntroduce}>{profile.introduce}</p>
 

@@ -66,9 +66,11 @@ export const MockWorkItems: () => Promise<WorkItem[]> = async () => {
         ...work,
         id: index,
         href: `/work/${index}`,
-        bgColor: getRandomColor(),
-        imageSrc: work.image,
-        imageType: work.imageType,
+        media: {
+          type: work.imageType,
+          src: work.image,
+          alt: work.summary,
+        },
         category: work.type,
       };
     }),

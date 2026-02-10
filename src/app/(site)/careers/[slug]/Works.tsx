@@ -1,7 +1,7 @@
-import ImageCard from "@components/ui/ImageCard";
 import { Work } from "./fetch";
 import * as Styles from "./style.css";
 import { getReadableTextColor } from "@utils/Color";
+import MediaCard from "@components/ui/Media/MediaCard";
 
 const CareerDetailWorks = ({ works }: { works: Work[] }) => {
   return (
@@ -10,13 +10,7 @@ const CareerDetailWorks = ({ works }: { works: Work[] }) => {
       <div className={Styles.WorksGrid}>
         {works.map((work, idx) => (
           <button key={`WORKS_${idx}`} className={Styles.WorksItem}>
-            <ImageCard
-              src={work.media.src}
-              alt={work.media.alt}
-              type={work.media.type}
-              loop={work.media.type === "LOOP" ? work.media.loop : undefined}
-              className={Styles.WorksItemImage}
-            />
+            <MediaCard media={work.media} className={Styles.WorksItemImage} />
             <div
               className={Styles.WorksItemOverlay}
               style={

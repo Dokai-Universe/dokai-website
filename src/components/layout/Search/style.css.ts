@@ -410,7 +410,7 @@ export const ResultItem = style({
   position: "relative",
 });
 
-export const ResultItemImageContainer = style({
+export const ResultItemMedia = style({
   width: "100%",
   height: "auto",
   aspectRatio: "6 / 7",
@@ -427,6 +427,16 @@ export const ResultItemImageContainer = style({
       aspectRatio: "4 / 3",
     },
   },
+});
+
+export const ResultItemMediaOverlay = style({
+  fontSize: vars.fontSize.lg,
+  fontWeight: "500",
+  letterSpacing: "0.04rem",
+  textAlign: "left",
+  lineHeight: "1.5em",
+  padding: "1rem",
+  color: "white",
 });
 
 export const ResultItemText = style({

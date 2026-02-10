@@ -1,19 +1,17 @@
 import Image from "next/image";
 import VimeoPlayer from "./VimeoPlayer";
+import { MediaSource } from "./types";
+import { IMAGE_SIZES } from "@ts/image";
 
-const ImageCard = ({
+const MediaCard = ({
   className,
-  src,
-  alt,
-  type,
-  loop,
+  media,
 }: {
   className?: string;
-  src: string;
-  alt: string;
-  type: "IMAGE" | "VIDEO" | "LOOP";
-  loop?: { start: number; end: number };
+  media: MediaSource;
 }) => {
+  const { type, src, alt } = media;
+
   if (type == "IMAGE") {
     return (
       <div
@@ -26,7 +24,7 @@ const ImageCard = ({
           src={src}
           alt={alt}
           fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          sizes={IMAGE_SIZES}
           style={{ objectFit: "cover" }}
         />
       </div>
@@ -38,9 +36,9 @@ const ImageCard = ({
     <VimeoPlayer
       videoId={videoId}
       className={className}
-      loop={type == "LOOP" ? loop : undefined}
+      loop={type == "LOOP" ? media.loop : undefined}
     />
   );
 };
 
-export default ImageCard;
+export default MediaCard;

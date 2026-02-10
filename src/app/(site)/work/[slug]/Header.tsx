@@ -1,6 +1,7 @@
-import ImageCard from "@components/ui/ImageCard";
-import { ExtraInfo, MediaSource } from "./fetch";
 import * as Styles from "./style.css";
+import MediaCard from "@components/ui/Media/MediaCard";
+import { MediaSource } from "@components/ui/Media/types";
+import { ExtraInfo } from "./fetch";
 
 const WorkDetailHeader = ({
   title,
@@ -36,12 +37,7 @@ const WorkDetailHeader = ({
         </div>
       </div>
 
-      <ImageCard
-        src={mainImage.src}
-        alt={mainImage.alt}
-        type={mainImage.type}
-        className={Styles.HeaderMediaContainer}
-      />
+      <MediaCard media={mainImage} className={Styles.HeaderMediaContainer} />
     </div>
   );
 };

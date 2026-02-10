@@ -1,4 +1,4 @@
-import { MediaSource } from "../work/[slug]/fetch";
+import { MediaSource } from "@components/ui/Media/types";
 
 const manifesto: Manifesto = {
   text: "As AI accelerates the world, DOKAI creates what technology alone cannot emotion. We craft refined visuals and human stories that connect brands with people. Beyond innovation. Toward meaningful change. This is DOKAI.",

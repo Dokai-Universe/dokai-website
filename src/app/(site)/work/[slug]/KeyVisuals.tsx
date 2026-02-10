@@ -1,6 +1,6 @@
-import { MediaSource } from "./fetch";
-import ImageCard from "@components/ui/ImageCard";
 import * as Styles from "./style.css";
+import MediaCard from "@components/ui/Media/MediaCard";
+import { MediaSource } from "@components/ui/Media/types";
 
 const WorkDetailKeyVisuals = ({
   keyVisuals,
@@ -12,12 +12,9 @@ const WorkDetailKeyVisuals = ({
       <p className={Styles.KeyVisualsTitle}>Key visual</p>
 
       {keyVisuals.map((visual, i) => (
-        <ImageCard
+        <MediaCard
           key={i}
-          src={visual.src}
-          alt={visual.alt}
-          type={visual.type}
-          loop={visual.type === "LOOP" ? visual.loop : undefined}
+          media={visual}
           className={Styles.KeyVisualsMediaContainer}
         />
       ))}

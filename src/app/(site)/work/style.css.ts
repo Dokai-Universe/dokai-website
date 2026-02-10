@@ -106,7 +106,7 @@ export const WorkItem = style({
   gap: "1rem",
 });
 
-export const WorkItemImageContainer = style({
+export const WorkItemMedia = style({
   width: "100%",
   height: "auto",
   aspectRatio: "16 / 9",
@@ -123,6 +123,17 @@ export const WorkItemImageContainer = style({
       fontSize: vars.fontSize.lg,
     },
   },
+});
+
+export const WorkItemMediaOverlay = style({
+  fontSize: vars.fontSize.xl,
+  fontWeight: "500",
+  letterSpacing: "0.04rem",
+  textAlign: "left",
+  lineHeight: "1.5em",
+  padding: "1rem",
+  color: "white",
+  paddingRight: "3rem",
 });
 
 export const WorkItemText = style({

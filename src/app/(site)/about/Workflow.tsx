@@ -2,6 +2,7 @@ import { Fragment } from "react/jsx-runtime";
 import { Workflow } from "./fetch";
 import * as Styles from "./style.css";
 import Image from "next/image";
+import { IMAGE_SIZES } from "@ts/image";
 
 type AboutPageWorkflowProps = {
   workflow: Workflow;
@@ -19,7 +20,7 @@ const AboutPageWorkflow = ({ workflow }: AboutPageWorkflowProps) => {
               src={tool.icon}
               alt={tool.title}
               fill
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              sizes={IMAGE_SIZES}
               className={Styles.WorkflowToolIcon}
             />
           </div>
