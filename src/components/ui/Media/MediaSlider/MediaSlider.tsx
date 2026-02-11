@@ -1,6 +1,12 @@
 "use client";
 
-import React, { useCallback, useMemo, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import MediaCard from "../MediaCard";
 import { MediaSource } from "../types";
 import * as Styles from "./style.css";
@@ -11,6 +17,8 @@ type Props = {
   mediaList: MediaSource[];
   className?: string; // 슬라이더 전체 컨테이너 클래스
   initialIndex?: number;
+  autoPlayMs?: number;
+  pauseOnHover?: boolean;
 };
 
 const clamp = (n: number, min: number, max: number) =>
@@ -20,35 +28,81 @@ export default function MediaSlider({
   mediaList,
   className,
   initialIndex = 0,
+  autoPlayMs = 4000,
+  pauseOnHover = true,
 }: Props) {
   const count = mediaList.length;
 
   const [index, setIndex] = useState(() => clamp(initialIndex, 0, count - 1));
 
-  const goTo = useCallback(
-    (next: number) => setIndex((prev) => clamp(next, 0, count - 1)),
-    [count],
-  );
-  const prev = useCallback(() => setIndex((i) => Math.max(0, i - 1)), []);
-  const next = useCallback(
-    () => setIndex((i) => Math.min(count - 1, i + 1)),
-    [count],
-  );
-
-  // ✅ 스와이프
   const dragRef = useRef<{ startX: number; active: boolean } | null>(null);
 
   const translateX = useMemo(() => `translateX(-${index * 100}%)`, [index]);
 
-  // ✅ 비디오/무거운 요소는 현재 인덱스 주변만 렌더링
-  const shouldRender = useCallback(
-    (i: number) => {
-      return Math.abs(i - index) <= 1; // 현재/이전/다음만
+  // ---------- autoplay ----------
+  const intervalRef = useRef<number | null>(null);
+  const pausedRef = useRef(false);
+
+  const clearAutoplay = useCallback(() => {
+    if (intervalRef.current != null) {
+      window.clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+  }, []);
+
+  const startAutoplay = useCallback(() => {
+    clearAutoplay();
+    if (!autoPlayMs || autoPlayMs <= 0) return;
+    if (count <= 1) return;
+
+    intervalRef.current = window.setInterval(() => {
+      // hover pause 등으로 paused 상태면 skip
+      if (pausedRef.current) return;
+
+      setIndex((i) => (i + 1) % count);
+    }, autoPlayMs);
+  }, [autoPlayMs, clearAutoplay, count]);
+
+  const restartAutoplay = useCallback(() => {
+    startAutoplay();
+  }, [startAutoplay]);
+
+  useEffect(() => {
+    startAutoplay();
+    return () => clearAutoplay();
+  }, [startAutoplay, clearAutoplay]);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    setIndex((i) => clamp(i, 0, Math.max(0, count - 1)));
+    restartAutoplay();
+  }, [count, restartAutoplay]);
+
+  // ---------- navigation helpers ----------
+  const goTo = useCallback(
+    (next: number, byUser = false) => {
+      setIndex(() => clamp(next, 0, count - 1));
+      if (byUser) restartAutoplay();
     },
-    [index],
+    [count, restartAutoplay],
   );
 
-  // ✅ 1개면 그냥 반환
+  const prev = useCallback(
+    (byUser = false) => {
+      setIndex((i) => Math.max(0, i - 1));
+      if (byUser) restartAutoplay();
+    },
+    [restartAutoplay],
+  );
+
+  const next = useCallback(
+    (byUser = false) => {
+      setIndex((i) => Math.min(count - 1, i + 1));
+      if (byUser) restartAutoplay();
+    },
+    [count, restartAutoplay],
+  );
+
   if (count <= 1) {
     const media = mediaList[0];
     if (!media) return null;
@@ -66,12 +120,24 @@ export default function MediaSlider({
 
     const dx = e.clientX - d.startX;
     const threshold = 40; // px
-    if (dx > threshold) prev();
-    else if (dx < -threshold) next();
+    if (dx > threshold) prev(true);
+    else if (dx < -threshold) next(true);
+    else restartAutoplay();
   };
 
   const onPointerCancel = () => {
     if (dragRef.current) dragRef.current.active = false;
+  };
+
+  const onMouseEnter = () => {
+    if (!pauseOnHover) return;
+    pausedRef.current = true;
+  };
+
+  const onMouseLeave = () => {
+    if (!pauseOnHover) return;
+    pausedRef.current = false;
+    restartAutoplay();
   };
 
   return (
@@ -81,26 +147,25 @@ export default function MediaSlider({
         onPointerDown={onPointerDown}
         onPointerUp={onPointerUp}
         onPointerCancel={onPointerCancel}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
         role="region"
         aria-label="Media slider"
       >
         <div className={Styles.Track} style={{ transform: translateX }}>
           {mediaList.map((media, i) => (
-            <div key={i} className={Styles.Slide} aria-hidden={i !== index}>
-              {shouldRender(i) ? (
-                <MediaCard className={className} media={media} />
-              ) : (
-                // ✅ 레이아웃 유지용 placeholder (비디오 iframe 미생성)
-                <div className={className} />
-              )}
-            </div>
+            <MediaCard
+              key={i}
+              className={`${Styles.Slide} ${className}`}
+              media={media}
+            />
           ))}
         </div>
 
         <div className={Styles.Controls}>
           <div className={Styles.ButtonContainer}>
             <button
-              onClick={prev}
+              onClick={() => prev(true)}
               disabled={index === 0}
               aria-label="Previous"
               type="button"
@@ -122,9 +187,10 @@ export default function MediaSlider({
               />
             ))}
           </div>
+
           <div className={Styles.ButtonContainer}>
             <button
-              onClick={next}
+              onClick={() => next(true)}
               disabled={index === count - 1}
               aria-label="Next"
               type="button"
