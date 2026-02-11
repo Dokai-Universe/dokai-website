@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import LogoPNG from "@assets/dokai.png";
-import LogoWhitePNG from "@assets/dokai-white.png";
 import * as Styles from "./Footer.css";
 import Image from "next/image";
 import ExternalLinks from "@ts/external_links";

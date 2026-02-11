@@ -1,3 +1,5 @@
+"use client";
+
 import { AboutInfo } from "./fetch";
 import AboutPageIntro from "./Intro";
 import AboutPageManifesto from "./Manifesto";
@@ -5,7 +7,6 @@ import * as Styles from "./style.css";
 import AboutPageServices from "./Services";
 import AboutPageTeam from "./Team";
 import AboutPageWorkflow from "./Workflow";
-import MediaCard from "@components/ui/Media/MediaCard";
 import MediaSlider from "@components/ui/Media/MediaSlider/MediaSlider";
 
 type AboutPageClientProps = {

@@ -4,6 +4,7 @@ import Script from "next/script";
 import { useEffect, useRef, useState } from "react";
 import MascotPNG from "@assets/mascot.png";
 import Image from "next/image";
+import { IMAGE_SIZES } from "@ts/image";
 
 declare global {
   interface Window {
@@ -122,6 +123,7 @@ export default function NaverMap({
           src={MascotPNG}
           alt="mascot"
           fill
+          sizes={IMAGE_SIZES}
           style={{ objectFit: "contain", padding: "2rem" }}
         />
       </div>
