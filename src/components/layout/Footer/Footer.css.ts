@@ -90,9 +90,6 @@ export const ItemSub = style({
   transition: "opacity .2s ease",
 
   selectors: {
-    "&.email": {
-      textDecoration: "underline",
-    },
     "&.address": {
       letterSpacing: "0.04em",
     },
@@ -101,10 +98,6 @@ export const ItemSub = style({
       opacity: 0.5,
     },
   },
-});
-
-export const ItemSubAddress = style({
-  letterSpacing: "0.04em",
 });
 
 export const ItemMapContainer = style({

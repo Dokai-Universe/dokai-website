@@ -140,3 +140,7 @@ globalStyle(`${Content}::-webkit-scrollbar-thumb`, {
   background: "#D9D9D9",
   borderRadius: "999px",
 });
+
+globalStyle(`${Content}::-webkit-scrollbar-thumb:hover`, {
+  background: vars.color.border,
+});

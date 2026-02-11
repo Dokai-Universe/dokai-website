@@ -28,7 +28,8 @@ const MediaHoverOverlay = ({
     <div className={`${Styles.Container} ${className}`}>
       <MediaCard media={media} className={Styles.Media} />
       <div ref={overlayRef} className={Styles.Overlay}>
-        {children}
+        <span className={Styles.OverlayBackground} />
+        <div className={Styles.OverlayContent}>{children}</div>
       </div>
     </div>
   );

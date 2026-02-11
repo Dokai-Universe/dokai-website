@@ -40,7 +40,7 @@ const Footer = () => {
             <p className={Styles.ItemTitle}>{email.label}</p>
             <Link
               href={`mailto:${email.address}`}
-              className={`${Styles.ItemSub} email`}
+              className={`${Styles.ItemSub}`}
             >
               {email.value}
             </Link>

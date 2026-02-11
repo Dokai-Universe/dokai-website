@@ -20,7 +20,7 @@ const ContactPage = () => {
             <p className={FooterStyles.ItemTitle}>{email.label}</p>
             <Link
               href={`mailto:${email.address}`}
-              className={`${FooterStyles.ItemSub} email`}
+              className={`${FooterStyles.ItemSub}`}
             >
               {email.value}
             </Link>
