@@ -1,21 +1,12 @@
-"use client";
-
-import dynamic from "next/dynamic";
-
-const SwaggerUI = dynamic(() => import("swagger-ui-react"), { ssr: false });
-import "swagger-ui-react/swagger-ui.css";
-
-function isDevEnabled() {
-  return (
-    process.env.NODE_ENV !== "production" &&
-    process.env.NEXT_PUBLIC_ENABLE_SWAGGER === "true"
-  );
-}
+import { notFound } from "next/navigation";
+import SwaggerClient from "./swagger-client";
 
 export default function DocsPage() {
-  if (!isDevEnabled()) {
-    return <div style={{ padding: 16 }}>Not Found</div>;
-  }
+  const enabled =
+    process.env.NODE_ENV !== "production" &&
+    process.env.NEXT_PUBLIC_ENABLE_SWAGGER === "true";
 
-  return <SwaggerUI url="/api/openapi.json" />;
+  if (!enabled) notFound();
+
+  return <SwaggerClient />;
 }

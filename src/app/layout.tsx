@@ -4,6 +4,7 @@ import "@styles/global.css";
 import { themeClass } from "@styles/theme.css";
 import Providers from "./providers";
 import NextTopLoader from "nextjs-toploader";
+import { Suspense } from "react";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -52,7 +53,9 @@ export default function RootLayout({
           speed={200}
           color="#ed8435"
         />
-        <Providers>{children}</Providers>
+        <Providers>
+          <Suspense>{children}</Suspense>
+        </Providers>
       </body>
     </html>
   );

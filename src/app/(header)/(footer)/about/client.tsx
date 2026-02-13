@@ -1,86 +1,73 @@
 "use client";
 
-import { AboutInfo } from "./fetch";
 import AboutPageIntro from "./Intro";
-import AboutPageManifesto from "./Manifesto";
 import * as Styles from "./style.css";
-import AboutPageServices from "./Services";
-import AboutPageTeam from "./Team";
-import AboutPageWorkflow from "./Workflow";
 import MediaSlider from "@components/ui/Media/MediaSlider/MediaSlider";
+import { About } from "@domain/about";
+import AboutPageTextSection from "./Text";
+import AboutPageGroupSection from "./Group";
+import AboutPageCardSection from "./Card";
+import AboutPageTeamSection from "./Team";
+import { useAboutQuery } from "./query";
 
 type AboutPageClientProps = {
-  aboutInfo: AboutInfo;
+  aboutInfo?: About;
 };
 
-const AboutPageClient = ({ aboutInfo }: AboutPageClientProps) => {
+const AboutPageClient = ({}: AboutPageClientProps) => {
+  const { data, isLoading, isError } = useAboutQuery();
+
+  const aboutInfo = data?.data;
+
+  if (isLoading) return <div>Loading...</div>;
+
+  if (isError || !aboutInfo) return <div>Error</div>;
+
   return (
     <div className={`${Styles.Container} page-wrapper layout-wrapper`}>
       <AboutPageIntro text={aboutInfo.intro} />
-      <AboutPageManifesto manifesto={aboutInfo.manifesto} />
-      <MediaSlider
-        mediaList={[
-          {
-            type: "IMAGE",
-            src: "/pantheon.png",
-            alt: "pantheon",
-          },
-          {
-            type: "IMAGE",
-            src: "/pantheon.png",
-            alt: "pantheon",
-          },
-          {
-            type: "IMAGE",
-            src: "/pantheon.png",
-            alt: "pantheon",
-          },
-        ]}
-        className={Styles.ImageRight}
-      />
-      <AboutPageServices services={aboutInfo.services} />
-      <MediaSlider
-        mediaList={[
-          {
-            type: "IMAGE",
-            src: "/pantheon.png",
-            alt: "pantheon",
-          },
-          {
-            type: "IMAGE",
-            src: "/pantheon.png",
-            alt: "pantheon",
-          },
-          {
-            type: "IMAGE",
-            src: "/pantheon.png",
-            alt: "pantheon",
-          },
-        ]}
-        className={Styles.ImageLeft}
-      />
-      <AboutPageWorkflow workflow={aboutInfo.workflow} />
-      <MediaSlider
-        mediaList={[
-          {
-            type: "IMAGE",
-            src: "/pantheon.png",
-            alt: "pantheon",
-          },
-          {
-            type: "IMAGE",
-            src: "/pantheon.png",
-            alt: "pantheon",
-          },
-          {
-            type: "IMAGE",
-            src: "/pantheon.png",
-            alt: "pantheon",
-          },
-        ]}
-        className={Styles.ImageRight}
-      />
-      <AboutPageTeam team={aboutInfo.team} />
+      {aboutInfo.contents.map((content, index) =>
+        content.type === "MEDIAS" ? (
+          <MediaSlider
+            key={`ABOUT_CONTENT_${index}`}
+            mediaList={content.value.medias}
+            className={
+              content.value.align === "LEFT"
+                ? Styles.ImageLeft
+                : Styles.ImageRight
+            }
+          />
+        ) : content.value.contentType === "TEXT" ? (
+          <AboutPageTextSection
+            key={`ABOUT_CONTENT_${index}`}
+            name={content.name}
+            text={content.value.text}
+          />
+        ) : content.value.contentType === "GROUP" ? (
+          <AboutPageGroupSection
+            key={`ABOUT_CONTENT_${index}`}
+            name={content.name}
+            text={content.value.text}
+            content={content.value.content}
+          />
+        ) : content.value.contentType === "CARD" ? (
+          <AboutPageCardSection
+            key={`ABOUT_CONTENT_${index}`}
+            name={content.name}
+            text={content.value.text}
+            content={content.value.content}
+          />
+        ) : content.value.contentType === "TEAM" ? (
+          <AboutPageTeamSection
+            key={`ABOUT_CONTENT_${index}`}
+            name={content.name}
+            text={content.value.text}
+            content={content.value.content}
+          />
+        ) : (
+          ""
+        ),
+      )}
     </div>
   );
 };

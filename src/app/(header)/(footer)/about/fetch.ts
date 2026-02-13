@@ -1,4 +1,5 @@
 import { MediaSource } from "@components/ui/Media/types";
+import { About } from "@domain/about";
 
 const manifesto: Manifesto = {
   text: "As AI accelerates the world, DOKAI creates what technology alone cannot emotion. We craft refined visuals and human stories that connect brands with people. Beyond innovation. Toward meaningful change. This is DOKAI.",
@@ -113,13 +114,29 @@ export type AboutInfo = {
   team: Team;
 };
 
-export const fetchAbout = async (): Promise<AboutInfo> => {
-  return await Promise.resolve({
-    intro:
-      "From planning and AI-driven creation to production and post-production mastering, experts from diverse disciplines came together with a single shared purpose.\n\nThis marks the beginning of something singular. As AI video technology continues to evolve, DOKAI moves beyond current boundaries— not by tools alone, but through a team defined by capability, excellence, and intelligence. \n\nBy integrating creative vision with advanced technical execution, \n\nDOKAI delivers a new dimension of high-quality AI content— where experimentation meets precision, and innovation is carried through to completion.\n\nTogether, all of this becomes possible.",
-    manifesto: manifesto,
-    services: services,
-    workflow: workflow,
-    team: team,
-  });
+type AboutPageResponse = {
+  data: About;
+  updatedAt: string | null;
+};
+
+export const fetchAbout = async (): Promise<AboutPageResponse> => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SITE_URL ?? ""}/api/public/about`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    },
+  );
+
+  if (res.status === 404) {
+    return { data: { intro: "", contents: [] }, updatedAt: null };
+  }
+
+  if (!res.ok) {
+    throw new Error(`Failed to fetch about: ${res.status}`);
+  }
+
+  return res.json();
 };

@@ -1,10 +1,7 @@
 import AboutPageClient from "./client";
-import { fetchAbout } from "./fetch";
 
 const AboutPage = async () => {
-  const aboutInfo = await fetchAbout();
-
-  return <AboutPageClient aboutInfo={aboutInfo} />;
+  return <AboutPageClient />;
 };
 
 export default AboutPage;
