@@ -18,7 +18,9 @@
     "next": "16.1.6",
     "nextjs-toploader": "^3.9.17",
     "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "react-dom": "19.2.3",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-react": "^5.31.0"
   },
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",
@@ -26,6 +28,8 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/swagger-jsdoc": "^6.0.4",
+    "@types/swagger-ui-react": "^5.18.0",
     "@vanilla-extract/next-plugin": "^2.4.17",
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
