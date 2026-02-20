@@ -21,9 +21,9 @@ function parseIntOr(v: string | null, fallback: number) {
 }
 
 function normalizeCategory(raw: string | null) {
-  if (!raw) return "ALL" as const;
+  if (!raw) return "EVERYTHING" as const;
   const v = raw.toUpperCase();
-  if (v === "ALL") return "ALL" as const;
+  if (v === "EVERYTHING") return "EVERYTHING" as const;
   if ((WORK_CATEGORIES as readonly string[]).includes(v)) {
     return v as (typeof WORK_CATEGORIES)[number];
   }
@@ -35,11 +35,8 @@ function normalizeCategory(raw: string | null) {
  * - ?q=asd&q=tmp
  * - ?q[]=asd&q[]=tmp
  */
-function getQueryTokens(url: URL) {
-  const fromRepeat = url.searchParams.getAll("q");
-  const fromBracket = url.searchParams.getAll("q[]");
-
-  const tokens = [...fromRepeat, ...fromBracket]
+function getQueryTokens(queries: string[]) {
+  const tokens = queries
     .flatMap((s) => s.split(/\s+/g))
     .map((s) => s.trim())
     .filter(Boolean);
@@ -102,7 +99,7 @@ function buildWebsearchQueryFromTokens(tokens: string[]) {
  *         required: false
  *         schema:
  *           type: string
- *           default: ALL
+ *           default: EVERYTHING
  *       - in: query
  *         name: q
  *         required: false
@@ -169,43 +166,48 @@ export async function GET(req: NextRequest) {
       count: "exact",
     });
 
-  // category filter (category/search 모드에서 적용)
-  if (category !== "ALL" && (mode === "category" || mode === "search")) {
+  if (category !== "EVERYTHING") {
     query = query.eq("category", category);
   }
 
-  if (mode === "main") {
-    query = query
-      .order("fixed_at", { ascending: false, nullsFirst: false })
-      .order("published_at", { ascending: false })
-      .range(from, to);
-  } else if (mode === "category") {
-    query = query.order("published_at", { ascending: false }).range(from, to);
-  } else {
-    // search
-    const tokens = getQueryTokens(url);
-    const websearchQuery = buildWebsearchQueryFromTokens(tokens);
+  const queries = url.searchParams.getAll("q");
 
-    if (!websearchQuery) {
-      return applyCookies(
-        NextResponse.json({
-          items: [],
-          page,
-          pageSize,
-          total: 0,
-          hasNext: false,
-        }),
-      );
+  if (queries?.length) {
+    const shortQs = queries.filter((q) => q.length <= 2);
+    const longQs = queries.filter((q) => q.length > 2);
+
+    for (const q of shortQs) {
+      query = query.ilike("search_text", `%${q}%`);
     }
 
-    query = query
-      .textSearch("search_tsv", websearchQuery, {
+    if (longQs.length) {
+      const tokens = getQueryTokens(longQs);
+      const websearchQuery = buildWebsearchQueryFromTokens(tokens);
+
+      if (!websearchQuery) {
+        return applyCookies(
+          NextResponse.json({
+            items: [],
+            page,
+            pageSize,
+            total: 0,
+            hasNext: false,
+          }),
+        );
+      }
+
+      query = query.textSearch("search_tsv", websearchQuery, {
         type: "websearch",
         config: "simple",
-      })
-      .order("published_at", { ascending: false })
-      .range(from, to);
+      });
+    }
   }
+
+  if (mode === "main") {
+    query = query.order("fixed_at", { ascending: false, nullsFirst: false });
+  }
+
+  query = query.order("published_at", { ascending: false }).range(from, to);
 
   const { data, error, count } = await query;
 

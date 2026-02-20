@@ -1,26 +1,36 @@
 "use client";
 
-import categories, { Category } from "@ts/categories";
+import categories from "@ts/categories";
 import { toTitleCase } from "@utils/Text";
 import Link from "next/link";
 import * as Styles from "./style.css";
-import { useEffect, useMemo, useState } from "react";
-import { WorkItem } from "@ts/work_item";
+import { useMemo, useState } from "react";
 import MoreButton from "@components/ui/Button/More";
 import MediaHoverOverlay from "@components/ui/Media/HoverOverlay/HoverOverlay";
-import { useWorkListQuery } from "@controllers/work/query";
+import { useWorksInfiniteQuery } from "@controllers/work/query";
 import AdminButtons from "@components/ui/AdminButtons/AdminButtons";
+import { WorkCategory } from "@domain/work";
 
-const WorkPageClient = ({ workItems }: { workItems: WorkItem[] }) => {
-  const { data: works } = useWorkListQuery();
+const WorkPageClient = () => {
+  const [selectedCategory, setSelectedCategory] = useState<
+    WorkCategory | "EVERYTHING"
+  >("EVERYTHING");
 
-  const [selectedCategory, setSelectedCategory] =
-    useState<Category>("EVERYTHING");
+  const {
+    data: works,
+    fetchNextPage,
+    hasNextPage,
+  } = useWorksInfiniteQuery({
+    mode: "category",
+    category: selectedCategory,
+  });
 
   const categoryGroups = useMemo(
     () =>
-      Array.from({ length: Math.ceil(categories.length / 4) }, (_, i) =>
-        categories.slice(i * 4, i * 4 + 4),
+      Array.from(
+        { length: Math.ceil(categories.length / 4) },
+        (_, i) =>
+          categories.slice(i * 4, i * 4 + 4) as (WorkCategory | "EVERYTHING")[],
       ),
     [],
   );
@@ -53,26 +63,28 @@ const WorkPageClient = ({ workItems }: { workItems: WorkItem[] }) => {
         ))}
       </div>
       <div className={Styles.WorkItemsContainer}>
-        {works?.items?.map((item) => (
-          <Link
-            key={`WORK_ITEM_${item.slug}`}
-            className={Styles.WorkItem}
-            href={`/work/${item.slug}`}
-          >
-            <MediaHoverOverlay
-              media={item.thumbnail!}
-              className={Styles.WorkItemMedia}
+        {works?.pages
+          ?.flatMap((page) => page.items)
+          .map((item) => (
+            <Link
+              key={`WORK_ITEM_${item.slug}`}
+              className={Styles.WorkItem}
+              href={`/work/${item.slug}`}
             >
-              <div className={Styles.WorkItemMediaOverlay}>
-                <p>{item.summary}</p>
-              </div>
-            </MediaHoverOverlay>
-            <p className={Styles.WorkItemText}>{item.title}</p>
-          </Link>
-        ))}
+              <MediaHoverOverlay
+                media={item.thumbnail!}
+                className={Styles.WorkItemMedia}
+              >
+                <div className={Styles.WorkItemMediaOverlay}>
+                  <p>{item.summary}</p>
+                </div>
+              </MediaHoverOverlay>
+              <p className={Styles.WorkItemText}>{item.title}</p>
+            </Link>
+          ))}
       </div>
       <div className={Styles.MoreButtonContainer}>
-        <MoreButton />
+        {hasNextPage && <MoreButton onClick={() => fetchNextPage()} />}
       </div>
       <AdminButtons
         adminButtons={[

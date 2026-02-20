@@ -2,28 +2,61 @@ import * as Styles from "./style.css";
 import categories from "@ts/categories";
 import { toTitleCase } from "@utils/Text";
 import MediaHoverOverlay from "@components/ui/Media/HoverOverlay/HoverOverlay";
-import { useSearchQuery } from "./query";
+import { useWorksInfiniteQuery } from "@controllers/work/query";
+import { useMemo, useState } from "react";
+import { WorkCard, WorkCategory } from "@domain/work";
+import Link from "next/link";
+
+const CATEGORY_ORDER: (WorkCategory | "EVERYTHING")[] = [
+  "EVERYTHING",
+  "ANIMATE",
+  "BRANDING",
+  "CHARACTER",
+  "AWARD",
+  "FILM",
+  "COMMERCIAL",
+  "SOCIAL_CONTENTS",
+];
 
 const SearchResult = ({ queries }: { queries: string[] }) => {
-  const { data: searchResults } = useSearchQuery(queries);
+  const [selectedCategory, setSelectedCategory] = useState<
+    WorkCategory | "EVERYTHING"
+  >("EVERYTHING");
+  const { data: works, isLoading } = useWorksInfiniteQuery({
+    mode: "main",
+    category: selectedCategory,
+    q: queries,
+  });
 
-  const handleItemClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const item = e.currentTarget.name;
-  };
+  const searchResults = works?.pages.flatMap((page) => page.items);
+
+  const categorizedSearchResult = useMemo(() => {
+    if (!searchResults?.length) return [];
+
+    const map = new Map<WorkCategory | "EVERYTHING", WorkCard[]>();
+    for (const item of searchResults) {
+      const key = item.category as WorkCategory | "EVERYTHING";
+      (map.get(key) ?? map.set(key, []).get(key)!).push(item);
+    }
+
+    return CATEGORY_ORDER.filter((c) => map.has(c)).map((category) => ({
+      category,
+      items: map.get(category)!,
+    }));
+  }, [searchResults]);
 
   if (!queries.length) return;
-  if (!searchResults) return;
+  if (!works || isLoading) return;
 
   return (
     <div className={Styles.ResultContainer}>
       <p className={Styles.FilterTitle}>Filter by</p>
       <div className={Styles.FilterGroup}>
-        {categories.map((filter, idx) => {
+        {(categories as (WorkCategory | "EVERYTHING")[]).map((filter, idx) => {
           const count =
             filter === "EVERYTHING"
-              ? searchResults.reduce((acc, r) => acc + r.items.length, 0)
-              : searchResults.find((r) => r.filter === filter)?.items.length ||
-                0;
+              ? searchResults?.length
+              : searchResults?.filter((r) => r.category === filter).length || 0;
           const defaultChecked = idx === 0;
           const disabled = count === 0;
 
@@ -35,6 +68,7 @@ const SearchResult = ({ queries }: { queries: string[] }) => {
                 className={Styles.FilterInput}
                 defaultChecked={defaultChecked}
                 disabled={disabled}
+                onChange={() => setSelectedCategory(filter)}
               />
               <p className={Styles.FilterText}>
                 {toTitleCase(filter)} ({count})
@@ -43,22 +77,21 @@ const SearchResult = ({ queries }: { queries: string[] }) => {
           );
         })}
       </div>
-      {searchResults.map((result) => (
+      {categorizedSearchResult?.map((result) => (
         <div
           className={Styles.ResultGroup}
-          key={`SEARCH_RESULT_${result.filter}`}
+          key={`SEARCH_RESULT_${result.category}`}
         >
-          <p className={Styles.ResultGroupTitle}>{result.filter}</p>
+          <p className={Styles.ResultGroupTitle}>{result.category}</p>
           <div className={Styles.ResultItemGroup}>
             {result.items.map((item) => (
-              <button
-                key={`SEARCH_RESULT_ITEM_${item.id}`}
+              <Link
+                key={`SEARCH_RESULT_ITEM_${item.slug}`}
                 className={Styles.ResultItem}
-                name={item.title}
-                onClick={handleItemClick}
+                href={`/work/${item.slug}`}
               >
                 <MediaHoverOverlay
-                  media={item.media}
+                  media={item.thumbnail}
                   className={Styles.ResultItemMedia}
                 >
                   <div className={Styles.ResultItemMediaOverlay}>
@@ -66,7 +99,7 @@ const SearchResult = ({ queries }: { queries: string[] }) => {
                   </div>
                 </MediaHoverOverlay>
                 <p className={Styles.ResultItemText}>{item.title}</p>
-              </button>
+              </Link>
             ))}
           </div>
         </div>

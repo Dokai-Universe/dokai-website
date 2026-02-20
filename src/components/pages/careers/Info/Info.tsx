@@ -43,7 +43,6 @@ const CareerDetailInfo = ({
           type="text"
           value={profile.name}
           onChange={(e) => setProfile({ ...profile, name: e.target.value })}
-          disabled={!emailEditable}
           className={Styles.Input}
         />
       </div>
@@ -55,7 +54,6 @@ const CareerDetailInfo = ({
           type="text"
           value={profile.role}
           onChange={(e) => setProfile({ ...profile, role: e.target.value })}
-          disabled={!emailEditable}
           className={Styles.Input}
         />
       </div>

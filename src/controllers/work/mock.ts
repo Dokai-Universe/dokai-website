@@ -1,5 +1,5 @@
 import { MediaSource } from "@components/ui/Media/types";
-import { Credit, Work, WorkMetaField } from "@domain/work";
+import { Credit, Work, WorkCard, WorkMetaField } from "@domain/work";
 
 const meta: WorkMetaField[] = [
   {
@@ -92,7 +92,7 @@ const credits: Credit[] = [
   },
 ];
 
-const mockWorkDetail: Work = {
+export const mockWorkDetail: Work = {
   title: "[NHPCI Rice Consumption PromotionCampaign] Absolutely Rice!",
   thumbnail: {
     type: "VIDEO",
@@ -113,4 +113,77 @@ const mockWorkDetail: Work = {
   credits: credits,
 };
 
-export default mockWorkDetail;
+export const mockWorkCard: WorkCard[] = [
+  {
+    slug: "nhi",
+    title: "[NHPCI Rice Consumption PromotionCampaign] Absolutely Rice!",
+    thumbnail: {
+      type: "VIDEO",
+      src: "/nhi_0.png",
+      alt: "[NHPCI Rice Consumption PromotionCampaign] Absolutely Rice!",
+    },
+    summary: "NHPCI Rice Consumption PromotionCampaign",
+    category: "ANIMATE",
+    fixedAt: null,
+  },
+  {
+    slug: "nhi",
+    title: "[NHPCI Rice Consumption PromotionCampaign] Absolutely Rice!",
+    thumbnail: {
+      type: "VIDEO",
+      src: "/nhi_0.png",
+      alt: "[NHPCI Rice Consumption PromotionCampaign] Absolutely Rice!",
+    },
+    summary: "NHPCI Rice Consumption PromotionCampaign",
+    category: "ANIMATE",
+    fixedAt: null,
+  },
+  {
+    slug: "nhi",
+    title: "[NHPCI Rice Consumption PromotionCampaign] Absolutely Rice!",
+    thumbnail: {
+      type: "VIDEO",
+      src: "/nhi_0.png",
+      alt: "[NHPCI Rice Consumption PromotionCampaign] Absolutely Rice!",
+    },
+    summary: "NHPCI Rice Consumption PromotionCampaign",
+    category: "ANIMATE",
+    fixedAt: null,
+  },
+  {
+    slug: "nhi",
+    title: "[NHPCI Rice Consumption PromotionCampaign] Absolutely Rice!",
+    thumbnail: {
+      type: "VIDEO",
+      src: "/nhi_0.png",
+      alt: "[NHPCI Rice Consumption PromotionCampaign] Absolutely Rice!",
+    },
+    summary: "NHPCI Rice Consumption PromotionCampaign",
+    category: "ANIMATE",
+    fixedAt: null,
+  },
+  {
+    slug: "nhi",
+    title: "[NHPCI Rice Consumption PromotionCampaign] Absolutely Rice!",
+    thumbnail: {
+      type: "VIDEO",
+      src: "/nhi_0.png",
+      alt: "[NHPCI Rice Consumption PromotionCampaign] Absolutely Rice!",
+    },
+    summary: "NHPCI Rice Consumption PromotionCampaign",
+    category: "ANIMATE",
+    fixedAt: null,
+  },
+  {
+    slug: "nhi",
+    title: "[NHPCI Rice Consumption PromotionCampaign] Absolutely Rice!",
+    thumbnail: {
+      type: "VIDEO",
+      src: "/nhi_0.png",
+      alt: "[NHPCI Rice Consumption PromotionCampaign] Absolutely Rice!",
+    },
+    summary: "NHPCI Rice Consumption PromotionCampaign",
+    category: "ANIMATE",
+    fixedAt: null,
+  },
+];

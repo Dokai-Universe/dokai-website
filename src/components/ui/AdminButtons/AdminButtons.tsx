@@ -40,7 +40,7 @@ const AdminButtons = ({
       {adminButtons.map((button) => {
         const { role, type, click, email } = button;
         if (role === "ADMIN" && session?.role !== "admin") return null;
-        if (role === "STAFF" && session?.email !== email) return null;
+        if (role === "STAFF" && email && session?.email !== email) return null;
 
         return (
           <button
@@ -49,7 +49,9 @@ const AdminButtons = ({
             onClick={
               click.type === "FUNCTION"
                 ? click.onClick
-                : () => router.push(click.href)
+                : () => {
+                    router.push(click.href);
+                  }
             }
           >
             {type === "EDIT" && <EditSVG className={Styles.ButtonIcon} />}

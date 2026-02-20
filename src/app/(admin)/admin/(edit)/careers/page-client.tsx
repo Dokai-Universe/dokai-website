@@ -35,11 +35,7 @@ const AdminCareersPageClient = ({
   const router = useRouter();
   const session = useSession();
   const [profile, setProfile] = useState<ProfileDetail>(initalProfile);
-  const emailEditable = !!(
-    session.me &&
-    (session.me.role === "admin" ||
-      (session.me.role === "staff" && session.me.email === profile.email))
-  );
+  const emailEditable = !!(session.me && session.me.role === "admin");
   const [isPublic, setIsPublic] = useState(false);
 
   useEffect(() => {

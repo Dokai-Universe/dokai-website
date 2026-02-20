@@ -5,6 +5,7 @@ import Link from "next/link";
 import * as Styles from "./style.css";
 import { toTitleCase } from "@utils/Text";
 import MediaCard from "@components/ui/Media/MediaCard";
+import { useWorksInfiniteQuery } from "@controllers/work/query";
 
 const getLayout = (idx: number) => {
   const isEvenColumn = idx % 4 >= 2;
@@ -18,29 +19,36 @@ const getLayout = (idx: number) => {
 };
 
 const MainWorks = () => {
+  const { data: works } = useWorksInfiniteQuery({
+    mode: "main",
+    category: "EVERYTHING",
+  });
+
   return (
     <div className={Styles.WorksContainer}>
-      {MockMainItems.map((item, idx) => {
-        const { row, width } = getLayout(idx);
+      {works?.pages
+        .flatMap((page) => page.items)
+        .map((item, idx) => {
+          const { row, width } = getLayout(idx);
 
-        return (
-          <Link
-            key={item.id}
-            className={Styles.ItemContainer({ row, width })}
-            href={item.url}
-          >
-            <MediaCard media={item.media} className={Styles.ItemMedia} />
-            <div className={Styles.ItemTextContainer({ width })}>
-              <p>{toTitleCase(item.type)}</p>
+          return (
+            <Link
+              key={item.slug}
+              className={Styles.ItemContainer({ row, width })}
+              href={`/work/${item.slug}`}
+            >
+              <MediaCard media={item.thumbnail!} className={Styles.ItemMedia} />
+              <div className={Styles.ItemTextContainer({ width })}>
+                <p>{toTitleCase(item.category)}</p>
 
-              <div className={Styles.ItemTextContent}>
-                <p>{item.title}</p>
-                <p className={Styles.ItemTextSummary}>{item.summary}</p>
+                <div className={Styles.ItemTextContent}>
+                  <p>{item.title}</p>
+                  <p className={Styles.ItemTextSummary}>{item.summary}</p>
+                </div>
               </div>
-            </div>
-          </Link>
-        );
-      })}
+            </Link>
+          );
+        })}
     </div>
   );
 };
