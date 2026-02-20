@@ -13,9 +13,12 @@ export function useSession() {
   useEffect(() => {
     (async () => {
       setLoading(true);
-      const res = await fetch("/api/public/auth/session", {
-        credentials: "include",
-      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_SITE_URL ?? ""}/api/public/auth/session`,
+        {
+          credentials: "include",
+        },
+      );
       if (res.ok) setMe(await res.json());
       else setMe(null);
       setLoading(false);
