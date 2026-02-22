@@ -14,7 +14,7 @@ import {
   fetchProfileUpdate,
 } from "@controllers/careers/fetch";
 import CareerDetailInfo from "@components/pages/careers/Info/Info";
-import { useRouter } from "next/navigation";
+import { useRouter } from "nextjs-toploader/app";
 
 const initalProfile: ProfileDetail = {
   email: "",

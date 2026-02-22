@@ -14,7 +14,7 @@ import {
 } from "@controllers/work/fetch";
 import WorkDetailInfo from "@components/pages/work/Info/Info";
 import AdminButtons from "@components/ui/AdminButtons/AdminButtons";
-import { useRouter } from "next/navigation";
+import { useRouter } from "nextjs-toploader/app";
 
 const initalWork: Work = {
   title: "",

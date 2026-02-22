@@ -197,6 +197,7 @@ const VimeoPlayer = ({
         width: "100%",
         aspectRatio: "16 / 9",
       }}
+      onClick={() => console.log("iframe")}
     >
       {mounted && (
         <iframe
@@ -209,6 +210,8 @@ const VimeoPlayer = ({
             height: "100%",
             top: "0",
             left: "0",
+            pointerEvents: "auto",
+            background: "transparent",
           }}
           frameBorder={0}
           allow={

@@ -4,22 +4,28 @@ import Image from "next/image";
 import LogoPNG from "@assets/dokai.png";
 import ExternalLinks from "@ts/external_links";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "nextjs-toploader/app";
 
 const DrawerFooter = () => {
   const [count, setCount] = useState(0);
   const router = useRouter();
+
+  const handleClickName = () => {
+    if (count + 1 === 10) {
+      router.push("/auth/login");
+    }
+    setCount((prev) => prev + 1);
+  };
 
   return (
     <footer className={Styles.Footer}>
       <p className={Styles.FooterTitle}>
         © 2026{" "}
         <span
-          onClick={() => {
-            if (count === 10) {
-              router.push("/auth/login");
-            }
-            setCount((prev) => prev + 1);
+          onClick={handleClickName}
+          style={{
+            opacity: (10 - count) / 10,
+            userSelect: "none",
           }}
         >
           DOKAI

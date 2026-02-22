@@ -4,10 +4,10 @@ import { useSessionStatusQuery } from "@controllers/auth/session";
 import useMount from "@hooks/useMount";
 import PlusSVG from "@assets/icons/plus.svg";
 import * as Styles from "./style.css";
-import { useRouter } from "next/navigation";
 import EditSVG from "@assets/icons/edit.svg";
 import SaveSVG from "@assets/icons/save.svg";
 import TrashSVG from "@assets/icons/trash.svg";
+import { useRouter } from "nextjs-toploader/app";
 
 type AdminButton = {
   role: "ADMIN" | "STAFF";

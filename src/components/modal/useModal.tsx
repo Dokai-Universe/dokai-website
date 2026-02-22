@@ -1,4 +1,5 @@
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
+import { useRouter } from "nextjs-toploader/app";
 import { JSX, useEffect, useMemo, useRef, useState } from "react";
 
 export interface ModalLayoutProps {

@@ -20,7 +20,7 @@ import AboutPageTextSection from "@components/pages/about/Text/Text";
 import AboutPageGroupSection from "@components/pages/about/Group/Group";
 import AboutPageCardSection from "@components/pages/about/Card/Card";
 import AboutPageTeamSection from "@components/pages/about/Team/Team";
-import { useRouter } from "next/navigation";
+import { useRouter } from "nextjs-toploader/app";
 
 const AboutPageClient = () => {
   const navigator = useRouter();

@@ -236,7 +236,7 @@ const VideoCard = ({
         videoId={videoId}
         className={className}
         loop={media?.type == "LOOP" ? media?.loop : undefined}
-        pointerEvents={pointerEvents}
+        // pointerEvents={pointerEvents}
         onLoad={() => setState({ step: "ready", errorText: null })}
         onError={(msg) =>
           setState({ step: "error", errorText: msg || "Invalid video" })
