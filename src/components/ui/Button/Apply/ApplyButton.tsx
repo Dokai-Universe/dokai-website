@@ -1,9 +1,22 @@
 import * as Styles from "./style.css";
 
-const ApplyButton = ({ onClick }: { onClick: () => void }) => {
+const ApplyButton = ({
+  onClick,
+  disabled,
+  text,
+}: {
+  onClick: () => void;
+  disabled?: boolean;
+  text?: string;
+}) => {
   return (
-    <button type="button" className={Styles.Button} onClick={onClick}>
-      Apply
+    <button
+      type="button"
+      className={Styles.Button}
+      onClick={onClick}
+      disabled={disabled}
+    >
+      {text ?? "Apply"}
     </button>
   );
 };

@@ -11,6 +11,7 @@ import EditCreditModal from "./Edit/EditCredit/EditCreditModal";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import useLockBodyScroll from "@hooks/useLockBodyScroll";
+import UploadImageModal from "./UploadImage/UploadImageModal";
 
 const ApiModal = dynamic(() => import("./Api/ApiModal"), { ssr: false });
 const ConfirmModal = dynamic(() => import("./Confirm/ConfirmModal"), {
@@ -103,6 +104,8 @@ const ModalStackRoot = () => {
             return <EditMetaInfoModal key={m.id} {...common} {...m.props} />;
           case "EDIT_CREDIT":
             return <EditCreditModal key={m.id} {...common} {...m.props} />;
+          case "UPLOAD_IMAGE":
+            return <UploadImageModal key={m.id} {...common} {...m.props} />;
           default:
             return null;
         }

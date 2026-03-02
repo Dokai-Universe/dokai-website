@@ -5,7 +5,6 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import * as Styles from "./style.css";
 import { createPortal } from "react-dom";
 import { assignInlineVars } from "@vanilla-extract/dynamic";
-import useLockBodyScroll from "@hooks/useLockBodyScroll";
 import SearchSVG from "@assets/icons/search.svg";
 import ArrowRightSVG from "@assets/icons/arrow-right.svg";
 import { useModalStackStore } from "@stores/modalStackStore";
@@ -43,7 +42,6 @@ const DrawerMenu = ({ handleCloseAll, isOpen, closeModal }: Props) => {
   const overlayRef = useRef<HTMLDivElement | null>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [count, setCount] = useState(0);
-  // useLockBodyScroll(true);
 
   const { push } = useModalStackStore();
 

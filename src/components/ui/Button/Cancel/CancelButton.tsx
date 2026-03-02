@@ -3,9 +3,11 @@ import * as Styles from "./style.css";
 const CancelButton = ({
   onClick,
   isRight,
+  text,
 }: {
   onClick: () => void;
   isRight?: boolean;
+  text?: string;
 }) => {
   return (
     <button
@@ -13,7 +15,7 @@ const CancelButton = ({
       className={Styles.Button({ isRight })}
       onClick={onClick}
     >
-      Cancel
+      {text ?? "Cancel"}
     </button>
   );
 };

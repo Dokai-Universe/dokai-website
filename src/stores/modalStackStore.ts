@@ -80,6 +80,13 @@ export type ModalMap = {
     applyCredit: (next: WorkCredit) => void;
     deleteCredit?: () => void;
   };
+
+  UPLOAD_IMAGE: {
+    uploadImages: (
+      setProgress: (file: File | null, progress: number, count: number) => void,
+    ) => void;
+    handleCommit?: () => void;
+  };
 };
 
 export type ModalState = {

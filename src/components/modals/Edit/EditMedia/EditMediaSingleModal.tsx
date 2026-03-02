@@ -8,6 +8,7 @@ import { uploadImage } from "@utils/uploadImage";
 import ArrowLeftSVG from "@assets/icons/arrow-left.svg";
 import EditVideo from "./EditVideo/EditVideo";
 import ModalLayout from "@components/modals/ModalLayout";
+import { useModalStackStore } from "@stores/modalStackStore";
 
 const EditMediaSingleModal = ({
   initial,
@@ -30,7 +31,6 @@ const EditMediaSingleModal = ({
   const ownedBlobUrlRef = useRef<string | null>(null);
 
   const registerBlobUrl = (url: string) => {
-    // 기존에 등록된 blob이 있으면 revoke 후 교체
     const prev = ownedBlobUrlRef.current;
     if (prev) URL.revokeObjectURL(prev);
     ownedBlobUrlRef.current = url;
@@ -89,18 +89,34 @@ const EditMediaSingleModal = ({
     requestCloseModal();
   };
 
+  const { push } = useModalStackStore();
+
+  const uploadPendingImages = async (
+    setProgress: (file: File | null, progress: number, count: number) => void,
+  ) => {
+    setProgress(pendingFile, 0, 1);
+    const { url: uploadedUrl } = await uploadImage(pendingFile!);
+
+    revokeBlobUrl();
+    setPendingFile(null);
+    updateMedia((prev) => ({ ...prev, src: uploadedUrl }));
+    setProgress(null, 1, 1);
+  };
+
   const handleApply = async () => {
     if (!media) {
       requestCloseModal();
       return;
     }
 
-    const nextMedia =
-      media.type === "IMAGE" && pendingFile
-        ? { ...media, src: (await uploadImage(pendingFile)).url }
-        : media;
+    if (media.type === "IMAGE" && pendingFile) {
+      push("UPLOAD_IMAGE", {
+        uploadImages: uploadPendingImages,
+      });
+      return;
+    }
 
-    applyMedia?.(nextMedia);
+    applyMedia?.(media);
     revokeBlobUrl();
     requestCloseModal();
   };

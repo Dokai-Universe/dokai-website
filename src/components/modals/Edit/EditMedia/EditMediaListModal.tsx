@@ -8,7 +8,7 @@ import EditImage from "./EditImage/EditImage";
 import { uploadImage } from "@utils/uploadImage";
 import EditVideo from "./EditVideo/EditVideo";
 import ModalLayout from "@components/modals/ModalLayout";
-import UploadImageModal from "@components/ui/Edit/Modal/UploadImage/UploadImageModal";
+import { useModalStackStore } from "@stores/modalStackStore";
 
 const EditMediaListModal = ({
   initial,
@@ -32,7 +32,8 @@ const EditMediaListModal = ({
   const [pendingFiles, setPendingFiles] = useState<Map<number, File>>(
     () => new Map(),
   );
-  const [openUploadModal, setOpenUploadModal] = useState(false);
+  const { push } = useModalStackStore();
+
   const nextIdRef = useRef(0);
 
   const ownedBlobUrlsRef = useRef<Map<number, string>>(new Map());
@@ -77,7 +78,6 @@ const EditMediaListModal = ({
     setMedias(list);
     setSelectedIndex(null);
     setPendingFiles(new Map());
-    setOpenUploadModal(false);
 
     ownedBlobUrlsRef.current.clear();
   }, [initial, open]);
@@ -160,7 +160,9 @@ const EditMediaListModal = ({
 
   const handleApply = async () => {
     if (pendingFiles.size) {
-      setOpenUploadModal(true);
+      push("UPLOAD_IMAGE", {
+        uploadImages: uploadPendingImages,
+      });
       return;
     }
 
@@ -216,13 +218,6 @@ const EditMediaListModal = ({
           </button>
         </div>
       </div>
-
-      <UploadImageModal
-        open={openUploadModal}
-        onClose={() => setOpenUploadModal(false)}
-        uploadImages={uploadPendingImages}
-        handleCommit={handleCommit}
-      />
     </ModalLayout>
   );
 };
