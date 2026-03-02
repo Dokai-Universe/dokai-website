@@ -1,7 +1,6 @@
 import type { NextRequest } from "next/server";
 import { createSupabaseRouteClient } from "@lib/supabase/route";
 import { createSupabaseAdminClient } from "@lib/supabase/admin";
-import { createSupabaseServerClient } from "@lib/supabase/server";
 
 type Role = "admin" | "staff";
 
