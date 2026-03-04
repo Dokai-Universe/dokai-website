@@ -1,5 +1,3 @@
-export const dynamic = "force-dynamic";
-
 import CareersPageClient from "./page-client";
 
 const CareersPage = async () => {
