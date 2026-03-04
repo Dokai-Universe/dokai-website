@@ -6,15 +6,17 @@ import * as Styles from "./style.css";
 
 export default function LoginButton() {
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  const isProd = process.env.NODE_ENV === "production";
 
   const handleLogin = async () => {
     const supabase = createSupabaseBrowserClient();
+    const next = location.pathname + location.search;
 
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: `${window.location.origin}/auth/callback`,
-        skipBrowserRedirect: true, // ✅ 자동 페이지 이동 막기
+        redirectTo: `${window.location.origin}/auth/callback${!isProd || !isMobile ? "" : `?next=${encodeURIComponent(next)}`}`,
+        skipBrowserRedirect: !isMobile,
       },
     });
 

@@ -7,6 +7,7 @@ export async function GET(req: NextRequest) {
 
   const code = url.searchParams.get("code");
   const rawNext = url.searchParams.get("next") || "/";
+  console.log(rawNext);
   const next = rawNext.startsWith("/") ? rawNext : "/";
 
   const { supabase, applyCookies } = createSupabaseRouteClient(req);

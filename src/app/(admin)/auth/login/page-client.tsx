@@ -11,6 +11,7 @@ const LoginPageClient = () => {
     authQueriesClient.sessionStatus(),
   );
 
+  console.log(session);
   if (isLoading) return null;
 
   return (
