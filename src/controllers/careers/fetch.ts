@@ -49,12 +49,6 @@ export const fetchProfileDelete = (id: string) =>
     method: "DELETE",
   });
 
-export const fetchHasProfile = () =>
-  fetchApi<{
-    email: string;
-    hasProfile: boolean;
-  }>(`/api/admin/profiles/has-profile`);
-
 export const fetchProfileCheckEmail = (email: string) =>
   fetchApi<{ exists: boolean }>(
     `/api/admin/profiles/check-email?email=${encodeEmailParam(email)}`,

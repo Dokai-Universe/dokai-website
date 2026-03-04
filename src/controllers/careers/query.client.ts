@@ -1,7 +1,6 @@
 import { QueryDef } from "../common";
 import {
   fetchCareerPageDetail,
-  fetchHasProfile,
   fetchProfileDetail,
   fetchProfileList,
   fetchProjectDetail,
@@ -37,13 +36,6 @@ export const careersQueriesClient = {
   > => ({
     queryKey: careersQueryKeys.profileDetail(email),
     queryFn: () => fetchProfileDetail(email),
-  }),
-  hasProfile: (): QueryDef<
-    { email: string; hasProfile: boolean },
-    readonly ["careers", "has-profile"]
-  > => ({
-    queryKey: careersQueryKeys.hasProfile(),
-    queryFn: () => fetchHasProfile(),
   }),
   projectDetail: (
     projectId: string,

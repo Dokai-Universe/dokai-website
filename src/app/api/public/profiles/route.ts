@@ -1,7 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { createSupabaseRouteClient } from "@lib/supabase/route";
-import { createSupabaseAdminClient } from "@lib/supabase/admin";
-import { getOptionalRole } from "@lib/auth/optionalRole";
 
 /**
  * @openapi

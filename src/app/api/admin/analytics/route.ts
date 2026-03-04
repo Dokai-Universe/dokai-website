@@ -1,11 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getGaClient, getGaPropertyName } from "@lib/ga4/server";
-import { getOptionalRole } from "@lib/auth/optionalRole";
+import { createSupabaseRouteClient } from "@lib/supabase/route";
 
 export async function GET(req: NextRequest) {
-  const { role, isPrivileged } = await getOptionalRole(req);
-  if (!isPrivileged || role !== "admin") {
-    return NextResponse.json({ message: "Forbidden" }, { status: 403 });
+  const { supabase, applyCookies } = createSupabaseRouteClient(req);
+
+  const { data: userRes, error: userErr } = await supabase.auth.getUser();
+  if (userErr || !userRes.user) {
+    return applyCookies(
+      NextResponse.json({ message: "Unauthorized" }, { status: 401 }),
+    );
   }
 
   const client = getGaClient();
@@ -99,5 +103,7 @@ export async function GET(req: NextRequest) {
       sessions: Number(row.metricValues?.[0]?.value ?? 0),
     })) ?? [];
 
-  return NextResponse.json({ totals, topPages, trend, topReferrers, device });
+  return applyCookies(
+    NextResponse.json({ totals, topPages, trend, topReferrers, device }),
+  );
 }

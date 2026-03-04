@@ -1,5 +1,4 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { createSupabaseAdminClient } from "@lib/supabase/admin";
 import { WorkUpsertRequest } from "@controllers/works/types";
 import {
   createSupabaseRouteClient,
