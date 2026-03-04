@@ -10,7 +10,7 @@ export default function LoginButton() {
 
   const handleLogin = async () => {
     const supabase = createSupabaseBrowserClient();
-    const next = location.pathname + location.search;
+    const next = location.href;
 
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: "google",
