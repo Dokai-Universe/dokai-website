@@ -30,11 +30,11 @@ import ProjectModalView from "./View";
 import ErrorComponent from "@components/ui/Status/Error";
 import LoadingComponent from "@components/ui/Status/Loading";
 import AddButton from "@components/ui/Edit/AddButton/AddButton";
-import { useSessionOwner } from "@controllers/auth/session";
 import { useAppMutation, useAppQuery } from "@controllers/common";
 import { careersQueriesClient } from "@controllers/careers/query.client";
 import { careersMutations } from "@controllers/careers/mutation";
 import { encodeEmailParam } from "@utils/Email";
+import { authQueriesClient } from "@controllers/auth/query.client";
 
 const TRANSITION_DURATION = 200;
 
@@ -207,7 +207,8 @@ const ProjectModalEdit = () => {
 };
 
 const ProjectModal = ({ ownerEmail, isOpen, closeModal }: Props) => {
-  const isOwner = useSessionOwner(ownerEmail);
+  const { data: session } = useAppQuery(authQueriesClient.sessionStatus());
+  const isOwner = session?.role === "admin" || session?.email === ownerEmail;
   const router = useRouter();
   const searchParams = useSearchParams();
   const rawId = searchParams.get("project");

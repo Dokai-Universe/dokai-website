@@ -5,13 +5,13 @@ import MediaHoverOverlay from "@components/ui/Media/HoverOverlay/HoverOverlay";
 import Link from "next/link";
 import PlusSVG from "@assets/icons/plus.svg";
 import { useQueryClient } from "@tanstack/react-query";
-import { fetchProjectDetail } from "@controllers/careers/fetch";
-import { queryOptions } from "@controllers/common";
+import { prefetchAppQuery, useAppQuery } from "@controllers/common";
 import { useSearchParams } from "next/navigation";
 import { useModalStackStore } from "@stores/modalStackStore";
 import { useEffect } from "react";
-import { useSessionOwner } from "@controllers/auth/session";
 import { ProjectListItem } from "@domain/careers";
+import { authQueriesClient } from "@controllers/auth/query.client";
+import { careersQueriesClient } from "@controllers/careers/query.client";
 
 const CareerProjects = ({
   projects,
@@ -23,18 +23,14 @@ const CareerProjects = ({
   isReadOnly?: boolean;
 }) => {
   const qc = useQueryClient();
-  const isOwner = useSessionOwner(email);
-
-  const handleClickProject = async (project: ProjectListItem) => {
-    void qc.prefetchQuery({
-      queryKey: ["project", project.id],
-      queryFn: () => fetchProjectDetail(project.id),
-      ...queryOptions,
-    });
-  };
-
   const searchParams = useSearchParams();
   const { replaceTop } = useModalStackStore();
+  const { data: session } = useAppQuery(authQueriesClient.sessionStatus());
+  const editable = session?.role === "admin" || session?.email === email;
+
+  const handleClickProject = async (project: ProjectListItem) => {
+    prefetchAppQuery(qc, careersQueriesClient.projectDetail(project.id));
+  };
 
   useEffect(() => {
     if (searchParams.get("project")) {
@@ -43,8 +39,6 @@ const CareerProjects = ({
       }, 100);
     }
   }, [searchParams]);
-
-  if (!isOwner && !projects.length) return null;
 
   return (
     <div className={Styles.ProjectContainer({ isReadOnly })}>
@@ -68,7 +62,7 @@ const CareerProjects = ({
           </MediaHoverOverlay>
         ))}
 
-        {isOwner && (
+        {editable && (
           <Link
             href="?project=new"
             scroll={false}

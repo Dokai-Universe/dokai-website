@@ -44,11 +44,11 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
+  const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
   return (
     <html lang="en">
-      {/* <head>
+      <head>
         {GA_ID && (
           <>
             <Script
@@ -67,7 +67,7 @@ export default function RootLayout({
             </Script>
           </>
         )}
-      </head> */}
+      </head>
       <body className={`${dmSans.variable} ${themeClass}`}>
         <NextTopLoader
           showSpinner={true}
@@ -78,9 +78,9 @@ export default function RootLayout({
           speed={200}
           color="#ed8435"
         />
-        {/* <Suspense fallback={null}>
+        <Suspense fallback={null}>
           <GaPageView />
-        </Suspense> */}
+        </Suspense>
         <Providers>
           <Suspense fallback={null}>
             <ModalStackRoot />

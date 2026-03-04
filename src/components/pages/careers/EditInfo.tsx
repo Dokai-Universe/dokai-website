@@ -1,11 +1,12 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { useSessionRole } from "@controllers/auth/session";
 import { useFormContext } from "react-hook-form";
 import type { ProfileFormInput } from "./career";
 import EditPublished from "@components/ui/Edit/EditPublished/EditPublished";
 import TitleInput from "@components/ui/Edit/TitleInput/TitleInput";
 import * as Styles from "./style.css";
 import { fetchProfileCheckEmail } from "@controllers/careers/fetch";
+import { useAppQuery } from "@controllers/common";
+import { authQueriesClient } from "@controllers/auth/query.client";
 
 type CheckState = "idle" | "checking" | "ok";
 
@@ -14,9 +15,9 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const normalizeEmail = (v: string) => v.trim().toLowerCase();
 
 const CareerEditInfo = ({ email }: { email?: string }) => {
-  const role = useSessionRole();
+  const { data: session } = useAppQuery(authQueriesClient.sessionStatus());
   const form = useFormContext<ProfileFormInput>();
-  const emailEditable = role === "admin";
+  const emailEditable = session?.role === "admin";
 
   const {
     setError,

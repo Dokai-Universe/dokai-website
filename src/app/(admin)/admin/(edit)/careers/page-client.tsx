@@ -9,7 +9,6 @@ import { Profile, ProfileDetail } from "@domain/careers";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
 import { FormProvider, useForm, useWatch } from "react-hook-form";
-import { useSessionEmail } from "@controllers/auth/session";
 import {
   initalProfile,
   ProfileFormInput,
@@ -30,6 +29,7 @@ import { useAppMutation, useAppQuery } from "@controllers/common";
 import { careersQueriesClient } from "@controllers/careers/query.client";
 import { careersMutations } from "@controllers/careers/mutation";
 import { encodeEmailParam } from "@utils/Email";
+import { authQueriesClient } from "@controllers/auth/query.client";
 
 const AdminCareersPageClient = ({ email }: { email?: string }) => {
   const router = useRouter();
@@ -37,6 +37,7 @@ const AdminCareersPageClient = ({ email }: { email?: string }) => {
   const { data } = useAppQuery(careersQueriesClient.profileDetail(email!), {
     enabled: !!email,
   });
+  const { data: session } = useAppQuery(authQueriesClient.sessionStatus());
   const [profileId, setProfileId] = useState<string | null>(null);
 
   const { mutateAsync: mutateCreateProfile } = useAppMutation(
@@ -56,7 +57,7 @@ const AdminCareersPageClient = ({ email }: { email?: string }) => {
       },
     },
   );
-  const userEmail = useSessionEmail();
+  const userEmail = session?.email;
 
   const form = useForm<ProfileFormInput>({
     mode: "onBlur",
