@@ -122,7 +122,6 @@ const WorkEditHeader = () => {
           media={mainMedia}
           applyMedia={handleApplyMedia}
           className={Styles.HeaderMedia({ isShortForm })}
-          blockedTypes={["VIDEO"]}
           priority
         />
         <ErrorText message={errors.mainMedia?.message} />

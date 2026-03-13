@@ -183,29 +183,42 @@ const VimeoPlayer = ({ videoId, loop, onLoad, onError }: Props) => {
   if (!mounted) return null;
 
   return (
-    <iframe
-      ref={iframeRef}
-      src={src}
+    <div
       style={{
-        position: "absolute",
-        inset: 0,
+        position: "relative",
         width: "100%",
         height: "100%",
-        top: "0",
-        left: "0",
-        pointerEvents: "auto",
-        background: "transparent",
-        opacity: ready ? 1 : 0,
-        transition: "opacity 300ms ease-in-out",
+        overflow: "hidden",
       }}
-      frameBorder={0}
-      allow={
-        isLoop
-          ? "autoplay; fullscreen; picture-in-picture"
-          : "fullscreen; picture-in-picture"
-      }
-      title="Vimeo video"
-    />
+    >
+      <iframe
+        ref={iframeRef}
+        src={src}
+        style={{
+          position: "absolute",
+          inset: 0,
+          width: "calc(100% + 2px)",
+          height: "calc(100% + 2px)",
+          top: "-1px",
+          left: "-1px",
+          pointerEvents: "auto",
+          background: "transparent",
+          opacity: ready ? 1 : 0,
+          transition: "opacity 300ms ease-in-out",
+          transform: "scale(1.0)",
+          transformOrigin: "center",
+          outline: "none",
+          border: "none",
+        }}
+        frameBorder={0}
+        allow={
+          isLoop
+            ? "autoplay; fullscreen; picture-in-picture"
+            : "fullscreen; picture-in-picture"
+        }
+        title="Vimeo video"
+      />
+    </div>
   );
 };
 

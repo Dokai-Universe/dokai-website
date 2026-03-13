@@ -4,6 +4,7 @@ import { MediaSource } from "@domain/media";
 import ImageCard from "./ImageCard";
 import VideoCard from "./VideoCard";
 import React from "react";
+import * as Styles from "./style.css";
 
 const MediaCard = ({
   media,
@@ -19,13 +20,7 @@ const MediaCard = ({
   priority?: boolean;
 }) => {
   return (
-    <div
-      className={className}
-      style={{
-        position: "relative",
-        background: "#EFEFEF",
-      }}
-    >
+    <div className={`${Styles.Card} ${className}`}>
       {!media ? null : media.type === "IMAGE" ? (
         <ImageCard
           image={media}
