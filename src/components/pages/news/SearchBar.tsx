@@ -19,21 +19,23 @@ const NewsPageSearchBar = ({ inDetail }: { inDetail?: boolean }) => {
   };
 
   return (
-    <label className={Styles.SearchBar}>
-      <input
-        type="text"
-        placeholder="Search for..."
-        className={Styles.SearchBarInput}
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-        onKeyDown={(e) => {
-          if (e.key === "Enter") {
-            handleSearch();
-          }
-        }}
-      />
-      <SearchSVG className={Styles.SearchBarIcon} onClick={handleSearch} />
-    </label>
+    <div className={Styles.Container}>
+      <label className={Styles.SearchBar}>
+        <input
+          type="text"
+          placeholder="Search for..."
+          className={Styles.SearchBarInput}
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              handleSearch();
+            }
+          }}
+        />
+        <SearchSVG className={Styles.SearchBarIcon} onClick={handleSearch} />
+      </label>
+    </div>
   );
 };
 

@@ -23,7 +23,7 @@ export const Content = style({
   gridColumn: "1 / -1",
   gridTemplateColumns: "repeat(3, 1fr)",
   rowGap: "2rem",
-  columnGap: "2.5rem",
+  columnGap: "2rem",
 
   "@media": {
     [media.tablet]: {
@@ -75,7 +75,7 @@ export const NewsItemCategory = style({
 
 export const NewsItemTitle = style({
   fontSize: vars.fontSize.md,
-  fontWeight: "400",
+  fontWeight: "300",
 });
 
 export const NewsItemFooter = style({
@@ -85,18 +85,18 @@ export const NewsItemFooter = style({
 });
 
 export const NewsItemDate = style({
-  fontSize: vars.fontSize.xxs,
+  fontSize: vars.fontSize.xs,
 });
 
 export const NewsItemView = style({
   display: "flex",
   alignItems: "center",
   gap: "0.25rem",
-  fontSize: vars.fontSize.xxs,
+  fontSize: vars.fontSize.xs,
 });
 
 export const NewsItemViewIcon = style({
-  width: "1rem",
+  width: "1.25rem",
   height: "auto",
   aspectRatio: "1 / 1",
   flexShrink: "0",

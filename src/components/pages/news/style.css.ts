@@ -1,26 +1,24 @@
-import { media, vars } from "@styles/theme.css";
+import { vars } from "@styles/theme.css";
 import { style } from "@vanilla-extract/css";
 
+export const Container = style({
+  gridColumn: "1 / -1",
+  display: "flex",
+  justifyContent: "center",
+});
+
 export const SearchBar = style({
-  gridColumn: "3 / -3",
   background: "#E8E8E8",
-  padding: "0.75rem 1rem",
+  padding: "0.75rem 1.5rem",
   borderRadius: "999px",
   display: "flex",
   alignItems: "center",
-
-  "@media": {
-    [media.tablet]: {
-      gridColumn: "2 / -2",
-    },
-    [media.mobile]: {
-      gridColumn: "1 / -1",
-    },
-  },
+  maxWidth: "560px",
+  width: "100%",
 });
 
 export const SearchBarInput = style({
-  fontSize: vars.fontSize.sm,
+  fontSize: vars.fontSize.md,
   border: "none",
   outline: "none",
   background: "transparent",
@@ -30,8 +28,8 @@ export const SearchBarInput = style({
 });
 
 export const SearchBarIcon = style({
-  stroke: "black",
-  width: "1.5rem",
+  stroke: "#646363",
+  width: "2rem",
   height: "auto",
   aspectRatio: "1 / 1",
   flexShrink: "0",

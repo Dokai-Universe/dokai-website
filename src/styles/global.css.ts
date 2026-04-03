@@ -11,7 +11,7 @@ globalStyle("html, body", {
 });
 
 globalStyle("html", {
-  fontSize: "clamp(16px, 1.4889vw, 32px)",
+  fontSize: "clamp(16px, 1.333333vw, 32px)",
 });
 
 globalStyle("body", {

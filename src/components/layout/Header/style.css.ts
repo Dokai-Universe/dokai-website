@@ -39,15 +39,18 @@ export const LogoImage = style({
 export const NavContainer = style({
   gridColumn: "6 / -1",
   display: "flex",
-  justifyContent: "space-between",
   alignItems: "center",
+  justifyContent: "flex-end",
+  gap: "1.75rem",
 
   "@media": {
     [media.desktop]: {
-      gridColumn: "6 / -1",
+      gridColumn: "5 / -1",
+      // justifyContent: "space-between",
+      // gap: "0",
     },
     [media.tablet]: {
-      gridColumn: "4 / -1",
+      gridColumn: "3 / -1",
     },
     [media.mobile]: {
       justifyContent: "flex-end",
