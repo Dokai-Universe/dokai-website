@@ -37,7 +37,7 @@ export const LogoImage = style({
 // Nav
 
 export const NavContainer = style({
-  gridColumn: "7 / -1",
+  gridColumn: "6 / -1",
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
@@ -47,7 +47,7 @@ export const NavContainer = style({
       gridColumn: "6 / -1",
     },
     [media.tablet]: {
-      gridColumn: "5 / -1",
+      gridColumn: "4 / -1",
     },
     [media.mobile]: {
       justifyContent: "flex-end",

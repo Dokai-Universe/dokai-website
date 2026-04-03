@@ -18,6 +18,7 @@ import useAuthUser from "@hooks/useAuthUser";
 const navList = [
   { label: "Work", href: "/work" },
   { label: "About", href: "/about" },
+  { label: "News", href: "/news" },
 ];
 
 const Header = () => {

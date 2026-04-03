@@ -22,6 +22,7 @@ import useAuthUser from "@hooks/useAuthUser";
 const drawerNavItems = [
   { label: "Work", href: "/work", private: false },
   { label: "About", href: "/about", private: false },
+  { label: "News", href: "/news", private: false },
   { label: "Contact", href: "/contact", private: false },
   { label: "Careers", href: "/careers", private: false },
   { label: "Admin", href: "/admin", private: true },
