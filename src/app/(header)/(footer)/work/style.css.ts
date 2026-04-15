@@ -4,15 +4,15 @@ import { globalStyle, style } from "@vanilla-extract/css";
 export const Container = style({
   display: "grid",
   gridTemplateColumns: "repeat(8, 1fr)",
-  rowGap: "7.5rem",
+  rowGap: "6rem",
   columnGap: "1rem",
   paddingBottom: "6rem",
   marginBottom: "4rem",
   position: "relative",
 
   "@media": {
-    [media.mobile]: {
-      rowGap: "5rem",
+    [media.tablet]: {
+      rowGap: "4rem",
     },
   },
 });
@@ -145,11 +145,4 @@ export const WorkItemText = style({
 
 globalStyle(`${WorkItem}:hover ${WorkItemText}`, {
   opacity: 0.5,
-});
-
-export const MoreButtonContainer = style({
-  position: "absolute",
-  bottom: "0",
-  left: "50%",
-  transform: "translateX(-50%)",
 });

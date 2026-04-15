@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Player from "@vimeo/player";
-import { LoopConfig } from "./types";
+import { LoopConfig } from "@domain/media";
 
 type Props = {
   videoId: string | number;

@@ -184,6 +184,7 @@ const EditMediaListModal = ({
         ) : medias[selectedIndex] ? (
           medias[selectedIndex].media.type === "IMAGE" ? (
             <EditImage
+              key={selectedIndex}
               media={medias[selectedIndex].media}
               updateMedia={updateMedia(medias[selectedIndex].id)}
               setPendingFile={setPendingFile(medias[selectedIndex].id)}

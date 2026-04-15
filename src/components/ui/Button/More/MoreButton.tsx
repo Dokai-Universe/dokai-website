@@ -3,10 +3,12 @@ import * as Styles from "./style.css";
 
 const MoreButton = ({ onClick }: { onClick: () => void }) => {
   return (
-    <button className={Styles.MoreButton} onClick={onClick}>
-      <p>More</p>
-      <PlusSVG className={Styles.MoreButtonIcon} />
-    </button>
+    <div className={Styles.Container}>
+      <button className={Styles.Button} onClick={onClick}>
+        <PlusSVG className={Styles.ButtonIcon} />
+        <p>More</p>
+      </button>
+    </div>
   );
 };
 

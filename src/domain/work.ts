@@ -41,6 +41,11 @@ export type Work = {
   credits: WorkCredit[];
 };
 
+export type WorkListItem = Pick<
+  Work,
+  "title" | "thumbnail" | "category" | "summary"
+>;
+
 export type WorkCard = {
   slug: string;
   title: string;

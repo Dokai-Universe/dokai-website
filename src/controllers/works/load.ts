@@ -8,7 +8,7 @@ export const loadWorkDetail = async (
 
   const { data, error } = await supabase
     .from("works")
-    .select("id, slug, data, is_published, fixed_at, updated_at")
+    .select("id, slug, data, is_published, updated_at")
     .eq("slug", slug)
     .maybeSingle();
 
@@ -18,10 +18,7 @@ export const loadWorkDetail = async (
     id: data.id,
     slug: data.slug,
     isPublished: data.is_published,
-    data: {
-      ...data.data,
-      fixedAt: data.fixed_at ? new Date(data.fixed_at).toISOString() : null,
-    },
+    data: data.data,
     updatedAt: data.updated_at,
   } as WorkDetailResponse;
 };

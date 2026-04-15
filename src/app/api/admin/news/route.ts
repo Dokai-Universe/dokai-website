@@ -1,38 +1,38 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { WorkUpsertRequest } from "@controllers/works/types";
 import {
   createSupabaseRouteClient,
   supabaseErrorToStatus,
 } from "@lib/supabase/route";
+import { ProfileUpsertRequest } from "@controllers/careers/types";
 
 /**
  * @openapi
- * /api/admin/works:
+ * /api/admin/career/profiles:
  *   post:
  *     tags:
- *       - Works
- *     summary: Create work (admin)
+ *       - Careers-Profile
+ *     summary: Create profile (admin/staff; staff can create only own)
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/WorkUpsertRequest'
+ *             $ref: '#/components/schemas/CareerCreateProfileRequest'
  *     responses:
  *       '201':
  *         description: Created
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/WorkDetailResponse'
- *       '400':
- *         description: Bad Request
+ *               $ref: '#/components/schemas/CareerProfileDetailResponse'
+ *       '401':
+ *         description: Unauthorized
  *         content:
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/ErrorResponse'
- *       '500':
- *         description: Server Error
+ *       '403':
+ *         description: Forbidden
  *         content:
  *           application/json:
  *             schema:
@@ -41,11 +41,13 @@ import {
 export async function POST(req: NextRequest) {
   const { supabase, applyCookies } = createSupabaseRouteClient(req);
 
-  let body: WorkUpsertRequest;
+  let body: ProfileUpsertRequest;
   try {
-    body = (await req.json()) as WorkUpsertRequest;
+    body = (await req.json()) as ProfileUpsertRequest;
   } catch {
-    return NextResponse.json({ message: "Invalid JSON" }, { status: 400 });
+    return applyCookies(
+      NextResponse.json({ message: "Invalid JSON body" }, { status: 400 }),
+    );
   }
 
   const { data: userRes, error: userErr } = await supabase.auth.getUser();
@@ -55,19 +57,19 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const slug = (body.slug ?? "").toString();
-  if (!slug) {
+  const email = (body.data.email ?? "").toString();
+  if (!email) {
     return applyCookies(
-      NextResponse.json({ message: "slug is required" }, { status: 400 }),
+      NextResponse.json({ message: "email is required" }, { status: 400 }),
     );
   }
 
   const { data, error } = await supabase
-    .from("works")
+    .from("career_profiles")
     .insert({
-      slug: body.slug,
+      email,
       data: body.data,
-      is_published: body.isPublished,
+      is_published: !!body.isPublished,
     })
     .select("id")
     .single();
@@ -84,7 +86,7 @@ export async function POST(req: NextRequest) {
   return applyCookies(
     NextResponse.json(
       {
-        workId: data.id,
+        profileId: data.id,
       },
       { status: 201 },
     ),

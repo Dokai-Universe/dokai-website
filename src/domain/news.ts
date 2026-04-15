@@ -1,20 +1,38 @@
-type News = {
-  id: string;
-  slug: string;
-  category: string;
-  title: string;
-  date: Date;
-  view: number;
-  chapters: NewsChapter[];
-  url: string;
-};
+import { MediaSource } from "./media";
 
-type NewsChapter = {
+export type NewsChapterContent =
+  | {
+      type: "TEXT";
+      content: string;
+    }
+  | {
+      type: "MEDIA";
+      content: MediaSource | null;
+    };
+
+//
+
+export type NewsChapter = {
   title: string;
   contents: NewsChapterContent[];
 };
 
-type NewsChapterContent = {
-  type: "TEXT" | "MEDIA" | "LINK";
-  content: string | MediaSource | string;
+export type News = {
+  title: string;
+  thumbnail: MediaSource | null;
+  category: string;
+  summary: string;
+  publishedAt: Date;
+  viewCount: number;
+  chapters: NewsChapter[];
+  externalUrl: string;
+  projectManager: string;
+  contentsNumero: string;
 };
+
+export type NewsListItem = {
+  slug: string;
+} & Pick<
+  News,
+  "title" | "thumbnail" | "category" | "publishedAt" | "viewCount"
+>;

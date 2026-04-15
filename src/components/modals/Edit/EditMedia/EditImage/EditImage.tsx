@@ -3,7 +3,7 @@
 import { MediaSource } from "@domain/media";
 import UploadSVG from "@assets/icons/upload.svg";
 import * as Styles from "./style.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MediaCard from "@components/ui/Media/MediaCard/MediaCard";
 
 const EditImage = ({
@@ -40,6 +40,30 @@ const EditImage = ({
       alt: prev.alt || file.name,
     }));
   };
+
+  const handlePasteImage = (e: ClipboardEvent) => {
+    const file =
+      Array.from(e.clipboardData?.files ?? []).find((file) =>
+        file.type.startsWith("image/"),
+      ) ??
+      Array.from(e.clipboardData?.items ?? [])
+        .find((item) => item.type.startsWith("image/"))
+        ?.getAsFile();
+
+    if (!file) return;
+
+    e.preventDefault();
+    handlePickFile(file);
+  };
+
+  useEffect(() => {
+    window.addEventListener("paste", handlePasteImage);
+    console.log(123);
+
+    return () => {
+      window.removeEventListener("paste", handlePasteImage);
+    };
+  }, []);
 
   const handleDragEnter = (e: React.DragEvent) => {
     e.preventDefault();

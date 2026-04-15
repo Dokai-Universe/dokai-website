@@ -65,7 +65,18 @@ globalStyle("button", {
 });
 
 globalStyle("main", {
-  minHeight: "100dvh",
+  display: "flex",
+  flexDirection: "column",
+  minHeight: "calc(100dvh - 10rem)",
+
+  "@media": {
+    [media.tablet]: {
+      minHeight: "calc(100dvh - 4rem - 48px)",
+    },
+    [media.mobile]: {
+      minHeight: "calc(100dvh - 3rem - 40px)",
+    },
+  },
 });
 
 globalStyle(".layout-wrapper", {

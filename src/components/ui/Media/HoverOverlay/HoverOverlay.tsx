@@ -1,8 +1,8 @@
 import { getRandomColor, getReadableTextColor } from "@utils/Color";
 import { useEffect, useRef } from "react";
 import * as Styles from "./style.css";
-import { MediaSource } from "../types";
 import MediaCard from "../MediaCard/MediaCard";
+import { MediaSource } from "@domain/media";
 
 const MediaHoverOverlay = ({
   children,

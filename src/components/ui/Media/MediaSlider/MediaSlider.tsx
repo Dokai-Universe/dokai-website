@@ -7,11 +7,11 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { MediaSource } from "../types";
 import * as Styles from "./style.css";
 import CaretLeft from "@assets/icons/caret_left.svg";
 import CaretRight from "@assets/icons/caret_right.svg";
 import MediaCard from "../MediaCard/MediaCard";
+import { MediaSource } from "@domain/media";
 
 type Props = {
   mediaList: MediaSource[];

@@ -1,5 +1,37 @@
-import type { WorkDetailResponse, WorkUpsertRequest } from "./types";
+import type {
+  WorkDetailResponse,
+  WorkListInfiniteResponse,
+  WorkListResponse,
+  WorkUpsertRequest,
+} from "./types";
 import { fetchApi } from "../common";
+
+export const fetchMainWorks = () =>
+  fetchApi<WorkListResponse>(`/api/public/main`, {
+    method: "GET",
+  });
+
+export const fetchWorkList = ({
+  category,
+  page = 1,
+  limit = 16,
+}: {
+  category?: string;
+  page?: number;
+  limit?: number;
+}) => {
+  const query = new URLSearchParams();
+  if (category) query.set("category", category);
+  if (page) query.set("page", page.toString());
+  if (limit) query.set("limit", limit.toString());
+
+  return fetchApi<WorkListInfiniteResponse>(
+    `/api/public/works?${query.toString()}`,
+    {
+      method: "GET",
+    },
+  );
+};
 
 export const fetchWorkDetail = (slug: string) =>
   fetchApi<WorkDetailResponse>(

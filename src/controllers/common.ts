@@ -1,7 +1,12 @@
 import {
+  InfiniteData,
+  keepPreviousData,
   MutationKey,
   QueryClient,
+  QueryFunctionContext,
   QueryKey,
+  useInfiniteQuery,
+  UseInfiniteQueryOptions,
   useMutation,
   UseMutationOptions,
   useQuery,
@@ -165,6 +170,68 @@ export function useAppQuery<TData, TKey extends readonly unknown[]>(
     refetchOnReconnect: false,
     refetchOnMount: false,
     ...(opts ?? {}),
+  });
+}
+
+export type InfiniteQueryDef<
+  TPageData extends { nextPage?: number | null },
+  TKey extends QueryKey = QueryKey,
+> = {
+  queryKey: TKey;
+  queryFn: (ctx: { pageParam: number }) => Promise<TPageData>;
+  initialPageParam?: number;
+  staleTime?: number;
+  gcTime?: number;
+  retry?: number | boolean;
+};
+
+export const withInfiniteDefaults = <
+  TPageData extends { nextPage?: number | null },
+  TKey extends QueryKey,
+>(
+  def: InfiniteQueryDef<TPageData, TKey>,
+): InfiniteQueryDef<TPageData, TKey> => ({
+  staleTime: 5_000,
+  gcTime: 5 * 60_000,
+  retry: 2,
+  initialPageParam: 1,
+  ...def,
+});
+
+export function useAppInfiniteQuery<
+  TPageData extends { nextPage?: number | null },
+  TKey extends QueryKey = QueryKey,
+>(
+  def: InfiniteQueryDef<TPageData, TKey>,
+  opts?: Omit<
+    UseInfiniteQueryOptions<
+      TPageData,
+      unknown,
+      InfiniteData<TPageData, number>,
+      TKey,
+      number
+    >,
+    "queryKey" | "queryFn" | "initialPageParam" | "getNextPageParam"
+  >,
+) {
+  const d = withInfiniteDefaults(def);
+
+  return useInfiniteQuery({
+    queryKey: d.queryKey,
+    initialPageParam: d.initialPageParam ?? 1,
+    queryFn: ({ pageParam }: QueryFunctionContext<TKey, number>) =>
+      d.queryFn({ pageParam }),
+    getNextPageParam: (lastPage) => {
+      return lastPage.nextPage ?? undefined;
+    },
+    staleTime: d.staleTime,
+    gcTime: d.gcTime,
+    retry: d.retry,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+    refetchOnMount: false,
+    placeholderData: keepPreviousData,
+    ...opts,
   });
 }
 

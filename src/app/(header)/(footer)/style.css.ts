@@ -5,14 +5,21 @@ import { recipe } from "@vanilla-extract/recipes";
 export const Container = style({
   display: "grid",
   gridTemplateColumns: "repeat(8, 1fr)",
+  gridTemplateRows: "auto 1fr auto",
   rowGap: "6rem",
   columnGap: "1rem",
   marginBottom: "10rem",
   marginTop: "-10rem",
+  flexGrow: "1",
 
   "@media": {
     [media.desktop]: {
       marginTop: "0",
+      marginBottom: "6rem",
+    },
+    [media.tablet]: {
+      rowGap: "4rem",
+      marginBottom: "4rem",
     },
   },
 });
@@ -42,10 +49,18 @@ export const WorksContainer = style({
   gridTemplateColumns: "repeat(8, 1fr)",
   rowGap: "6rem",
   columnGap: "1rem",
+  marginBottom: "auto",
+
+  "@media": {
+    [media.tablet]: {
+      rowGap: "4rem",
+    },
+  },
 });
 
 export const ItemContainer = recipe({
   base: {
+    position: "relative",
     display: "flex",
     flexDirection: "column",
     gap: "1rem",
@@ -102,6 +117,18 @@ export const ItemContainer = recipe({
 export const ItemMedia = style({
   width: "100%",
   aspectRatio: "16 / 9",
+});
+
+export const PrivateIcon = style({
+  position: "absolute",
+  top: "0.5rem",
+  right: "0.5rem",
+  width: "2rem",
+  height: "2rem",
+  zIndex: 1,
+  background: "rgba(255, 255, 255, 0.75)",
+  padding: "0.25rem",
+  borderRadius: "0.25rem",
 });
 
 export const ItemTextContainer = recipe({

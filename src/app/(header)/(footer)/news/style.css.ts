@@ -105,7 +105,7 @@ export const NewsItemViewIcon = style({
 export const Divider = style({
   width: "100%",
   height: "1px",
-  background: "gray",
+  background: "#9B9B9B",
   display: "none",
   gridColumn: "1 / -1",
 

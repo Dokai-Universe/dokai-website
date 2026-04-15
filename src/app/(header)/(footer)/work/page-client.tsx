@@ -5,14 +5,16 @@ import { toTitleCase } from "@utils/Text";
 import Link from "next/link";
 import * as Styles from "./style.css";
 import { useMemo, useState } from "react";
-import MoreButton from "@components/ui/Button/More";
+import MoreButton from "@components/ui/Button/More/MoreButton";
 import MediaHoverOverlay from "@components/ui/Media/HoverOverlay/HoverOverlay";
-import { useWorksInfiniteQuery } from "@controllers/work/query";
 import { WorkCategory } from "@domain/work";
 import FloatingButton, {
   FloatingButtonContainer,
 } from "@components/ui/Button/FloatingButton/FloatingButton";
 import { useRouter } from "nextjs-toploader/app";
+import { useAppInfiniteQuery } from "@controllers/common";
+import { worksQueriesClient } from "@controllers/works/query.client";
+import MediaCard from "@components/ui/Media/MediaCard/MediaCard";
 
 const WorkPageClient = () => {
   const router = useRouter();
@@ -24,10 +26,8 @@ const WorkPageClient = () => {
     data: works,
     fetchNextPage,
     hasNextPage,
-  } = useWorksInfiniteQuery({
-    mode: "category",
-    category: selectedCategory,
-  });
+    isLoading,
+  } = useAppInfiniteQuery(worksQueriesClient.workList(selectedCategory));
 
   const categoryGroups = useMemo(
     () =>
@@ -68,29 +68,36 @@ const WorkPageClient = () => {
           ))}
         </div>
         <div className={Styles.WorkItemsContainer}>
-          {works?.pages
-            ?.flatMap((page) => page.items)
-            .map((item) => (
-              <Link
-                key={`WORK_ITEM_${item.slug}`}
-                className={Styles.WorkItem}
-                href={`/work/${item.slug}`}
-              >
-                <MediaHoverOverlay
-                  media={item.thumbnail!}
-                  className={Styles.WorkItemMedia}
-                >
-                  <div className={Styles.WorkItemMediaOverlay}>
-                    <p>{item.summary}</p>
-                  </div>
-                </MediaHoverOverlay>
-                <p className={Styles.WorkItemText}>{item.title}</p>
-              </Link>
-            ))}
+          {isLoading
+            ? Array.from({ length: 16 }).map((_, idx) => (
+                <div key={`WORK_ITEM_${idx}`} className={Styles.WorkItem}>
+                  <MediaCard className={Styles.WorkItemMedia} />
+                  <p className={Styles.WorkItemText}>
+                    <br />
+                  </p>
+                </div>
+              ))
+            : works?.pages
+                ?.flatMap((page) => page.items)
+                .map((item) => (
+                  <Link
+                    key={`WORK_ITEM_${item.slug}`}
+                    className={Styles.WorkItem}
+                    href={`/work/${item.slug}`}
+                  >
+                    <MediaHoverOverlay
+                      media={item.data.thumbnail!}
+                      className={Styles.WorkItemMedia}
+                    >
+                      <div className={Styles.WorkItemMediaOverlay}>
+                        <p>{item.data.summary}</p>
+                      </div>
+                    </MediaHoverOverlay>
+                    <p className={Styles.WorkItemText}>{item.data.title}</p>
+                  </Link>
+                ))}
         </div>
-        <div className={Styles.MoreButtonContainer}>
-          {hasNextPage && <MoreButton onClick={() => fetchNextPage()} />}
-        </div>
+        {hasNextPage && <MoreButton onClick={() => fetchNextPage()} />}
       </div>
       <FloatingButtonContainer role={["admin"]}>
         <FloatingButton
