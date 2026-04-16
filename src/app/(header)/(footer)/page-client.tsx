@@ -15,8 +15,8 @@ const MainPageClient = () => {
   return (
     <div className={`${Styles.Container} page-wrapper layout-wrapper`}>
       <p className={Styles.Title}>
-        DOKAI was founded by professionals from the commercial film industry as
-        an AI-driven creative group.
+        DOKAI is the only high-end studio delivering major commercial projects
+        end-to-end—from AI planning to global distribution.
       </p>
       <MainWorks />
       <MoreButton onClick={handleMoreClick} />
