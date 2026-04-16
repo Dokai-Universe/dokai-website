@@ -6,11 +6,11 @@ export const aboutMutations = {
   updateAbout: () => ({
     mutationKey: aboutMutationKeys.updateAbout(),
     mutationFn: (body: AboutUpsertRequest) => fetchAboutUpdate(body),
-    invalidateQueries: [aboutQueryKeys.aboutDetail()],
+    invalidateQueryKeys: [aboutQueryKeys.aboutDetail()],
   }),
   deleteAbout: () => ({
     mutationKey: aboutMutationKeys.deleteAbout(),
     mutationFn: () => fetchAboutDelete(),
-    invalidateQueries: [aboutQueryKeys.aboutDetail()],
+    invalidateQueryKeys: [aboutQueryKeys.aboutDetail()],
   }),
 };

@@ -1,9 +1,11 @@
 export const careersQueryKeys = {
-  careerPageDetail: () => ["careers-page", "career-page-detail"] as const,
+  all: () => ["careers"] as const,
+  careerPageDetail: () => ["page-detail", "careers"] as const,
   profileList: () => ["careers", "profile-list"] as const,
+  allByEmail: (email: string) => ["careers", email] as const,
   profileDetail: (email: string) =>
-    ["careers", "profile-detail", email] as const,
-  profileExist: (email: string) => ["careers", "profile-exist", email] as const,
+    ["careers", email, "profile-detail"] as const,
+  profileExist: (email: string) => ["careers", email, "profile-exist"] as const,
   projectDetail: (projectId: string) =>
     ["careers", "project-detail", projectId] as const,
 };

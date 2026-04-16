@@ -4,12 +4,7 @@ import { loadWorkDetail } from "./load";
 import { worksQueryKeys } from "./keys";
 
 export const worksQueriesServer = {
-  workDetail: (
-    slug: string,
-  ): QueryDef<
-    WorkDetailResponse | null,
-    readonly ["works", "work-detail", string]
-  > => ({
+  workDetail: (slug: string): QueryDef<WorkDetailResponse | null> => ({
     queryKey: worksQueryKeys.workDetail(slug),
     queryFn: () => loadWorkDetail(slug),
   }),

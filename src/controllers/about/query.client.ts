@@ -4,10 +4,7 @@ import { aboutQueryKeys } from "./keys";
 import { AboutDetailResponse } from "./types";
 
 export const aboutQueriesClient = {
-  aboutDetail: (): QueryDef<
-    AboutDetailResponse,
-    readonly ["about", "about-detail"]
-  > => ({
+  aboutDetail: (): QueryDef<AboutDetailResponse> => ({
     queryKey: aboutQueryKeys.aboutDetail(),
     queryFn: () => fetchAboutDetail(),
   }),

@@ -43,9 +43,11 @@ const AdminWorkPageClient = ({ slug }: { slug?: string }) => {
       },
     },
   );
+
   const { mutateAsync: mutateUpdateWork } = useAppMutation(
     worksMutations.updateWork(workId!),
   );
+
   const { mutateAsync: mutateDeleteWork } = useAppMutation(
     worksMutations.deleteWork(workId!),
   );

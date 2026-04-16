@@ -5,6 +5,6 @@ export const authMutations = {
   logout: () => ({
     mutationKey: authMutationKeys.logout(),
     mutationFn: () => fetchLogout(),
-    invalidateQueries: [authQueryKeys.session()],
+    invalidateQueryKeys: [authQueryKeys.session()],
   }),
 };

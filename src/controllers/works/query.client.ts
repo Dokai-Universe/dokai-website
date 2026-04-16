@@ -13,38 +13,22 @@ import {
 } from "./types";
 
 export const worksQueriesClient = {
-  mainWorks: (): QueryDef<
-    WorkListResponse,
-    readonly ["works", "main-works"]
-  > => ({
+  mainWorks: (): QueryDef<WorkListResponse> => ({
     queryKey: worksQueryKeys.mainWorks(),
     queryFn: () => fetchMainWorks(),
   }),
   workList: (
     category?: string,
-  ): InfiniteQueryDef<
-    WorkListInfiniteResponse,
-    readonly ["works", "list", string | undefined]
-  > => ({
+  ): InfiniteQueryDef<WorkListInfiniteResponse> => ({
     queryKey: worksQueryKeys.workList(category),
     queryFn: ({ pageParam }) =>
       fetchWorkList({ category, page: pageParam, limit: 16 }),
   }),
-  workDetail: (
-    slug: string,
-  ): QueryDef<
-    WorkDetailResponse,
-    readonly ["works", "work-detail", string]
-  > => ({
+  workDetail: (slug: string): QueryDef<WorkDetailResponse> => ({
     queryKey: worksQueryKeys.workDetail(slug),
     queryFn: () => fetchWorkDetail(slug),
   }),
-  checkSlug: (
-    slug: string,
-  ): QueryDef<
-    { exists: boolean },
-    readonly ["works", "check-slug", string]
-  > => ({
+  checkSlug: (slug: string): QueryDef<{ exists: boolean }> => ({
     queryKey: worksQueryKeys.checkSlug(slug),
     queryFn: () => fetchWorkCheckSlug(slug),
   }),

@@ -4,10 +4,7 @@ import { loadAboutDetail } from "./load";
 import { aboutQueryKeys } from "./keys";
 
 export const aboutQueriesServer = {
-  aboutDetail: (): QueryDef<
-    AboutDetailResponse | null,
-    readonly ["about", "about-detail"]
-  > => ({
+  aboutDetail: (): QueryDef<AboutDetailResponse | null> => ({
     queryKey: aboutQueryKeys.aboutDetail(),
     queryFn: () => loadAboutDetail(),
   }),

@@ -14,35 +14,19 @@ import {
 } from "./types";
 
 export const careersQueriesClient = {
-  careerPageDetail: (): QueryDef<
-    CareerPageDetailResponse,
-    readonly ["careers-page", "career-page-detail"]
-  > => ({
+  careerPageDetail: (): QueryDef<CareerPageDetailResponse> => ({
     queryKey: careersQueryKeys.careerPageDetail(),
     queryFn: () => fetchCareerPageDetail(),
   }),
-  profileList: (): QueryDef<
-    ProfileListResponse,
-    readonly ["careers", "profile-list"]
-  > => ({
+  profileList: (): QueryDef<ProfileListResponse> => ({
     queryKey: careersQueryKeys.profileList(),
     queryFn: () => fetchProfileList(),
   }),
-  profileDetail: (
-    email: string,
-  ): QueryDef<
-    ProfileDetailResponse,
-    readonly ["careers", "profile-detail", string]
-  > => ({
+  profileDetail: (email: string): QueryDef<ProfileDetailResponse> => ({
     queryKey: careersQueryKeys.profileDetail(email),
     queryFn: () => fetchProfileDetail(email),
   }),
-  projectDetail: (
-    projectId: string,
-  ): QueryDef<
-    ProjectDetailResponse,
-    readonly ["careers", "project-detail", string]
-  > => ({
+  projectDetail: (projectId: string): QueryDef<ProjectDetailResponse> => ({
     queryKey: careersQueryKeys.projectDetail(projectId),
     queryFn: () => fetchProjectDetail(projectId),
   }),

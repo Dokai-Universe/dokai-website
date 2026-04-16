@@ -91,7 +91,7 @@ export async function fetchApi<TResponse = unknown, TBody = unknown>(
 
   const res = await fetch(`${baseUrl}${path}`, {
     method,
-    cache: cache ?? (method === "GET" ? "force-cache" : "no-store"),
+    cache: cache ?? "no-store",
     headers: {
       ...(body !== undefined ? { "Content-Type": "application/json" } : {}),
       ...(headers ?? {}),
@@ -131,7 +131,7 @@ export type QueryDef<TData, TKey extends QueryKey = QueryKey> = {
 export const withDefaults = <TData, TKey extends QueryKey>(
   def: QueryDef<TData, TKey>,
 ): QueryDef<TData, TKey> => ({
-  staleTime: 5_000,
+  staleTime: 30_000,
   gcTime: 5 * 60_000,
   retry: 2,
   ...def,
@@ -240,7 +240,7 @@ export type MutationDef<
   TVariables = void,
   TKey extends MutationKey = MutationKey,
 > = {
-  invalidateQueries?: QueryKey[];
+  invalidateQueryKeys?: (readonly string[])[];
   mutationKey?: TKey;
   mutationFn: (variables: TVariables) => Promise<TData>;
   retry?: number | boolean;
@@ -276,13 +276,15 @@ export function useAppMutation<
     mutationKey: d.mutationKey,
     mutationFn: d.mutationFn,
     retry: d.retry,
-    onSuccess: () => {
-      if (d.invalidateQueries) {
-        d.invalidateQueries.forEach((queryKey) => {
-          queryClient.invalidateQueries({ queryKey });
-        });
+    ...(opts ?? {}),
+    onSuccess: async () => {
+      if (!d.invalidateQueryKeys) return;
+      console.log(123333);
+
+      for (const key of d.invalidateQueryKeys) {
+        await queryClient.invalidateQueries({ queryKey: key });
+        await queryClient.refetchQueries({ queryKey: key, type: "all" });
       }
     },
-    ...(opts ?? {}),
   });
 }

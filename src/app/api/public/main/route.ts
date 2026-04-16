@@ -20,6 +20,8 @@ export async function GET(req: NextRequest) {
     );
   }
 
+  console.log(123);
+
   const items =
     data?.map((row) => ({
       id: row.id,

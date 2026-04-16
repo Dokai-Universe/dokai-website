@@ -1,5 +1,5 @@
 export const aboutQueryKeys = {
-  aboutDetail: () => ["about", "about-detail"] as const,
+  aboutDetail: () => ["page-detail", "about"] as const,
 };
 
 export const aboutMutationKeys = {
