@@ -3,7 +3,13 @@ import SearchSVG from "@assets/icons/search.svg";
 import { useState } from "react";
 import { useRouter } from "nextjs-toploader/app";
 
-const NewsPageSearchBar = ({ inDetail }: { inDetail?: boolean }) => {
+const NewsPageSearchBar = ({
+  inDetail,
+  disabled = false,
+}: {
+  inDetail?: boolean;
+  disabled?: boolean;
+}) => {
   const router = useRouter();
   const [value, setValue] = useState("");
 
@@ -19,8 +25,8 @@ const NewsPageSearchBar = ({ inDetail }: { inDetail?: boolean }) => {
   };
 
   return (
-    <div className={Styles.Container}>
-      <label className={Styles.SearchBar}>
+    <div className={Styles.SearchBarContainer} data-disabled={disabled}>
+      <label className={Styles.SearchBarLabel}>
         <input
           type="text"
           placeholder="Search for..."

@@ -19,4 +19,6 @@ const categories: Category[] = [
   "SOCIAL CONTENTS",
 ];
 
+export const NewsCategories = ["NEWS", "BRANDING"];
+
 export default categories;

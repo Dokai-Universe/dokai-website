@@ -3,11 +3,11 @@ import { MediaSource } from "./media";
 export type NewsChapterContent =
   | {
       type: "TEXT";
-      content: string;
+      text: string;
     }
   | {
       type: "MEDIA";
-      content: MediaSource | null;
+      media: MediaSource | null;
     };
 
 //
@@ -23,7 +23,6 @@ export type News = {
   category: string;
   summary: string;
   publishedAt: Date;
-  viewCount: number;
   chapters: NewsChapter[];
   externalUrl: string;
   projectManager: string;
@@ -32,7 +31,4 @@ export type News = {
 
 export type NewsListItem = {
   slug: string;
-} & Pick<
-  News,
-  "title" | "thumbnail" | "category" | "publishedAt" | "viewCount"
->;
+} & Pick<News, "title" | "thumbnail" | "category" | "publishedAt">;
