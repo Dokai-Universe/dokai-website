@@ -21,7 +21,7 @@ const WorkDetailPageClient = ({ slug }: { slug: string }) => {
   const { data: work, isPublished } = data;
 
   const handleEditWork = () => {
-    router.push(`/admin/work?slug=${slug}`);
+    router.push(`/admin/work?slug=${encodeURIComponent(slug)}`);
   };
 
   return (
