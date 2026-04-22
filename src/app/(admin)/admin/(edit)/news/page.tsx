@@ -1,9 +1,9 @@
-import AdminWorkPageClient from "./page-client";
+import AdminNewsPageClient from "./page-client";
 import { getQueryClient } from "@lib/react-query/getQueryClient";
 import { prefetchAppQuery } from "@controllers/common";
-import { worksQueriesServer } from "@controllers/works/query.server";
-import { worksQueryKeys } from "@controllers/works/keys";
 import { notFound } from "next/navigation";
+import { newsQueryKeys } from "@controllers/news/keys";
+import { newsQueriesServer } from "@controllers/news/query.server";
 
 const AdminNewsPage = async ({
   searchParams,
@@ -15,12 +15,12 @@ const AdminNewsPage = async ({
 
   const qc = getQueryClient();
   if (slug) {
-    await prefetchAppQuery(qc, worksQueriesServer.workDetail(slug));
-    const exist = await qc.getQueryData(worksQueryKeys.workDetail(slug));
+    await prefetchAppQuery(qc, newsQueriesServer.newsDetail(slug));
+    const exist = await qc.getQueryData(newsQueryKeys.newsDetail(slug));
     if (!exist) notFound();
   }
 
-  return <AdminWorkPageClient slug={slug} />;
+  return <AdminNewsPageClient slug={slug} />;
 };
 
 export default AdminNewsPage;

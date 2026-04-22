@@ -403,8 +403,8 @@ export const EditMediasContainer = recipe({
   },
   variants: {
     size: {
-      NORMAL: { gridColumn: "span 4" },
-      FULL: { gridColumn: "1 / -1" },
+      NORMAL: { gridColumn: "span 4", aspectRatio: "16 / 9" },
+      FULL: { gridColumn: "1 / -1", aspectRatio: "21 / 9" },
     },
   },
   defaultVariants: {

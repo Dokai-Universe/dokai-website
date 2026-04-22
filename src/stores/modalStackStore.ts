@@ -2,6 +2,7 @@
 import { AboutCard, AboutContent, AboutGroup, AboutTeam } from "@domain/about";
 import { ContactLink, ProjectContent } from "@domain/careers";
 import { MediaSource, MediaType } from "@domain/media";
+import { NewsChapterContent } from "@domain/news";
 import { WorkCredit, WorkMetaField } from "@domain/work";
 import { create } from "zustand";
 
@@ -67,6 +68,11 @@ export type ModalMap = {
     deleteExperience?: () => void;
   };
 
+  EDIT_CALENDAR: {
+    initialDate?: Date;
+    applyDate: (nextDate: Date) => void;
+  };
+
   EDIT_DATE_PICKER: {
     initialDate?: Date;
     applyDate: (nextDate: Date, nextText: string) => void;
@@ -115,6 +121,10 @@ export type ModalMap = {
 
   ADD_ABOUT_SECTION: {
     addAboutContent: (content: AboutContent) => void;
+  };
+
+  ADD_NEWS_CONTENT: {
+    addNewsContent: (content: NewsChapterContent) => void;
   };
 };
 

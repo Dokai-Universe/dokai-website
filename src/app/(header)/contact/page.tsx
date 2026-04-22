@@ -1,5 +1,6 @@
+"use client";
+
 import Link from "next/link";
-import ExternalLinks from "@ts/external_links";
 import LogoSVG from "@assets/dokai.png";
 
 import * as FooterStyles from "@components/layout/Footer/Footer.css";
@@ -7,6 +8,33 @@ import * as Styles from "./style.css";
 import Image from "next/image";
 import CompanyInfo from "@ts/company_info";
 import NaverMap from "@components/ui/NaverMap/NaverMap";
+import VimeoSVG from "@assets/social/Vimeo.svg";
+import YoutubeSVG from "@assets/social/Youtube.svg";
+import InstagramSVG from "@assets/social/Instagram.svg";
+import BehanceSVG from "@assets/social/Behance.svg";
+
+const ExternalLinks = [
+  {
+    label: "Vimeo",
+    icon: VimeoSVG,
+    href: "https://vimeo.com/dokaiuniverse",
+  },
+  {
+    label: "Youtube",
+    icon: YoutubeSVG,
+    href: "https://www.youtube.com/@Dokaiuniverse",
+  },
+  {
+    label: "Instagram",
+    icon: InstagramSVG,
+    href: "https://www.instagram.com/dokai_universe/",
+  },
+  {
+    label: "Behance",
+    icon: BehanceSVG,
+    href: "https://www.behance.net/dokaiuniverse",
+  },
+];
 
 const ContactPage = () => {
   const { email, tel, address } = CompanyInfo;
@@ -59,7 +87,8 @@ const ContactPage = () => {
               key={`FOOTER_LINK_${link.label}`}
               className={FooterStyles.SocialLink}
             >
-              {link.label}
+              <p className={FooterStyles.SocialLabel}>{link.label}</p>
+              <link.icon className={FooterStyles.SocialIcon} />
             </Link>
           ))}
         </nav>

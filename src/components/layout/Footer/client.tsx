@@ -4,7 +4,6 @@ import Link from "next/link";
 import LogoPNG from "@assets/dokai.png";
 import * as Styles from "./Footer.css";
 import Image from "next/image";
-import ExternalLinks from "@ts/external_links";
 import { getRandomColor, getReadableTextColor } from "@utils/Color";
 import CompanyInfo from "@ts/company_info";
 import dynamic from "next/dynamic";
@@ -13,6 +12,33 @@ const NaverMap = dynamic(() => import("@components/ui/NaverMap/NaverMap"), {
 });
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
+import VimeoSVG from "@assets/social/Vimeo.svg";
+import YoutubeSVG from "@assets/social/Youtube.svg";
+import InstagramSVG from "@assets/social/Instagram.svg";
+import BehanceSVG from "@assets/social/Behance.svg";
+
+const ExternalLinks = [
+  {
+    label: "Vimeo",
+    icon: VimeoSVG,
+    href: "https://vimeo.com/dokaiuniverse",
+  },
+  {
+    label: "Youtube",
+    icon: YoutubeSVG,
+    href: "https://www.youtube.com/@Dokaiuniverse",
+  },
+  {
+    label: "Instagram",
+    icon: InstagramSVG,
+    href: "https://www.instagram.com/dokai_universe/",
+  },
+  {
+    label: "Behance",
+    icon: BehanceSVG,
+    href: "https://www.behance.net/dokaiuniverse",
+  },
+];
 
 const FooterClient = ({ initialColor }: { initialColor: string }) => {
   const pathname = usePathname();
@@ -80,7 +106,8 @@ const FooterClient = ({ initialColor }: { initialColor: string }) => {
               key={`FOOTER_LINK_${link.label}`}
               className={Styles.SocialLink}
             >
-              {link.label}
+              <p className={Styles.SocialLabel}>{link.label}</p>
+              <link.icon className={Styles.SocialIcon} />
             </Link>
           ))}
         </nav>

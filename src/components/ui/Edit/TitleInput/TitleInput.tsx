@@ -42,6 +42,7 @@ const TitleInput = <T extends FieldValues, K extends Path<T>>({
         placeholder={placeholder}
         {...register(name)}
         onChange={(e) => {
+          register(name).onChange(e);
           clearErrors(name);
           onChange?.(e);
         }}

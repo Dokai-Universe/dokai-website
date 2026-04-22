@@ -42,7 +42,7 @@ export const Layout = recipe({
     flexDirection: "column",
     gap: "0.5rem",
     transition: `transform ${TransitionDurationVar} ease-in-out, opacity ${TransitionDurationVar} ease-in-out, border-radius ${TransitionDurationVar} ease-in-out`,
-    overflow: "hidden",
+    overflow: "auto",
     height: "100%",
     justifyContent: "space-between",
     willChange: "transform, opacity",
@@ -79,7 +79,10 @@ export const NavGrid = style({
 
   "@media": {
     [media.tablet]: {
-      marginTop: "8rem",
+      marginTop: "6rem",
+    },
+    [media.mobile]: {
+      marginTop: "4rem",
     },
   },
 });

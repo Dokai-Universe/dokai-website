@@ -40,7 +40,7 @@ function toYMDFromParts(y: number, m1: number, d: number) {
   return `${y}-${pad2(m1)}-${pad2(d)}`;
 }
 
-function toYMD(input: Date | string) {
+export function toYMD(input: Date | string) {
   const t = new Date(input);
   return toYMDFromParts(t.getFullYear(), t.getMonth() + 1, t.getDate());
 }

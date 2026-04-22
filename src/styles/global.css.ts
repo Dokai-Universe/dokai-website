@@ -48,6 +48,10 @@ globalStyle("p", {
   margin: "0",
 });
 
+globalStyle("b", {
+  fontWeight: "600",
+});
+
 globalStyle(".underline", {
   textDecoration: "underline",
 });

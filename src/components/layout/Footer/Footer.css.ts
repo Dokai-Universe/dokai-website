@@ -117,16 +117,17 @@ export const Footer = style({
   columnGap: "1rem",
   display: "grid",
   gridTemplateColumns: "repeat(8, minmax(0px, 1fr))",
+  gridTemplateRows: "1fr auto",
   fontSize: vars.fontSize.md,
   fontWeight: "300",
   lineHeight: "1.4em",
   letterSpacing: "-0.03em",
   alignItems: "flex-end",
-  rowGap: "0.5rem",
 
   "@media": {
     [media.mobile]: {
       fontSize: vars.fontSize.sm,
+      rowGap: "0.25rem",
     },
   },
 });
@@ -160,14 +161,14 @@ export const SocialRow = style({
       gridColumn: "1 / span 6",
       fontSize: vars.fontSize.sm,
       margin: "0 1rem",
+      justifyContent: "flex-start",
+      gap: "0.75rem",
     },
     [media.mobile]: {
       gridColumn: "1 / span 7",
       flexDirection: "row",
-      alignItems: "flex-start",
-      gap: "1rem",
-      justifyContent: "space-around",
-      flexWrap: "wrap",
+      gap: "0.75rem",
+      margin: "0 0",
     },
   },
 });
@@ -179,6 +180,28 @@ export const SocialLink = style({
   selectors: {
     "&:hover": {
       opacity: 0.5,
+    },
+  },
+});
+
+export const SocialLabel = style({
+  "@media": {
+    [media.mobile]: {
+      display: "none",
+    },
+  },
+});
+
+export const SocialIcon = style({
+  display: "none",
+  width: "1.25rem",
+  height: "auto",
+  aspectRatio: "1 / 1",
+  filter: "invert(var(--footer-logo-invert, 0))",
+
+  "@media": {
+    [media.mobile]: {
+      display: "block",
     },
   },
 });

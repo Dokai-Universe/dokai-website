@@ -36,7 +36,8 @@ const TitleSelect = <T extends FieldValues, K extends Path<T>>({
           className={Styles.Select}
           disabled={disabled}
           {...register(name)}
-          onChange={() => {
+          onChange={(e) => {
+            register(name).onChange(e);
             clearErrors(name);
             onChange?.();
           }}

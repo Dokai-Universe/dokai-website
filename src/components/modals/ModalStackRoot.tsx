@@ -9,6 +9,8 @@ import DrawerMenuModal from "./DrawerMenu/DrawerMenuModal";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import useLockBodyScroll from "@hooks/useLockBodyScroll";
+import EditCalendarModal from "./Edit/EditCalendar/EditCalendarModal";
+import AddNewsContentModal from "./Edit/AddNewsContent/AddNewsContentModal";
 
 const ApiModal = dynamic(() => import("./Api/ApiModal"), { ssr: false });
 const ConfirmModal = dynamic(() => import("./Confirm/ConfirmModal"), {
@@ -122,6 +124,8 @@ const ModalStackRoot = () => {
             return <EditContactModal key={m.id} {...common} {...m.props} />;
           case "EDIT_EXPERIENCE":
             return <EditExperienceModal key={m.id} {...common} {...m.props} />;
+          case "EDIT_CALENDAR":
+            return <EditCalendarModal key={m.id} {...common} {...m.props} />;
           case "EDIT_DATE_PICKER":
             return <EditDatePickerModal key={m.id} {...common} {...m.props} />;
           case "EDIT_META_INFO":
@@ -140,6 +144,8 @@ const ModalStackRoot = () => {
             return <EditAboutTeamModal key={m.id} {...common} {...m.props} />;
           case "ADD_ABOUT_SECTION":
             return <AddAboutSectionModal key={m.id} {...common} {...m.props} />;
+          case "ADD_NEWS_CONTENT":
+            return <AddNewsContentModal key={m.id} {...common} {...m.props} />;
           default:
             return null;
         }

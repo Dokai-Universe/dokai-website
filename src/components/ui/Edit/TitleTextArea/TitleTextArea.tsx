@@ -32,7 +32,8 @@ const TitleTextArea = <T extends FieldValues, K extends Path<T>>({
         className={Styles.TextArea}
         placeholder={placeholder}
         {...register(name)}
-        onChange={() => {
+        onChange={(e) => {
+          register(name).onChange(e);
           clearErrors(name);
           onChange?.();
         }}

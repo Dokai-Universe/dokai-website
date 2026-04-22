@@ -59,7 +59,7 @@ const AboutPageEditContent = ({ index }: { index: number }) => {
       ) : type === "TEAM" ? (
         <AboutPageEditTeam index={index} />
       ) : null}
-      {size === "NORMAL" && (
+      {size !== "FULL" && (
         <div className={Styles.EditContentButtonContainer({ align })}>
           <button className={Styles.EditContentButton} onClick={handleMoveUp}>
             <CaretUpSVG className={Styles.EditContentButtonIcon} />

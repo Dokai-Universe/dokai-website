@@ -9,6 +9,9 @@ import NewsPageSearchBar from "@components/pages/news/SearchBar";
 import MediaCard from "@components/ui/Media/MediaCard/MediaCard";
 import { useAppQuery } from "@controllers/common";
 import { newsQueriesClient } from "@controllers/news/query.client";
+import FloatingButton, {
+  FloatingButtonContainer,
+} from "@components/ui/Button/FloatingButton/FloatingButton";
 
 const NewsPageClient = () => {
   const router = useRouter();
@@ -140,6 +143,13 @@ const NewsPageClient = () => {
           </span>
         </div>
       </div>
+      <FloatingButtonContainer role={["admin"]}>
+        <FloatingButton
+          type="ADD"
+          onClick={() => router.push("/admin/news")}
+          text="Create New News"
+        />
+      </FloatingButtonContainer>
     </>
   );
 };

@@ -1,5 +1,5 @@
 import { media, vars } from "@styles/theme.css";
-import { style } from "@vanilla-extract/css";
+import { globalStyle, style } from "@vanilla-extract/css";
 
 export const SearchBarContainer = style({
   gridColumn: "1 / -1",
@@ -169,6 +169,7 @@ export const BodyContent = style({
 });
 
 export const BodyChapter = style({
+  position: "relative",
   display: "flex",
   flexDirection: "column",
   gap: "2rem",
@@ -204,13 +205,12 @@ export const BodyChapterContentMediaContainer = style({
 });
 
 export const BodyChapterContentMedia = style({
-  width: "60%",
-  height: "auto",
+  width: "60% !important",
   aspectRatio: "16 / 9",
 
   "@media": {
     [media.tablet]: {
-      width: "80%",
+      width: "80% !important",
     },
     [media.mobile]: {
       width: "100%",
@@ -363,4 +363,119 @@ export const ListButton = style({
       opacity: "0.5",
     },
   },
+});
+
+// EditInfo
+
+export const EditInfoContainer = style({
+  gridColumn: "1 / -1",
+  display: "grid",
+  gridTemplateColumns: "repeat(8, 1fr)",
+  gap: "1rem",
+});
+
+export const EditInfoMediaContainer = style({
+  gridColumn: "1 / span 4",
+});
+
+export const EditInfoMedia = style({
+  aspectRatio: "16 / 9",
+});
+
+export const EditInfoContent = style({
+  gridColumn: "5 / -2",
+  display: "flex",
+  flexDirection: "column",
+  gap: "0.5rem",
+});
+
+export const EditInfoTextArea = style({
+  flexGrow: "1",
+});
+
+export const EditInfoPublished = style({
+  gridColumn: "1 / -2",
+});
+
+//
+
+export const EditHeaderContainer = style({
+  gridColumn: "1 / -1",
+  display: "grid",
+  gridTemplateColumns: "repeat(8, 1fr)",
+  gap: "1rem",
+  marginTop: "2rem",
+});
+
+export const EditHeaderInput = style({
+  gridColumn: "1 / -2",
+  fontSize: vars.fontSize.xl,
+  fontWeight: "600",
+});
+
+export const EditBodyChapterContentMedia = style({
+  width: "100%",
+  aspectRatio: "16 / 9",
+});
+
+//
+
+export const EditContentButton = style({
+  position: "absolute",
+  top: "-0.25rem",
+  right: "0",
+  width: "fit-content",
+  padding: "0.25rem",
+  borderRadius: "0.5rem",
+  flexShrink: "0",
+
+  transition: "all 0.2s ease-in-out",
+  opacity: "0.5",
+  outline: `1px solid transparent`,
+  border: "1px solid #999",
+
+  selectors: {
+    "&:hover": {
+      opacity: "1",
+      outlineColor: "#999",
+    },
+  },
+});
+
+export const EditChapterButtonIcon = style({
+  width: "1.25rem",
+  height: "auto",
+  aspectRatio: "1 / 1",
+});
+
+export const EditContentButtonIcon = style({
+  width: "1rem",
+  height: "auto",
+  aspectRatio: "1 / 1",
+});
+
+export const DragHandle = style({
+  position: "absolute",
+  left: "-36px",
+  top: "12px",
+  width: "28px",
+  height: "28px",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  borderRadius: "9999px",
+  cursor: "grab",
+  zIndex: 2,
+});
+
+export const DragHandleActive = style({
+  cursor: "grabbing",
+});
+
+export const ChapterWrapper = style({
+  position: "relative",
+});
+
+export const ContentWrapper = style({
+  position: "relative",
 });
