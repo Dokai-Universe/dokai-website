@@ -16,17 +16,23 @@ import useAuthUser from "@hooks/useAuthUser";
 const CareerProjects = ({
   projects,
   email,
-  isReadOnly,
+  inEditPage,
 }: {
   projects: ProjectListItem[];
   email: string;
-  isReadOnly?: boolean;
+  inEditPage?: boolean;
 }) => {
   const qc = useQueryClient();
   const searchParams = useSearchParams();
   const { replaceTop } = useModalStackStore();
   const [session] = useAuthUser();
   const editable = session?.role === "admin" || session?.email === email;
+
+  const createProjectHref = (projectId: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("project", projectId);
+    return `?${params.toString()}`;
+  };
 
   const handleClickProject = async (project: ProjectListItem) => {
     prefetchAppQuery(qc, careersQueriesClient.projectDetail(project.id));
@@ -35,13 +41,13 @@ const CareerProjects = ({
   useEffect(() => {
     if (searchParams.get("project")) {
       setTimeout(() => {
-        replaceTop("PROJECT", { ownerEmail: email });
-      }, 100);
+        replaceTop("PROJECT", { ownerEmail: email, inEditPage: inEditPage });
+      }, 0);
     }
   }, [searchParams]);
 
   return (
-    <div className={Styles.ProjectContainer({ isReadOnly })}>
+    <div className={Styles.ProjectContainer({ isReadOnly: false })}>
       <p className={Styles.ProjectTitle}>work</p>
       <div className={Styles.ProjectContent}>
         {projects.map((project, idx) => (
@@ -52,7 +58,7 @@ const CareerProjects = ({
             priority={idx === 0}
           >
             <Link
-              href={`?project=${project.id}`}
+              href={createProjectHref(project.id)}
               scroll={false}
               className={Styles.ProjectOverlay}
               onClick={() => handleClickProject(project)}
@@ -64,7 +70,7 @@ const CareerProjects = ({
 
         {editable && (
           <Link
-            href="?project=new"
+            href={createProjectHref("new")}
             scroll={false}
             className={Styles.ProjectAddButton}
           >

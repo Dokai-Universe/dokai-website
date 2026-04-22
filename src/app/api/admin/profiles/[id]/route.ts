@@ -77,6 +77,10 @@ export async function PATCH(
 
   if (body.data !== undefined) {
     updatePayload.data = body.data;
+
+    if (body.data.email) {
+      updatePayload.email = body.data.email;
+    }
   }
 
   if (Object.keys(updatePayload).length === 0) {

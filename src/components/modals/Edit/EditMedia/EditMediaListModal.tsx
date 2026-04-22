@@ -209,6 +209,7 @@ const EditMediaListModal = ({
           deleteMedia={deleteMedia}
           selectedIndex={selectedIndex}
           setSelectedIndex={setSelectedIndex}
+          reorderMedias={setMedias}
         />
         <div className={Styles.ListButtonContainer}>
           <button onClick={handleCancel} className={Styles.CancelButton}>

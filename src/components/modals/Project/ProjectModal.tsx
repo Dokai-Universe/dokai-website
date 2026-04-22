@@ -33,7 +33,6 @@ import AddButton from "@components/ui/Edit/AddButton/AddButton";
 import { useAppMutation, useAppQuery } from "@controllers/common";
 import { careersQueriesClient } from "@controllers/careers/query.client";
 import { careersMutations } from "@controllers/careers/mutation";
-import { encodeEmailParam } from "@utils/Email";
 import useAuthUser from "@hooks/useAuthUser";
 
 const TRANSITION_DURATION = 200;
@@ -80,6 +79,8 @@ export type ProjectFormInput = z.input<typeof schema>;
 
 type Props = {
   ownerEmail: string;
+  inEditPage?: boolean;
+  editProjectId?: string;
 
   isOpen: boolean;
   closeModal: () => void;
@@ -206,14 +207,21 @@ const ProjectModalEdit = () => {
   );
 };
 
-const ProjectModal = ({ ownerEmail, isOpen, closeModal }: Props) => {
+const ProjectModal = ({
+  ownerEmail,
+  inEditPage,
+  editProjectId,
+  isOpen,
+  closeModal,
+  requestCloseModal,
+}: Props) => {
   const [session] = useAuthUser();
   const isOwner = session?.role === "admin" || session?.email === ownerEmail;
   const router = useRouter();
   const searchParams = useSearchParams();
-  const rawId = searchParams.get("project");
+  const rawId = editProjectId || searchParams.get("project");
   const [mode, setMode] = useState<"EDIT" | "VIEW">(
-    rawId === "new" ? "EDIT" : "VIEW",
+    inEditPage || rawId === "new" ? "EDIT" : "VIEW",
   );
 
   const [isVisible, setIsVisible] = useState(false);
@@ -225,6 +233,7 @@ const ProjectModal = ({ ownerEmail, isOpen, closeModal }: Props) => {
     {
       onSuccess: (data) => {
         setProjectId(data.projectId);
+        console.log(data);
       },
     },
   );
@@ -276,7 +285,11 @@ const ProjectModal = ({ ownerEmail, isOpen, closeModal }: Props) => {
   }, [isOpen]);
 
   const handleClose = () => {
-    router.back();
+    if (!inEditPage) {
+      router.back();
+    } else {
+      requestCloseModal();
+    }
   };
 
   useEffect(() => {
@@ -306,9 +319,11 @@ const ProjectModal = ({ ownerEmail, isOpen, closeModal }: Props) => {
             data: nextProject,
           }),
         onConfirm: () => {
-          router.replace(
-            `/careers/${encodeEmailParam(ownerEmail)}?project=${projectId}`,
-          );
+          if (!projectId) return;
+
+          const searchParams = new URLSearchParams(window.location.search);
+          searchParams.set("project", projectId);
+          router.replace(`?${searchParams.toString()}`);
         },
       });
     } else {
@@ -323,9 +338,9 @@ const ProjectModal = ({ ownerEmail, isOpen, closeModal }: Props) => {
             data: nextProject,
           }),
         onConfirm: () => {
-          router.replace(
-            `/careers/${encodeEmailParam(ownerEmail)}?project=${projectId}`,
-          );
+          const searchParams = new URLSearchParams(window.location.search);
+          searchParams.set("project", projectId);
+          router.replace(`?${searchParams.toString()}`);
         },
       });
     }

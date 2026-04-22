@@ -277,14 +277,15 @@ export function useAppMutation<
     mutationFn: d.mutationFn,
     retry: d.retry,
     ...(opts ?? {}),
-    onSuccess: async () => {
-      if (!d.invalidateQueryKeys) return;
-      console.log(123333);
-
-      for (const key of d.invalidateQueryKeys) {
-        await queryClient.invalidateQueries({ queryKey: key });
-        await queryClient.refetchQueries({ queryKey: key, type: "all" });
+    onSuccess: async (data, variables, onMutateResult, context) => {
+      if (d.invalidateQueryKeys) {
+        for (const key of d.invalidateQueryKeys) {
+          await queryClient.invalidateQueries({ queryKey: key });
+          await queryClient.refetchQueries({ queryKey: key, type: "all" });
+        }
       }
+
+      await opts?.onSuccess?.(data, variables, onMutateResult, context);
     },
   });
 }

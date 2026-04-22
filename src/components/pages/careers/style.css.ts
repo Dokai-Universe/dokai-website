@@ -85,7 +85,7 @@ export const ProfileListItem = style({
 
 export const ProfileListItemImage = style({
   width: "100%",
-  aspectRatio: "1 / 1",
+  aspectRatio: "5 / 6",
 });
 
 export const ProfileListItemOverlay = style({
@@ -294,6 +294,7 @@ export const ProjectOverlay = style({
   height: "100%",
   display: "flex",
   padding: "1rem",
+  cursor: "pointer",
 });
 
 export const ProjectOverlayTitle = style({
@@ -312,6 +313,7 @@ export const ProjectAddButton = style({
   border: "2px solid #bbb",
   opacity: "0.4",
   borderRadius: "0.5rem",
+  cursor: "pointer",
 
   transition: "opacity 0.2s",
 

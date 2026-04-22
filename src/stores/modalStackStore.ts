@@ -34,6 +34,8 @@ export type ModalMap = {
 
   PROJECT: {
     ownerEmail: string;
+    inEditPage?: boolean;
+    editProjectId?: string;
   };
 
   EDIT_MEDIA_LIST: {

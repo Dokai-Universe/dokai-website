@@ -39,6 +39,7 @@ const AdminCareersPageClient = ({ email }: { email?: string }) => {
   });
   const [session] = useAuthUser();
   const [profileId, setProfileId] = useState<string | null>(null);
+  const [firstLoaded, setFirstLoaded] = useState(false);
 
   const { mutateAsync: mutateCreateProfile } = useAppMutation(
     careersMutations.createProfile(),
@@ -76,13 +77,14 @@ const AdminCareersPageClient = ({ email }: { email?: string }) => {
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    if (data) {
+    if (data && !firstLoaded) {
       setProfileId(data.id);
       form.reset({
         ...initalProfile,
         ...data.data,
         isPublished: data.isPublished,
       });
+      setFirstLoaded(true);
     }
   }, [data]);
 
@@ -199,7 +201,7 @@ const AdminCareersPageClient = ({ email }: { email?: string }) => {
           <CareerProjects
             projects={data?.data.projects ?? []}
             email={data?.data.email ?? ""}
-            isReadOnly
+            inEditPage={true}
           />
           <CareerEditExperiences />
         </FormProvider>
