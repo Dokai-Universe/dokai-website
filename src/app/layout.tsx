@@ -9,7 +9,6 @@ import Providers from "./providers";
 import NextTopLoader from "nextjs-toploader";
 import { Suspense } from "react";
 import ModalStackRoot from "@components/modals/ModalStackRoot";
-import ThemeProvider from "./ThemeProvider";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -49,7 +48,6 @@ export default function RootLayout({
   return (
     <html lang="en" className={lightThemeClass}>
       <body className={`${dmSans.variable} `}>
-        <ThemeProvider />
         <NextTopLoader
           showSpinner={true}
           height={4}

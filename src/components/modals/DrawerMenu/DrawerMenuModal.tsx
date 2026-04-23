@@ -19,6 +19,8 @@ import { authMutations } from "@controllers/auth/mutation";
 import { useQueryClient } from "@tanstack/react-query";
 import useAuthUser from "@hooks/useAuthUser";
 import { darkThemeClass } from "@styles/theme.css";
+import ThemeToggleButton from "./ThemeToggleButton";
+import { useTheme } from "@app/ThemeProvider";
 
 const drawerNavItems = [
   { label: "Work", href: "/work", private: false },
@@ -52,6 +54,7 @@ const DrawerMenu = ({ handleCloseAll, isOpen, closeModal }: Props) => {
   });
 
   const { push } = useModalStackStore();
+  const { theme } = useTheme();
 
   const handleClickSearch = () => {
     push("SEARCH", { handleCloseAll });
@@ -77,7 +80,7 @@ const DrawerMenu = ({ handleCloseAll, isOpen, closeModal }: Props) => {
       "--drawer-bg",
       isDark ? getRandomDarkColor() : getRandomLightColor(),
     );
-  }, []);
+  }, [theme]);
 
   useEffect(() => {
     if (isOpen) {
@@ -141,6 +144,7 @@ const DrawerMenu = ({ handleCloseAll, isOpen, closeModal }: Props) => {
             )}
           </div>
         </nav>
+        <ThemeToggleButton />
         <footer className={Styles.Footer}>
           <p className={Styles.FooterTitle}>
             © 2026{" "}
