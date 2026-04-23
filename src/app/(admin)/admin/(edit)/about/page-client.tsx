@@ -4,7 +4,12 @@ import * as Styles from "./style.css";
 import EditModeToggle from "@components/ui/Edit/EditModeToggle/EditModeToggle";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
-import { FormProvider, useForm, useWatch } from "react-hook-form";
+import {
+  FormProvider,
+  useForm,
+  useWatch,
+  useFieldArray,
+} from "react-hook-form";
 import {
   AboutInput,
   aboutSchema,
@@ -24,6 +29,18 @@ import FloatingButton, {
   FloatingButtonContainer,
 } from "@components/ui/Button/FloatingButton/FloatingButton";
 import AddButton from "@components/ui/Edit/AddButton/AddButton";
+import {
+  DndContext,
+  PointerSensor,
+  closestCenter,
+  useSensor,
+  useSensors,
+  type DragEndEvent,
+} from "@dnd-kit/core";
+import {
+  SortableContext,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
 
 const AdminAboutPageClient = () => {
   const router = useRouter();
@@ -42,8 +59,13 @@ const AdminAboutPageClient = () => {
   });
 
   const { control, reset, trigger, getValues } = form;
-  const { ...rest } = useWatch({ control });
-  const about = rest as About;
+  const watched = useWatch({ control });
+  const about = watched as About;
+
+  const { fields, move } = useFieldArray({
+    control,
+    name: "contents",
+  });
 
   useEffect(() => {
     if (!data) return;
@@ -54,13 +76,32 @@ const AdminAboutPageClient = () => {
     });
   }, [data, reset]);
 
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 6,
+      },
+    }),
+  );
+
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+
+    if (!over || active.id === over.id) return;
+
+    const oldIndex = fields.findIndex((field) => field.id === active.id);
+    const newIndex = fields.findIndex((field) => field.id === over.id);
+
+    if (oldIndex < 0 || newIndex < 0) return;
+    move(oldIndex, newIndex);
+  };
+
   const handleUpdateAbout = async () => {
     const valid = await trigger();
     if (!valid) return;
 
     const formValues = getValues();
-    const { ...rest } = formValues;
-    const nextAbout = rest as About;
+    const nextAbout = formValues as About;
 
     push("API", {
       title: "Update About",
@@ -75,10 +116,9 @@ const AdminAboutPageClient = () => {
     push("ADD_ABOUT_SECTION", {
       addAboutContent: (content: AboutContent) => {
         const { contents } = getValues();
-        const nextContents = [...contents, content];
         reset({
           ...getValues(),
-          contents: nextContents,
+          contents: [...contents, content],
         });
       },
     });
@@ -102,23 +142,36 @@ const AdminAboutPageClient = () => {
             ))}
           </>
         ) : (
-          <>
-            <FormProvider {...form}>
-              <AboutPageEditIntro />
-              {about.contents.map((_, index) => (
-                <AboutPageEditContent
-                  key={`EDIT_ABOUT_CONTENT_${index}`}
-                  index={index}
-                />
-              ))}
-              <AddButton
-                onClick={handleAddContent}
-                className={Styles.AboutSectionAddButton}
-              />
-            </FormProvider>
-          </>
+          <FormProvider {...form}>
+            <AboutPageEditIntro />
+
+            <DndContext
+              sensors={sensors}
+              collisionDetection={closestCenter}
+              onDragEnd={handleDragEnd}
+            >
+              <SortableContext
+                items={fields.map((field) => field.id)}
+                strategy={verticalListSortingStrategy}
+              >
+                {fields.map((field, index) => (
+                  <AboutPageEditContent
+                    key={field.id}
+                    id={field.id}
+                    index={index}
+                  />
+                ))}
+              </SortableContext>
+            </DndContext>
+
+            <AddButton
+              onClick={handleAddContent}
+              className={Styles.AboutSectionAddButton}
+            />
+          </FormProvider>
         )}
       </div>
+
       <FloatingButtonContainer>
         <FloatingButton
           type="SAVE"

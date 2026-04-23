@@ -49,7 +49,7 @@ export const Overlay = recipe({
 
 export const Layout = recipe({
   base: {
-    background: "white",
+    background: vars.color.bg,
     borderRadius: "1rem",
     boxSizing: "border-box",
     overflow: "hidden",
@@ -223,7 +223,7 @@ export const ContentItemListItem = style({
   margin: "0",
   padding: "0.25em 0.5em",
   fontSize: vars.fontSize.sm,
-  background: "#D9D9D9",
+  background: vars.color.bgSub,
   borderRadius: "0.25em",
   lineHeight: "1",
 });

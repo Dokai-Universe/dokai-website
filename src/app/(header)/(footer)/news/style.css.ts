@@ -159,16 +159,17 @@ export const Rect = style({
     },
 
     "&:first-child:hover, &:last-child:hover": {
-      background: "#E9E9E9",
+      background: vars.color.bgSub,
     },
 
     "&:hover": {
-      color: "#000000",
+      color: vars.color.fg,
+      opacity: "0.75",
     },
 
     "&[data-active='true']": {
-      background: "#E9E9E9",
-      color: "#000000",
+      background: vars.color.bgSub,
+      color: vars.color.fg,
     },
   },
 });

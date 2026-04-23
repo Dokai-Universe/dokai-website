@@ -1,7 +1,8 @@
+import { vars } from "@styles/theme.css";
 import { style } from "@vanilla-extract/css";
 
 export const Card = style({
   position: "relative",
-  background: "#D9D9D9",
+  background: vars.color.bgSub,
   overflow: "hidden",
 });

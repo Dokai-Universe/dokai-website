@@ -1,4 +1,4 @@
-import { media, vars } from "@styles/theme.css";
+import { darkThemeClass, media, vars } from "@styles/theme.css";
 import { style } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
 
@@ -191,6 +191,12 @@ export const ProfileContactLabelIcon = style({
   flexShrink: "0",
   display: "none",
 
+  selectors: {
+    [`${darkThemeClass} &`]: {
+      filter: "invert(1)",
+    },
+  },
+
   "@media": {
     [media.tablet]: {
       display: "block",
@@ -309,7 +315,7 @@ export const ProjectAddButton = style({
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  background: "white",
+  background: vars.color.bg,
   border: "2px solid #bbb",
   opacity: "0.4",
   borderRadius: "0.5rem",

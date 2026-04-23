@@ -10,7 +10,7 @@ export const Overlay = style({
   zIndex: "102",
   transition: "transform 250ms ease, opacity 250ms ease",
   willChange: "transform",
-  background: "white",
+  background: vars.color.bg,
   overflow: "auto",
   minHeight: "100dvh",
   scrollbarGutter: "stable",
@@ -123,7 +123,7 @@ export const InputForm = style({
   gap: "0.75rem",
   flexWrap: "wrap",
   marginBottom: "2rem",
-  background: "#EFEFEF",
+  background: vars.color.input,
   padding: "0.5rem 1rem",
   paddingLeft: "0.5rem",
 });
@@ -149,7 +149,7 @@ export const Input = style({
 
   selectors: {
     "&::placeholder": {
-      color: "#9B9B9B",
+      opacity: "0.75",
     },
   },
 });
@@ -184,7 +184,7 @@ export const Query = style({
   fontWeight: "300",
   letterSpacing: "0.04rem",
   overflow: "hidden",
-  background: vars.color.lightGray,
+  background: vars.color.bgSub,
   borderRadius: vars.radius.full,
   transition: "opacity 0.2s ease-in-out",
   flexShrink: "0",
@@ -245,11 +245,11 @@ export const Tag = style({
   alignItems: "center",
   gap: "0.5rem",
   overflow: "hidden",
-  background: "white",
+  background: vars.color.bg,
   borderRadius: vars.radius.full,
   transition:
     "background 0.2s ease-in-out, color 0.2s ease-in-out, opacity 0.2s ease-in-out, border-color 0.2s ease-in-out",
-  border: "1px solid black",
+  border: `1px solid ${vars.color.fg}`,
 
   selectors: {
     "&:hover": {

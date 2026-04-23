@@ -1,3 +1,4 @@
+import { AdminMemberRole } from "@components/pages/admin/members/types";
 import type {
   CareerPageDetail,
   Profile,
@@ -16,6 +17,14 @@ export type CareerPageDetailResponse = {
 
 export type ProfileListResponse = {
   items: ProfileListItem[];
+};
+
+export type AdminMemberListResponse = {
+  items: {
+    email: string;
+    fixedOrder: number | null;
+    role: AdminMemberRole | null;
+  }[];
 };
 
 export type ProfileDetailResponse = {
@@ -57,4 +66,14 @@ export type EmailResponse = { email: string };
 export type TogglePublishResponse = {
   id: string;
   isPublished: boolean;
+};
+
+// ===== AdminMemberListUpdateRequest =====
+
+export type AdminMemberListUpdateRequest = {
+  items: {
+    email: string;
+    role: AdminMemberRole | null;
+    fixedOrder: number | null;
+  }[];
 };

@@ -1,4 +1,4 @@
-import { media, vars } from "@styles/theme.css";
+import { darkThemeClass, media, vars } from "@styles/theme.css";
 import { keyframes, style } from "@vanilla-extract/css";
 
 export const Layout = style({
@@ -23,6 +23,12 @@ export const LogoImage = style({
   width: "5rem",
   height: "auto",
   aspectRatio: "1 / 1",
+
+  selectors: {
+    [`${darkThemeClass} &`]: {
+      filter: "invert(1)",
+    },
+  },
 
   "@media": {
     [media.tablet]: {
@@ -146,4 +152,5 @@ export const NavDrawerButtonDeco = style({
   width: "100%",
   aspectRatio: "1 / 1",
   transform: "scale(2)",
+  fill: vars.color.bg,
 });

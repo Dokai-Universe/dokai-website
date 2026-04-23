@@ -6,6 +6,8 @@ import type {
   ProjectUpsertRequest,
   CareerPageDetailResponse,
   CareerPageUpsertRequest,
+  AdminMemberListResponse,
+  AdminMemberListUpdateRequest,
 } from "./types";
 import { fetchApi } from "../common";
 import { encodeEmailParam } from "@utils/Email";
@@ -18,6 +20,18 @@ export const fetchCareerPageUpdate = (req: CareerPageUpsertRequest) =>
     method: "PUT",
     body: req,
   });
+
+export const fetchMemberList = () =>
+  fetchApi<AdminMemberListResponse>(`/api/admin/profiles`);
+
+export const fetchMemberListUpdate = (req: AdminMemberListUpdateRequest) =>
+  fetchApi<void, AdminMemberListUpdateRequest>(
+    `/api/admin/profiles/update-members`,
+    {
+      method: "PATCH",
+      body: req,
+    },
+  );
 
 // Profile
 

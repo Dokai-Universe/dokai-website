@@ -1,4 +1,4 @@
-import { vars } from "@styles/theme.css";
+import { darkThemeClass, vars } from "@styles/theme.css";
 import { style } from "@vanilla-extract/css";
 
 export const Layout = style({
@@ -11,8 +11,9 @@ export const Layout = style({
 
 export const Container = style({
   padding: "2rem",
-  background: "#eee",
-  border: "1px solid #ccc",
+  background: vars.color.bgSub,
+  border: "1px solid",
+  borderColor: vars.color.lightGray,
   borderRadius: "1rem",
   display: "flex",
   flexDirection: "column",
@@ -25,6 +26,12 @@ export const Logo = style({
   width: "8rem",
   height: "auto",
   aspectRatio: "1 /1",
+
+  selectors: {
+    [`${darkThemeClass} &`]: {
+      filter: "invert(1)",
+    },
+  },
 });
 
 export const Title = style({
@@ -47,6 +54,7 @@ export const Description = style({
 export const Button = style({
   padding: "0.5rem 1rem",
   border: "1px solid #ddd",
+  color: "black",
   borderRadius: "0.5rem",
   cursor: "pointer",
   width: "100%",

@@ -29,7 +29,10 @@ export async function GET(req: NextRequest) {
 
   const { data, error } = await routeSupabase
     .from("career_profiles")
-    .select("email, data->name, data->role, data->avatar, is_published")
+    .select(
+      "email, data->name, data->role, data->avatar, is_published, fixed_order",
+    )
+    .order("fixed_order", { ascending: false, nullsFirst: false })
     .order("updated_at", { ascending: false });
 
   if (error) {
@@ -44,6 +47,7 @@ export async function GET(req: NextRequest) {
       avatar: row.avatar ?? null,
       name: row.name ?? "",
       role: row.role ?? "",
+      fixedOrder: row.fixed_order ?? null,
     })) ?? [];
 
   return applyCookies(NextResponse.json({ items }));

@@ -4,11 +4,12 @@ export const revalidate = 0;
 import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
 import "@styles/global.css";
-import { themeClass } from "@styles/theme.css";
+import { lightThemeClass } from "@styles/theme.css";
 import Providers from "./providers";
 import NextTopLoader from "nextjs-toploader";
 import { Suspense } from "react";
 import ModalStackRoot from "@components/modals/ModalStackRoot";
+import ThemeProvider from "./ThemeProvider";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -46,8 +47,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${dmSans.variable} ${themeClass}`}>
+    <html lang="en" className={lightThemeClass}>
+      <body className={`${dmSans.variable} `}>
+        <ThemeProvider />
         <NextTopLoader
           showSpinner={true}
           height={4}

@@ -36,6 +36,8 @@ globalStyle("img, picture, video, canvas, svg", {
 
 globalStyle("input, button, textarea, select", {
   font: "inherit",
+  color: vars.color.fg,
+  background: vars.color.input,
 });
 
 globalStyle("a", {

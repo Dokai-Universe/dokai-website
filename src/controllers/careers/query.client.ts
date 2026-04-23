@@ -1,12 +1,14 @@
 import { QueryDef } from "../common";
 import {
   fetchCareerPageDetail,
+  fetchMemberList,
   fetchProfileDetail,
   fetchProfileList,
   fetchProjectDetail,
 } from "./fetch";
 import { careersQueryKeys } from "./keys";
 import {
+  AdminMemberListResponse,
   CareerPageDetailResponse,
   ProfileDetailResponse,
   ProfileListResponse,
@@ -21,6 +23,10 @@ export const careersQueriesClient = {
   profileList: (): QueryDef<ProfileListResponse> => ({
     queryKey: careersQueryKeys.profileList(),
     queryFn: () => fetchProfileList(),
+  }),
+  memberList: (): QueryDef<AdminMemberListResponse> => ({
+    queryKey: careersQueryKeys.memberList(),
+    queryFn: () => fetchMemberList(),
   }),
   profileDetail: (email: string): QueryDef<ProfileDetailResponse> => ({
     queryKey: careersQueryKeys.profileDetail(email),

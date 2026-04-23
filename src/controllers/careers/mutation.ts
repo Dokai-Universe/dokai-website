@@ -1,6 +1,7 @@
 import { authQueryKeys } from "@controllers/auth/queryKeys";
 import {
   fetchCareerPageUpdate,
+  fetchMemberListUpdate,
   fetchProfileCreate,
   fetchProfileDelete,
   fetchProfileUpdate,
@@ -10,6 +11,7 @@ import {
 } from "./fetch";
 import { careersMutationKeys, careersQueryKeys } from "./keys";
 import {
+  AdminMemberListUpdateRequest,
   CareerPageUpsertRequest,
   ProfileUpsertRequest,
   ProjectUpsertRequest,
@@ -59,5 +61,11 @@ export const careersMutations = {
       careersQueryKeys.allByEmail(email),
       careersQueryKeys.projectDetail(id),
     ],
+  }),
+  updateMemberList: () => ({
+    mutationKey: careersMutationKeys.updateMemberList(),
+    mutationFn: (body: AdminMemberListUpdateRequest) =>
+      fetchMemberListUpdate(body),
+    invalidateQueryKeys: [careersQueryKeys.all(), authQueryKeys.session()],
   }),
 };

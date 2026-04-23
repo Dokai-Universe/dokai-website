@@ -22,7 +22,7 @@ export const SearchBarContainer = style({
 });
 
 export const SearchBarLabel = style({
-  background: "#E8E8E8",
+  background: vars.color.input,
   padding: "0.75rem 1.25rem",
   borderRadius: "999px",
   display: "flex",
@@ -48,7 +48,8 @@ export const SearchBarInput = style({
 });
 
 export const SearchBarIcon = style({
-  stroke: "#646363",
+  stroke: vars.color.fg,
+  opacity: "0.5",
   width: "1.5rem",
   height: "auto",
   aspectRatio: "1 / 1",
@@ -229,7 +230,8 @@ export const ExternalLinkContainer = style({
   display: "grid",
   gridTemplateColumns: "repeat(10, 1fr)",
   marginTop: "3rem",
-  border: "1px solid #000000",
+  border: "1px solid",
+  borderColor: vars.color.fg,
   cursor: "pointer",
   transition: "all 0.2s ease",
 
@@ -352,7 +354,7 @@ export const FooterItem = style({
 
 export const FooterItemTitle = style({
   fontWeight: "500",
-  color: "black",
+  color: vars.color.fg,
 });
 
 //
@@ -368,10 +370,11 @@ export const ListButton = style({
   fontSize: vars.fontSize.md,
   padding: "0.5rem 2rem",
   width: "200px",
-  border: "1px solid #646363",
+  border: "1px solid",
+  borderColor: vars.color.fg,
   cursor: "pointer",
   transition: "all 0.2s ease",
-  background: "#E9E9E9",
+  background: vars.color.bgSub,
 
   selectors: {
     "&:hover": {

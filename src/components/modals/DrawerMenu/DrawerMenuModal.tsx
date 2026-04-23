@@ -1,6 +1,6 @@
 "use client";
 
-import { getRandomLightColor } from "@utils/Color";
+import { getRandomDarkColor, getRandomLightColor } from "@utils/Color";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import * as Styles from "./style.css";
 import { createPortal } from "react-dom";
@@ -18,6 +18,7 @@ import { useAppMutation } from "@controllers/common";
 import { authMutations } from "@controllers/auth/mutation";
 import { useQueryClient } from "@tanstack/react-query";
 import useAuthUser from "@hooks/useAuthUser";
+import { darkThemeClass } from "@styles/theme.css";
 
 const drawerNavItems = [
   { label: "Work", href: "/work", private: false },
@@ -70,7 +71,12 @@ const DrawerMenu = ({ handleCloseAll, isOpen, closeModal }: Props) => {
   };
 
   useLayoutEffect(() => {
-    overlayRef.current?.style.setProperty("--drawer-bg", getRandomLightColor());
+    const isDark = document.documentElement.classList.contains(darkThemeClass);
+
+    overlayRef.current?.style.setProperty(
+      "--drawer-bg",
+      isDark ? getRandomDarkColor() : getRandomLightColor(),
+    );
   }, []);
 
   useEffect(() => {

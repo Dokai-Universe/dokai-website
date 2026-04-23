@@ -23,9 +23,6 @@ const AdminHeader = () => {
           <Link className={Styles.NavItem} href="/admin/work-list">
             Works
           </Link>
-          <Link className={Styles.NavItem} href="/admin/member-list">
-            Members
-          </Link>
         </nav>
       </div>
 

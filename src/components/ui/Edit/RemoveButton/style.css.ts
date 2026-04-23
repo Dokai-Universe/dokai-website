@@ -1,3 +1,4 @@
+import { vars } from "@styles/theme.css";
 import { style } from "@vanilla-extract/css";
 
 export const Button = style({
@@ -20,4 +21,6 @@ export const ButtonIcon = style({
   width: "1.25rem",
   height: "auto",
   aspectRatio: "1 / 1",
+
+  stroke: vars.color.fg,
 });

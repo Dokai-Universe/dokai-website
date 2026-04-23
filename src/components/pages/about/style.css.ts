@@ -1,4 +1,4 @@
-import { media, vars } from "@styles/theme.css";
+import { darkThemeClass, media, vars } from "@styles/theme.css";
 import { style } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
 
@@ -237,6 +237,12 @@ export const CardIconContainer = style({
 
 export const CardIcon = style({
   objectFit: "contain",
+
+  selectors: {
+    [`${darkThemeClass} &`]: {
+      filter: "invert(1)",
+    },
+  },
 });
 
 export const CardTextContainer = style({
@@ -332,12 +338,12 @@ export const EditContentButtonContainer = recipe({
     position: "absolute",
     display: "inline-flex",
     flexDirection: "column",
-    justifyContent: "space-between",
     top: "0",
     padding: "0.5rem",
     height: "100%",
     width: "5rem",
     alignItems: "center",
+    gap: "1rem",
 
     "@media": {
       [media.tablet]: {

@@ -1,4 +1,4 @@
-import { media, vars } from "@styles/theme.css";
+import { darkThemeClass, media, vars } from "@styles/theme.css";
 import { createVar, style } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
 
@@ -158,7 +158,7 @@ export const NavSearchIcon = style({
   width: "1.25em",
   height: "auto",
   aspectRatio: "1 / 1",
-  stroke: "black",
+  stroke: vars.color.fg,
 });
 
 export const NavLink = style({
@@ -167,6 +167,7 @@ export const NavLink = style({
   alignItems: "center",
   transform: `translateX(calc(-1 * (1em + 1rem)))`,
   transition: "opacity .3s ease, transform .2s ease",
+  color: vars.color.fg,
 
   selectors: {
     "&:hover": {
@@ -180,7 +181,7 @@ export const NavArrowIcon = style({
   width: "1em",
   height: "auto",
   aspectRatio: "1 / 1",
-  stroke: "black",
+  stroke: vars.color.fg,
 });
 
 // Footer
@@ -276,4 +277,10 @@ export const FooterIcon = style({
   width: "3.25rem",
   height: "auto",
   aspectRatio: "1 / 1",
+
+  selectors: {
+    [`${darkThemeClass} &`]: {
+      filter: "invert(1)",
+    },
+  },
 });

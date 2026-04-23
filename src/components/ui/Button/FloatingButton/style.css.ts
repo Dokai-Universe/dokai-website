@@ -12,9 +12,6 @@ export const Container = style({
 });
 
 export const Button = style({
-  borderRadius: "999px",
-  background: "rgba(0, 0, 0, 0.3)",
-  backdropFilter: "blur(1rem)",
   position: "relative",
   opacity: "0.7",
   transition: "opacity 0.2s ease-in-out",
@@ -23,10 +20,25 @@ export const Button = style({
     "&:hover": {
       opacity: "1",
     },
+
+    "&::before": {
+      content: '""',
+      position: "absolute",
+      width: "100%",
+      height: "100%",
+      inset: 0,
+      borderRadius: "999px",
+      background: vars.color.fg,
+      backdropFilter: "blur(1rem)",
+      WebkitBackdropFilter: "blur(10px)",
+      zIndex: 0,
+      opacity: "0.3",
+    },
   },
 });
 
 export const ButtonIcon = style({
+  position: "relative",
   width: "2rem",
   height: "auto",
   aspectRatio: "1 / 1",
@@ -41,17 +53,31 @@ export const ButtonText = style({
   color: "white",
   top: "0",
   right: "100%",
-  background: "rgba(0, 0, 0, 0.3)",
   padding: "0.25rem 0.5rem",
   marginRight: "0.5rem",
   fontSize: vars.fontSize.sm,
-  borderRadius: "0.5rem",
   width: "auto",
   overflow: "hidden",
   opacity: "0",
   maxWidth: "0",
   transition: "max-width 0.2s ease-in-out, opacity 0.2s ease-in-out",
   whiteSpace: "nowrap",
+
+  selectors: {
+    "&::before": {
+      content: '""',
+      position: "absolute",
+      width: "100%",
+      height: "100%",
+      inset: 0,
+      borderRadius: "0.5rem",
+      background: vars.color.fg,
+      backdropFilter: "blur(1rem)",
+      WebkitBackdropFilter: "blur(10px)",
+      zIndex: 0,
+      opacity: "0.1",
+    },
+  },
 });
 
 globalStyle(`.${Button}:hover .${ButtonText}`, {

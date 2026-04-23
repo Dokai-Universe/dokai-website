@@ -50,8 +50,17 @@ const RandomLightColors = RandomColors.filter(
   (e) => getReadableTextColor(e) === "black",
 );
 
+// Random Dark Color(fg)
+const RandomDarkColors = RandomColors.filter(
+  (e) => getReadableTextColor(e) === "white",
+);
+
 export const getRandomLightColor = () => {
   return RandomLightColors[
     Math.floor(Math.random() * RandomLightColors.length)
   ];
+};
+
+export const getRandomDarkColor = () => {
+  return RandomColors[Math.floor(Math.random() * RandomLightColors.length)];
 };

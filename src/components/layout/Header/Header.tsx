@@ -14,6 +14,7 @@ import MenuBGSVG from "@assets/icons/menu-bg.svg";
 import CloseLink from "@components/ui/Link/CloseLink";
 import { usePathname, useSearchParams } from "next/navigation";
 import useAuthUser from "@hooks/useAuthUser";
+import LogoSVG from "@assets/dokai.svg";
 
 const navList = [
   { label: "Work", href: "/work" },
@@ -58,13 +59,7 @@ const Header = () => {
         className={Styles.LogoContainer}
         handleClose={handleCloseAll}
       >
-        <Image
-          src={LogoPNG}
-          alt="logo"
-          className={Styles.LogoImage}
-          sizes={IMAGE_SIZES}
-          priority
-        />
+        <LogoSVG className={Styles.LogoImage} />
       </CloseLink>
       <nav ref={sentinelRef} className={Styles.NavContainer}>
         {navList.map((nav) => (
