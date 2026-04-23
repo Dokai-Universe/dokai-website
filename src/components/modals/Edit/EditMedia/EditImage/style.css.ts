@@ -16,7 +16,7 @@ export const DragOverlay = style({
   height: "100%",
   top: "0",
   left: "0",
-  background: "#999",
+  background: vars.color.bgSub,
   opacity: "0",
   transition: "opacity 0.2s ease-in-out",
   pointerEvents: "none",
@@ -36,10 +36,10 @@ export const DragOverlayIcon = style({
   width: "5rem",
   height: "auto",
   aspectRatio: "1 / 1",
-  background: "white",
+  background: vars.color.bg,
   padding: "1rem",
   borderRadius: "999px",
-  stroke: "#999",
+  stroke: vars.color.fg,
   strokeWidth: "2px",
 });
 
@@ -58,7 +58,7 @@ export const Media = style({
   width: "100%",
   height: "100%",
   opacity: "1",
-  background: "white",
+  background: vars.color.bgSub,
   transition: "background 0.2s ease-in-out, opacity 0.2s ease-in-out",
 });
 
@@ -111,6 +111,9 @@ export const Input = style({
   fontSize: vars.fontSize.xs,
   padding: "0.25rem 0.5rem",
   flexGrow: "1",
+  outline: "none",
+  border: "1px solid",
+  borderColor: vars.color.lightGray,
 });
 
 export const ClearButton = style({
@@ -133,9 +136,10 @@ export const UploadContainer = style({
   alignItems: "center",
   justifyContent: "center",
   gridColumn: "span 3",
-  border: "3px dashed #ddd",
+  border: "3px dashed",
+  borderColor: vars.color.lightGray,
   borderRadius: "0.5rem",
-  background: "#eee",
+  background: vars.color.bgSub,
   transition: "border 0.2s ease-in-out, background 0.2s ease-in-out",
   textAlign: "center",
   lineHeight: "1.25",

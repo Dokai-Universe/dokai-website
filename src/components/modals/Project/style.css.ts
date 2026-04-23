@@ -33,11 +33,11 @@ export const Overlay = recipe({
   variants: {
     isVisible: {
       true: {
-        background: "rgba(0, 0, 0, 0.5)",
+        background: "#33333380",
         backdropFilter: "blur(2px)",
       },
       false: {
-        background: "rgba(0, 0, 0, 0)",
+        background: "#33333380",
         backdropFilter: "none",
       },
     },

@@ -31,7 +31,7 @@ export const Toggle = style({
       height: "100%",
       aspectRatio: "1 / 1",
       borderRadius: 999,
-      background: "#fff",
+      background: vars.color.bg,
       boxShadow: "0 1px 2px rgba(0,0,0,0.18)",
       transform: "translateX(0px)",
       transition: "transform 160ms ease",
@@ -45,7 +45,7 @@ export const Toggle = style({
       boxSizing: "content-box",
       transformOrigin: "center",
       borderRadius: 999,
-      background: "#e5e5e5",
+      background: vars.color.lightGray,
       left: "50%",
       top: "50%",
       transform: "translate(-50%, -50%)",
@@ -59,5 +59,5 @@ globalStyle(`${Input}:checked + ${Toggle}::after`, {
 });
 
 globalStyle(`${Input}:checked + ${Toggle}::before`, {
-  background: "#262626",
+  background: vars.color.fg,
 });

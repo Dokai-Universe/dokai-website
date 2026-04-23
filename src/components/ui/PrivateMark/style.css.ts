@@ -14,6 +14,7 @@ export const Icon = style({
   width: "1.5rem",
   height: "auto",
   aspectRatio: "1 / 1",
+  stroke: vars.color.fg,
 });
 
 export const Text = style({

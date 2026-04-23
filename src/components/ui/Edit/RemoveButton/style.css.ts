@@ -4,7 +4,7 @@ import { style } from "@vanilla-extract/css";
 export const Button = style({
   padding: "0.25rem",
   borderRadius: "0.5rem",
-  background: "white",
+  background: vars.color.bg,
   opacity: "0.5",
   transition: "opacity 0.2s ease-in-out",
   border: "1px solid #999",

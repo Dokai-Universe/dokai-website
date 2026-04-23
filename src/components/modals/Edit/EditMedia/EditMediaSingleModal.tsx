@@ -154,7 +154,7 @@ const EditMediaSingleModal = ({
               className={Styles.BackButton}
               onClick={() => setMedia(null)}
             >
-              <ArrowLeftSVG />
+              <ArrowLeftSVG className={Styles.BackButtonIcon} />
             </button>
           )}
           <button onClick={handleCancel} className={Styles.CancelButton}>

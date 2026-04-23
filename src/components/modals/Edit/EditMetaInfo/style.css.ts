@@ -46,6 +46,7 @@ export const ValueLabel = style({
   border: `1px solid #999`,
   borderRadius: "0.25rem",
   overflow: "hidden",
+  background: vars.color.input,
 
   selectors: {
     "&:focus-within": {
@@ -66,6 +67,7 @@ export const ValueInput = style({
 export const ValueRemoveButton = style({
   border: "none !important",
   marginRight: "0.25rem",
+  background: "transparent !important",
 });
 
 export const AddValueButton = style({
@@ -114,9 +116,9 @@ export const MetaCardBody = style({
   display: "flex",
   flexDirection: "column",
   padding: "1rem",
-  border: "1px solid #e2e8f0",
+  border: "1px solid",
+  borderColor: vars.color.lightGray,
   borderRadius: "0.5rem",
-  backgroundColor: "#fff",
   flex: 1,
   gap: "1rem",
   minWidth: 0,
@@ -128,6 +130,7 @@ export const MetaRemoveButton = style({
   right: "0.5rem",
   width: "1.5rem",
   height: "1.5rem",
+  background: "transparent !important",
 });
 
 export const MetaAddButtonContainer = style({

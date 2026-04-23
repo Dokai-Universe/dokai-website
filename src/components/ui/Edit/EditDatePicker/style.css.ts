@@ -1,3 +1,4 @@
+import { vars } from "@styles/theme.css";
 import { style } from "@vanilla-extract/css";
 
 export const Container = style({
@@ -20,6 +21,7 @@ export const InputContainer = style({
   padding: "0.25rem 0.5rem",
   borderRadius: "0.25rem",
   border: "1px solid #999",
+  background: vars.color.input,
 });
 
 export const Input = style({

@@ -22,7 +22,7 @@ export const SelectMediaButton = style({
 
   selectors: {
     "&:hover": {
-      background: "#eeeeee",
+      background: vars.color.bgSub,
       color: "#666",
     },
   },

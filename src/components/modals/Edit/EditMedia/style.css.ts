@@ -1,4 +1,4 @@
-import { vars } from "@styles/theme.css";
+import { darkThemeClass, vars } from "@styles/theme.css";
 import { style, globalStyle } from "@vanilla-extract/css";
 
 // List
@@ -83,8 +83,20 @@ export const BackButton = style({
 
   selectors: {
     "&:hover": {
-      background: "#eeeeee",
+      background: vars.color.bgSub,
       color: "#666",
+    },
+  },
+});
+
+export const BackButtonIcon = style({
+  width: "1.25rem",
+  height: "auto",
+  aspectRatio: "1 / 1",
+
+  selectors: {
+    [`${darkThemeClass} &`]: {
+      filter: "invert(1)",
     },
   },
 });

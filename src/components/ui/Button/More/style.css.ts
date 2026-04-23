@@ -9,7 +9,8 @@ export const Container = style({
 
 export const Button = style({
   display: "flex",
-  border: "1.5px solid black",
+  border: "1.5px solid",
+  borderColor: vars.color.fg,
   borderRadius: "999px",
   padding: "0.5rem 1rem",
   gap: "0.5rem",
@@ -20,13 +21,13 @@ export const Button = style({
 
   selectors: {
     "&:hover": {
-      background: "#eeeeee",
+      background: vars.color.lightGray,
     },
   },
 });
 
 export const ButtonIcon = style({
-  stroke: "black",
+  stroke: vars.color.fg,
   width: "1.25em",
   height: "1.25em",
 });

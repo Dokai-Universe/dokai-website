@@ -102,7 +102,7 @@ export const HeaderInfo = style({
       content: '""',
       height: "1px",
       width: "6rem",
-      background: "black",
+      background: vars.color.fg,
       marginTop: "0.75rem",
     },
   },
@@ -404,7 +404,6 @@ export const EditInfoPublished = style({
 //
 
 export const EditHeaderMetaTitle = style({
-  color: "black",
   fontSize: "1.25rem",
   lineHeight: "1.2",
   letterSpacing: "0.04em",

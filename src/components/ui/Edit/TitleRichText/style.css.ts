@@ -1,3 +1,4 @@
+import { darkThemeClass, vars } from "@styles/theme.css";
 import { globalStyle, style } from "@vanilla-extract/css";
 
 export const Container = style({
@@ -16,7 +17,6 @@ export const Content = style({
   position: "relative",
   border: "1px solid #999",
   borderRadius: "0.25rem",
-  background: "white",
   padding: "0.5rem",
   transition: "border-color 0.1s ease-in-out",
 
@@ -27,8 +27,10 @@ export const Content = style({
 
     "&:focus-within": {
       borderTopLeftRadius: "0",
-      outline: "1px solid black",
-      border: "1px solid black",
+      border: "1px solid",
+      borderColor: vars.color.fg,
+      outline: "1px solid",
+      outlineColor: vars.color.fg,
     },
   },
 });
@@ -37,15 +39,17 @@ export const ToolbarContainer = style({
   position: "absolute",
   bottom: "calc(100% + 1px)",
   left: "-1px",
-  border: "1px solid black",
-  outline: "1px solid black",
+  border: "1px solid",
+  borderColor: vars.color.fg,
+  outline: "1px solid ",
+  outlineColor: vars.color.fg,
   zIndex: "100",
   display: "none",
   borderRadius: "0.5rem 0.5rem 0 0",
   borderBottom: "none",
 
   overflow: "hidden",
-  background: "white",
+  background: vars.color.bg,
 
   selectors: {
     [`${Content}:focus-within &`]: { display: "flex" },
@@ -63,7 +67,7 @@ export const ToolbarButton = style({
 
   selectors: {
     "&:hover": {
-      background: "lightgray",
+      background: vars.color.bgSub,
     },
     "&:focus-visible": {
       outline: "2px solid black",
@@ -76,6 +80,12 @@ export const ToolbarButtonIcon = style({
   width: "1rem",
   height: "auto",
   aspectRatio: "1 / 1",
+
+  selectors: {
+    [`${darkThemeClass} &`]: {
+      filter: "invert(1)",
+    },
+  },
 });
 
 export const RichText = style({

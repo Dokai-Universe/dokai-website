@@ -30,7 +30,6 @@ export const Button = style({
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  background: "white",
   border: "1px solid #999",
   borderRadius: "0.25rem",
   padding: "0.25rem 0.5rem",

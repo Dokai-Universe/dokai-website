@@ -28,12 +28,12 @@ export const Overlay = recipe({
   variants: {
     isVisible: {
       true: {
-        background: "rgba(0, 0, 0, 0.5)",
+        background: "#33333380",
         backdropFilter: "blur(2px)",
       },
       false: {
-        background: "rgba(0, 0, 0, 0)",
-        backdropFilter: "blur(0px)",
+        background: "#33333300",
+        backdropFilter: "none",
       },
     },
   },
@@ -46,7 +46,7 @@ export const Layout = recipe({
   base: {
     width: "100%",
     maxWidth: MaxWidthVar,
-    background: "white",
+    background: vars.color.bg,
     boxShadow: "0 10px 30px rgba(0,0,0,0.15)",
     display: "flex",
     flexDirection: "column",
@@ -98,7 +98,7 @@ export const CloseButton = style({});
 
 export const CloseButtonIcon = style({
   width: "1.5rem",
-  stroke: "black",
+  stroke: vars.color.fg,
   height: "auto",
   aspectRatio: "1 / 1",
 });

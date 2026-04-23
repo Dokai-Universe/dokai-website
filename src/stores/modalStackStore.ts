@@ -112,10 +112,9 @@ export type ModalMap = {
     deleteCard?: () => void;
   };
 
-  EDIT_ABOUT_TEAM: {
-    initial?: AboutTeam;
-    applyTeam: (next: AboutTeam) => void;
-    deleteTeam?: () => void;
+  EDIT_ABOUT_TEAM_LIST: {
+    initial?: { role: string; names: string[] }[];
+    applyTeamList: (next: { role: string; names: string[] }[]) => void;
   };
 
   ADD_ABOUT_SECTION: {

@@ -46,6 +46,7 @@ export const ValueLabel = style({
   border: `1px solid #999`,
   borderRadius: "0.25rem",
   overflow: "hidden",
+  backgroundColor: vars.color.input,
 
   selectors: {
     "&:focus-within": {
@@ -66,6 +67,7 @@ export const ValueInput = style({
 export const ValueRemoveButton = style({
   border: "none !important",
   marginRight: "0.25rem",
+  background: "transparent !important",
 });
 
 export const ButtonContainer = style({
@@ -81,12 +83,36 @@ export const MembersList = style({
 });
 
 export const RoleContainer = style({
+  position: "relative",
   display: "flex",
   flexDirection: "column",
   gap: "0.25rem",
   padding: "0.5rem",
   borderRadius: "0.5rem",
   border: "1px solid #999",
+});
+
+export const MemberDragHandle = style({
+  position: "absolute",
+  left: "50%",
+  transform: "translateX(-50%)",
+  top: 0,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  padding: "0.5rem 0",
+  cursor: "grab",
+  background: "none",
+  border: "none",
+  color: "#94a3b8",
+  fontSize: "1.25rem",
+  selectors: {
+    "&:active": {
+      cursor: "grabbing",
+    },
+  },
+  rotate: "90deg",
+  transformOrigin: "center center",
 });
 
 export const MemberAddForm = style({
@@ -97,6 +123,7 @@ export const MemberAddForm = style({
   overflow: "hidden",
   outline: "1px solid transparent",
   padding: "0.25rem 0.5rem",
+  backgroundColor: vars.color.input,
 
   selectors: {
     "&:focus-within": {
@@ -119,6 +146,7 @@ export const MemberAddButton = style({
   outline: "none !important",
   padding: "0 !important",
   width: "fit-content !important",
+  background: "transparent !important",
 
   selectors: {
     "&:hover": {
@@ -174,5 +202,5 @@ export const NameRemoveButtonIcon = style({
   width: "0.75rem",
   height: "auto",
   aspectRatio: "1 / 1",
-  stroke: "black",
+  stroke: vars.color.fg,
 });

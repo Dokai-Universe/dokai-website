@@ -45,6 +45,7 @@ export const ValueLabel = style({
   border: `1px solid #999`,
   borderRadius: "0.25rem",
   overflow: "hidden",
+  background: vars.color.input,
 
   selectors: {
     "&:focus-within": {
@@ -64,6 +65,7 @@ export const ValueInput = style({
 
 export const ValueRemoveButton = style({
   border: "none !important",
+  background: "transparent !important",
   marginRight: "0.25rem",
 });
 

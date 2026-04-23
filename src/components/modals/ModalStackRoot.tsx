@@ -13,6 +13,7 @@ import EditCalendarModal from "./Edit/EditCalendar/EditCalendarModal";
 import AddNewsContentModal from "./Edit/AddNewsContent/AddNewsContentModal";
 import EditMetaInfoListModal from "./Edit/EditMetaInfo/EditMetaInfoModal";
 import EditCreditModal from "./Edit/EditCredit/EditCreditModal";
+import EditAboutTeamListModal from "./Edit/EditAboutTeam/EditAboutTeamModal";
 
 const ApiModal = dynamic(() => import("./Api/ApiModal"), { ssr: false });
 const ConfirmModal = dynamic(() => import("./Confirm/ConfirmModal"), {
@@ -55,10 +56,6 @@ const EditAboutGroupModal = dynamic(
 );
 const EditAboutCardModal = dynamic(
   () => import("./Edit/EditAboutCard/EditAboutCardModal"),
-  { ssr: false },
-);
-const EditAboutTeamModal = dynamic(
-  () => import("./Edit/EditAboutTeam/EditAboutTeamModal"),
   { ssr: false },
 );
 const AddAboutSectionModal = dynamic(
@@ -140,8 +137,10 @@ const ModalStackRoot = () => {
             return <EditAboutGroupModal key={m.id} {...common} {...m.props} />;
           case "EDIT_ABOUT_CARD":
             return <EditAboutCardModal key={m.id} {...common} {...m.props} />;
-          case "EDIT_ABOUT_TEAM":
-            return <EditAboutTeamModal key={m.id} {...common} {...m.props} />;
+          case "EDIT_ABOUT_TEAM_LIST":
+            return (
+              <EditAboutTeamListModal key={m.id} {...common} {...m.props} />
+            );
           case "ADD_ABOUT_SECTION":
             return <AddAboutSectionModal key={m.id} {...common} {...m.props} />;
           case "ADD_NEWS_CONTENT":

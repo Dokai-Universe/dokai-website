@@ -291,7 +291,8 @@ export const TeamContainer = style({
       flexDirection: "column",
       lineHeight: "1.5",
       paddingLeft: "0.5rem",
-      borderLeft: "2px solid black",
+      borderLeft: "2px solid",
+      borderLeftColor: vars.color.fg,
     },
   },
 });

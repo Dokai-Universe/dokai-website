@@ -65,6 +65,7 @@ export const CalendarHeaderTitleYear = style({
   WebkitAppearance: "none",
   MozAppearance: "none",
   lineHeight: "1.33",
+  background: "transparent",
 });
 
 export const CalendarHeaderTitleMonth = style({
@@ -75,6 +76,7 @@ export const CalendarHeaderTitleMonth = style({
   WebkitAppearance: "none",
   MozAppearance: "none",
   lineHeight: "1.33",
+  background: "transparent",
 });
 
 export const CalendarBody = style({
@@ -198,13 +200,15 @@ export const OptionFormatItemLabel = style({
   alignItems: "center",
   padding: "0.25rem 0.5rem",
   borderRadius: "0.25rem",
-  border: "1px solid #ddd",
+  border: "1px solid",
+  borderColor: vars.color.lightGray,
+
   cursor: "pointer",
   fontSize: vars.fontSize.xs,
 
   selectors: {
     "&:has(input:checked)": {
-      background: "#eee",
+      background: vars.color.bgSub,
     },
   },
 });

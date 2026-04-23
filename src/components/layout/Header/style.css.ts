@@ -132,7 +132,7 @@ export const NavDrawerButton = style({
 
     '&[data-floating="true"]': {
       position: "fixed",
-      margin: "2rem 3rem",
+      margin: "2rem 2rem",
       top: "0",
       right: "0",
       zIndex: "103",
@@ -141,6 +141,13 @@ export const NavDrawerButton = style({
   },
 
   "@media": {
+    [media.tablet]: {
+      selectors: {
+        '&[data-floating="true"]': {
+          margin: "30px",
+        },
+      },
+    },
     [media.mobile]: {
       margin: "0.5rem",
     },

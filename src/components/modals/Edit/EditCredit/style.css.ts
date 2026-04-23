@@ -125,6 +125,7 @@ export const MemberAddForm = style({
   overflow: "hidden",
   outline: "1px solid transparent",
   padding: "0.25rem 0.5rem",
+  background: vars.color.input,
 
   selectors: {
     "&:focus-within": {
@@ -147,6 +148,7 @@ export const MemberAddButton = style({
   outline: "none !important",
   padding: "0 !important",
   width: "fit-content !important",
+  background: "transparent !important",
 
   selectors: {
     "&:hover": {
@@ -202,5 +204,5 @@ export const NameRemoveButtonIcon = style({
   width: "0.75rem",
   height: "auto",
   aspectRatio: "1 / 1",
-  stroke: "black",
+  stroke: vars.color.fg,
 });
