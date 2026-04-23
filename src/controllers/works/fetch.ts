@@ -33,6 +33,28 @@ export const fetchWorkList = ({
   );
 };
 
+export const fetchWorkSearch = ({
+  queries,
+  page = 1,
+  limit = 16,
+}: {
+  queries?: string[];
+  page?: number;
+  limit?: number;
+}) => {
+  const query = new URLSearchParams();
+  if (queries?.length) query.set("searchQueries", JSON.stringify(queries));
+  if (page) query.set("page", page.toString());
+  if (limit) query.set("limit", limit.toString());
+
+  return fetchApi<WorkListInfiniteResponse>(
+    `/api/public/search/works?${query.toString()}`,
+    {
+      method: "GET",
+    },
+  );
+};
+
 export const fetchWorkDetail = (slug: string) =>
   fetchApi<WorkDetailResponse>(
     `/api/public/works/${encodeURIComponent(slug)}`,

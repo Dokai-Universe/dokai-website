@@ -20,6 +20,7 @@ export type WorkListInfiniteResponse = {
   }[];
   page: number;
   limit: number;
+  totalCount: number;
   hasNext: boolean;
   nextPage: number | null;
 };

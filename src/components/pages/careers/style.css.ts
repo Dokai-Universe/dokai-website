@@ -47,33 +47,20 @@ export const EditContentRemoveButton = style({
 
 //
 
-export const ProfileListContainer = recipe({
-  base: {
-    gridColumn: "3 / -2",
-    display: "grid",
-    gridTemplateColumns: "repeat(3, 1fr)",
-    gap: "1rem",
+export const ProfileListContainer = style({
+  gridColumn: "3 / -2",
+  display: "grid",
+  gridTemplateColumns: "repeat(3, 1fr)",
+  gap: "1rem",
 
-    "@media": {
-      [media.tablet]: {
-        gridTemplateColumns: "repeat(2, 1fr)",
-      },
-      [media.mobile]: {
-        gridColumn: "1 / -1",
-        gridTemplateColumns: "repeat(1, 1fr)",
-      },
+  "@media": {
+    [media.tablet]: {
+      gridTemplateColumns: "repeat(2, 1fr)",
     },
-  },
-  variants: {
-    isReadOnly: {
-      true: {
-        opacity: "0.5",
-        pointerEvents: "none",
-      },
+    [media.mobile]: {
+      gridColumn: "1 / -1",
+      gridTemplateColumns: "repeat(1, 1fr)",
     },
-  },
-  defaultVariants: {
-    isReadOnly: false,
   },
 });
 
@@ -81,6 +68,11 @@ export const ProfileListItem = style({
   gridColumn: "span 1",
   position: "relative",
   overflow: "hidden",
+});
+
+export const Draggable = style({
+  cursor: "grab",
+  userSelect: "none",
 });
 
 export const ProfileListItemImage = style({
@@ -512,4 +504,32 @@ export const EditExperienceItem = style({
   alignItems: "center",
   gap: "0.5rem",
   fontSize: vars.fontSize.md,
+});
+
+//
+
+export const ProfileListSaveButtonContainer = style({
+  gridColumn: "1 / -1",
+  display: "flex",
+  justifyContent: "flex-end",
+});
+
+export const ProfileListSaveButton = style({
+  padding: "0.25rem 0.5rem",
+  background: "white",
+  border: "1px solid #999",
+  borderRadius: "0.5rem",
+  lineHeight: "1.33",
+
+  transition: "opacity 0.2s",
+
+  selectors: {
+    "&:disabled": {
+      opacity: "0.5",
+      cursor: "default",
+    },
+    "&:not(:disabled):hover": {
+      opacity: "0.5",
+    },
+  },
 });

@@ -4,6 +4,7 @@ import {
   fetchMemberListUpdate,
   fetchProfileCreate,
   fetchProfileDelete,
+  fetchProfileOrderUpdate,
   fetchProfileUpdate,
   fetchProjectCreate,
   fetchProjectDelete,
@@ -61,6 +62,11 @@ export const careersMutations = {
       careersQueryKeys.allByEmail(email),
       careersQueryKeys.projectDetail(id),
     ],
+  }),
+  updateProfileOrder: () => ({
+    mutationKey: careersMutationKeys.updateProfileOrder(),
+    mutationFn: (body: { emails: string[] }) => fetchProfileOrderUpdate(body),
+    invalidateQueryKeys: [careersQueryKeys.all()],
   }),
   updateMemberList: () => ({
     mutationKey: careersMutationKeys.updateMemberList(),

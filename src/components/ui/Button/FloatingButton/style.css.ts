@@ -62,6 +62,7 @@ export const ButtonText = style({
   maxWidth: "0",
   transition: "max-width 0.2s ease-in-out, opacity 0.2s ease-in-out",
   whiteSpace: "nowrap",
+  zIndex: "1",
 
   selectors: {
     "&::before": {
@@ -75,7 +76,7 @@ export const ButtonText = style({
       backdropFilter: "blur(1rem)",
       WebkitBackdropFilter: "blur(10px)",
       zIndex: 0,
-      opacity: "0.1",
+      opacity: "0.3",
     },
   },
 });

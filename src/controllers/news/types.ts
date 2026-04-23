@@ -1,3 +1,4 @@
+import { MediaSource } from "@domain/media";
 import { News, NewsListItem } from "@domain/news";
 
 // ===== Responses =====
@@ -19,6 +20,24 @@ export type NewsDetailResponse = {
   data: News;
   updatedAt: string;
   viewCount: number;
+};
+
+export type NewsListInfiniteResponse = {
+  items: {
+    id: string;
+    slug: string;
+    isPublished: boolean;
+    data: {
+      title: string;
+      thumbnail: MediaSource;
+      summary: string;
+    };
+  }[];
+  page: number;
+  limit: number;
+  totalCount: number;
+  hasNext: boolean;
+  nextPage: number | null;
 };
 
 // export type WorkListInfiniteResponse = {

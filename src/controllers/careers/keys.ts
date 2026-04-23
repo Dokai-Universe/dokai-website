@@ -7,6 +7,8 @@ export const careersQueryKeys = {
   profileDetail: (email: string) =>
     ["careers", email, "profile-detail"] as const,
   profileExist: (email: string) => ["careers", email, "profile-exist"] as const,
+  projectSearch: (queries: string[]) =>
+    ["careers", "project-search", ...queries] as const,
   projectDetail: (projectId: string) =>
     ["careers", "project-detail", projectId] as const,
 };
@@ -20,4 +22,5 @@ export const careersMutationKeys = {
   updateProject: () => ["careers", "update-project"] as const,
   deleteProject: () => ["careers", "delete-project"] as const,
   updateMemberList: () => ["careers", "update-member-list"] as const,
+  updateProfileOrder: () => ["careers", "update-profile-order"] as const,
 };

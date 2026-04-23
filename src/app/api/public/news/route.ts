@@ -10,6 +10,7 @@ export async function GET(req: NextRequest) {
 
   const rawLimit = Number(searchParams.get("limit") ?? DEFAULT_LIMIT);
   const rawPage = Number(searchParams.get("page") ?? 1);
+  const query = (searchParams.get("query") ?? "").trim();
 
   const limit =
     Number.isFinite(rawLimit) && rawLimit > 0
@@ -22,16 +23,16 @@ export async function GET(req: NextRequest) {
   const from = (page - 1) * limit;
   const to = from + limit - 1;
 
-  const query = supabase
+  let dbQuery = supabase
     .from("news")
     .select(
       `
       id,
       slug,
-      data->title,
-      data->thumbnail,
-      data->summary,
-      data->category,
+      title:data->>title,
+      thumbnail:data->thumbnail,
+      summary:data->>summary,
+      category:data->>category,
       published_at,
       view_count
     `,
@@ -40,7 +41,11 @@ export async function GET(req: NextRequest) {
     .order("published_at", { ascending: false })
     .range(from, to);
 
-  const { data, error, count } = await query;
+  if (query) {
+    dbQuery = dbQuery.ilike("search_text", `%${query}%`);
+  }
+
+  const { data, error, count } = await dbQuery;
 
   if (error) {
     return applyCookies(
@@ -60,6 +65,7 @@ export async function GET(req: NextRequest) {
         title: row.title,
         thumbnail: row.thumbnail,
         category: row.category,
+        summary: row.summary,
         publishedAt: row.published_at,
       },
     })) ?? [];

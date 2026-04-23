@@ -1,23 +1,51 @@
 import type {
   NewsDetailResponse,
+  NewsListInfiniteResponse,
   NewsListResponse,
   NewsUpsertRequest,
 } from "./types";
 import { fetchApi } from "../common";
 
-export const fetchMainWorks = ({
+export const fetchNewsList = ({
+  page = 1,
+  limit = 16,
+  query,
+}: {
+  page?: number;
+  limit?: number;
+  query?: string;
+}) => {
+  const queryParams = new URLSearchParams();
+  if (page) queryParams.set("page", page.toString());
+  if (limit) queryParams.set("limit", limit.toString());
+  if (query) queryParams.set("query", query);
+  return fetchApi<NewsListResponse>(
+    `/api/public/news?${queryParams.toString()}`,
+    {
+      method: "GET",
+    },
+  );
+};
+
+export const fetchNewsSearch = ({
+  queries,
   page = 1,
   limit = 16,
 }: {
+  queries?: string[];
   page?: number;
   limit?: number;
 }) => {
   const query = new URLSearchParams();
+  if (queries?.length) query.set("searchQueries", JSON.stringify(queries));
   if (page) query.set("page", page.toString());
   if (limit) query.set("limit", limit.toString());
-  return fetchApi<NewsListResponse>(`/api/public/news?${query.toString()}`, {
-    method: "GET",
-  });
+  return fetchApi<NewsListInfiniteResponse>(
+    `/api/public/search/news?${query.toString()}`,
+    {
+      method: "GET",
+    },
+  );
 };
 
 export const fetchNewsDetail = (slug: string) => {

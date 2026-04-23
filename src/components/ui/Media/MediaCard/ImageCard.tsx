@@ -11,15 +11,15 @@ const isSupportedImageSrc = (src: string) =>
   src.startsWith("http://") ||
   src.startsWith("blob:");
 
-const ImageCard = ({
-  image,
-  useAlternative,
-  priority,
-}: {
+type Props = {
   image?: ImageSource;
   useAlternative?: boolean;
   priority?: boolean;
-}) => {
+};
+
+const loadedImageSrcSet = new Set<string>();
+
+const ImageCard = ({ image, useAlternative, priority }: Props) => {
   const [state, setState] = useState<{
     step: "loading" | "error" | "loaded" | "idle";
     errorText?: string;
@@ -28,13 +28,17 @@ const ImageCard = ({
   });
 
   useEffect(() => {
-    //eslint-disable-next-line react-hooks/exhaustive-deps
     const src = image?.src;
+
     if (!src || !isSupportedImageSrc(src)) {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       setState({ step: "idle" });
-    } else {
-      setState({ step: "loading" });
+      return;
     }
+
+    setState({
+      step: loadedImageSrcSet.has(src) ? "loaded" : "loading",
+    });
   }, [image?.src]);
 
   const handleImageError = () =>
@@ -42,6 +46,11 @@ const ImageCard = ({
       step: "error",
       errorText: "Invalid image",
     });
+
+  const handleImageLoad = () => {
+    if (image?.src) loadedImageSrcSet.add(image.src);
+    setState({ step: "loaded" });
+  };
 
   return (
     <>
@@ -58,9 +67,10 @@ const ImageCard = ({
             transition: "opacity 0.3s ease-in-out",
           }}
           onError={handleImageError}
-          onLoad={() => setState({ step: "loaded" })}
+          onLoad={handleImageLoad}
         />
       )}
+
       {useAlternative &&
         (state.step === "error" ? (
           <ErrorComponent errorText={state.errorText} />

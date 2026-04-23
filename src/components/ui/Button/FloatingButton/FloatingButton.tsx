@@ -28,7 +28,9 @@ const FloatingButton = ({
       ) : (
         <SaveSVG className={Styles.ButtonIcon} />
       )}
-      <div className={Styles.ButtonText}>{text ?? type}</div>
+      <div className={Styles.ButtonText}>
+        <p style={{ position: "relative" }}>{text ?? type}</p>
+      </div>
     </button>
   );
 };

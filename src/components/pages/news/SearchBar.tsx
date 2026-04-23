@@ -15,7 +15,7 @@ const NewsPageSearchBar = ({
 
   const handleSearch = () => {
     const params = new URLSearchParams();
-    params.set("query", value);
+    if (value.trim()) params.set("query", value.trim());
 
     if (inDetail) {
       router.push(`/news?${params.toString()}`);

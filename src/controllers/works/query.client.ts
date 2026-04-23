@@ -4,6 +4,7 @@ import {
   fetchWorkCheckSlug,
   fetchWorkDetail,
   fetchWorkList,
+  fetchWorkSearch,
 } from "./fetch";
 import { worksQueryKeys } from "./keys";
 import {
@@ -23,6 +24,13 @@ export const worksQueriesClient = {
     queryKey: worksQueryKeys.workList(category),
     queryFn: ({ pageParam }) =>
       fetchWorkList({ category, page: pageParam, limit: 16 }),
+  }),
+  workSearch: (
+    queries: string[],
+  ): InfiniteQueryDef<WorkListInfiniteResponse> => ({
+    queryKey: worksQueryKeys.workSearch(queries),
+    queryFn: ({ pageParam }) =>
+      fetchWorkSearch({ queries, page: pageParam, limit: 12 }),
   }),
   workDetail: (slug: string): QueryDef<WorkDetailResponse> => ({
     queryKey: worksQueryKeys.workDetail(slug),

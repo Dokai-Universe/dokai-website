@@ -127,6 +127,14 @@ export const InputForm = style({
   padding: "0.5rem 1rem",
   paddingLeft: "0.5rem",
   borderRadius: "999px",
+
+  "@media": {
+    [media.mobile]: {
+      padding: "0",
+      background: "transparent",
+      rowGap: "0.5rem",
+    },
+  },
 });
 
 export const InputLabel = style({
@@ -134,6 +142,15 @@ export const InputLabel = style({
   alignItems: "center",
   gap: "0.75rem",
   flexGrow: "1",
+
+  "@media": {
+    [media.mobile]: {
+      background: vars.color.input,
+      padding: "0.5rem 1rem",
+      borderRadius: "999px",
+      width: "100%",
+    },
+  },
 });
 
 export const Input = style({
@@ -410,6 +427,7 @@ export const ResultItemGroup = style({
   gridTemplateColumns: "repeat(3, minmax(0px, 1fr))",
   columnGap: "1rem",
   rowGap: "3rem",
+  marginBottom: "1rem",
 
   "@media": {
     [media.tablet]: {

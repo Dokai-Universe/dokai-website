@@ -6,6 +6,7 @@ import type {
   ProfileListItem,
   Project,
 } from "@domain/careers";
+import { MediaSource } from "@domain/media";
 
 // ===== Responses =====
 
@@ -32,6 +33,23 @@ export type ProfileDetailResponse = {
   isPublished: boolean;
   data: ProfileDetail;
   updatedAt: string;
+};
+
+export type ProjectListInfiniteResponse = {
+  items: {
+    id: string;
+    data: {
+      title: string;
+      thumbnail: MediaSource;
+      ownerEmail: string;
+      ownerName: string;
+    };
+  }[];
+  page: number;
+  limit: number;
+  totalCount: number;
+  hasNext: boolean;
+  nextPage: number | null;
 };
 
 export type ProjectDetailResponse = {

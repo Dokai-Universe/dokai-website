@@ -23,6 +23,7 @@ import FloatingButton, {
 } from "@components/ui/Button/FloatingButton/FloatingButton";
 import { careersMutations } from "@controllers/careers/mutation";
 import { useModalStackStore } from "@stores/modalStackStore";
+import CareersPageEditProfileList from "@components/pages/careers/EditProfileList";
 
 const CareersPageEditPageClient = () => {
   const router = useRouter();
@@ -116,10 +117,7 @@ const CareersPageEditPageClient = () => {
               onClick={handleAddContent}
               className={Styles.AddButton}
             />
-            <CareersPageProfileList
-              profiles={profiles?.items ?? []}
-              isReadOnly
-            />
+            <CareersPageEditProfileList profiles={profiles?.items ?? []} />
           </FormProvider>
         )}
       </div>

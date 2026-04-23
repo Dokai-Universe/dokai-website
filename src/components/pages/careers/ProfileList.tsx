@@ -5,13 +5,11 @@ import MediaHoverOverlay from "@components/ui/Media/HoverOverlay/HoverOverlay";
 
 const CareersPageProfileList = ({
   profiles,
-  isReadOnly,
 }: {
   profiles: ProfileListItem[];
-  isReadOnly?: boolean;
 }) => {
   return (
-    <div className={Styles.ProfileListContainer({ isReadOnly })}>
+    <div className={Styles.ProfileListContainer}>
       {profiles.map((profile) => (
         <Link
           href={`/careers/${encodeURIComponent(profile.email)}`}

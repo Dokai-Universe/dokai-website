@@ -17,9 +17,10 @@ const NewsPageClient = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const currentPage = Number(searchParams.get("page") ?? "1");
+  const query = searchParams.get("query") ?? undefined;
 
   const { data: newsList } = useAppQuery(
-    newsQueriesClient.newsList(currentPage),
+    newsQueriesClient.newsList({ page: currentPage, query }),
   );
 
   const maxPage = newsList?.totalPages ?? 1;

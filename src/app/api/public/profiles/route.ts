@@ -32,8 +32,8 @@ export async function GET(req: NextRequest) {
     .select(
       "email, data->name, data->role, data->avatar, is_published, fixed_order",
     )
-    .order("fixed_order", { ascending: false, nullsFirst: false })
-    .order("updated_at", { ascending: false });
+    .order("fixed_order", { ascending: true, nullsFirst: false })
+    .order("created_at", { ascending: true });
 
   if (error) {
     return applyCookies(

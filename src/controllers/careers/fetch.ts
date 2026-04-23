@@ -8,6 +8,7 @@ import type {
   CareerPageUpsertRequest,
   AdminMemberListResponse,
   AdminMemberListUpdateRequest,
+  ProjectListInfiniteResponse,
 } from "./types";
 import { fetchApi } from "../common";
 import { encodeEmailParam } from "@utils/Email";
@@ -68,7 +69,34 @@ export const fetchProfileCheckEmail = (email: string) =>
     `/api/admin/profiles/check-email?email=${encodeEmailParam(email)}`,
   );
 
+export const fetchProfileOrderUpdate = ({ emails }: { emails: string[] }) =>
+  fetchApi<void, { emails: string[] }>(`/api/admin/profiles/order`, {
+    method: "PATCH",
+    body: { emails },
+  });
+
 // Project
+
+export const fetchProjectSearch = ({
+  queries,
+  page = 1,
+  limit = 16,
+}: {
+  queries?: string[];
+  page?: number;
+  limit?: number;
+}) => {
+  const query = new URLSearchParams();
+  if (queries?.length) query.set("searchQueries", JSON.stringify(queries));
+  if (page) query.set("page", page.toString());
+  if (limit) query.set("limit", limit.toString());
+  return fetchApi<ProjectListInfiniteResponse>(
+    `/api/public/search/projects?${query.toString()}`,
+    {
+      method: "GET",
+    },
+  );
+};
 
 export const fetchProjectCreate = (req: ProjectUpsertRequest) =>
   fetchApi<{ projectId: string }, ProjectUpsertRequest>(`/api/admin/projects`, {
