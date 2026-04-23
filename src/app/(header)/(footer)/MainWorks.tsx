@@ -164,7 +164,7 @@ const MainWorks = () => {
         <div className={Styles.ItemTextContainer({ width: layoutItem.width })}>
           {data ? (
             <>
-              <p>{toTitleCase(data.category ?? "")}</p>
+              <p>{data.category}</p>
               <div className={Styles.ItemTextContent}>
                 <p>{data.title}</p>
                 <p className={Styles.ItemTextSummary}>{data.summary}</p>

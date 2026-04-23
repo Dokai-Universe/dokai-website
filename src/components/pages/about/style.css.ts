@@ -110,7 +110,12 @@ export const MediasMedia = recipe({
     },
     size: {
       NORMAL: { gridColumnEnd: "span 4", aspectRatio: "16 / 9" },
-      FULL: { gridColumn: "1 / -1", aspectRatio: "21 / 9" },
+      FULL: {
+        gridColumn: "1 / -1",
+        aspectRatio: "21 / 9",
+        marginLeft: "-20px",
+        width: "calc(100% + 40px)",
+      },
     },
   },
   defaultVariants: {
@@ -225,12 +230,12 @@ export const CardIconContainer = style({
   position: "relative",
   width: "100%",
   height: "auto",
-  aspectRatio: "5 / 3",
+  aspectRatio: "7 / 3",
   overflow: "hidden",
 
   "@media": {
     [media.mobile]: {
-      height: "4rem",
+      height: "3rem",
     },
   },
 });
