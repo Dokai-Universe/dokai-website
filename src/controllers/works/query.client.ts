@@ -1,6 +1,7 @@
 import { InfiniteQueryDef, QueryDef } from "../common";
 import {
   fetchMainWorks,
+  fetchWorkCategories,
   fetchWorkCheckSlug,
   fetchWorkDetail,
   fetchWorkList,
@@ -8,6 +9,7 @@ import {
 } from "./fetch";
 import { worksQueryKeys } from "./keys";
 import {
+  WorkCategoriesResponse,
   WorkDetailResponse,
   WorkListInfiniteResponse,
   WorkListResponse,
@@ -39,5 +41,9 @@ export const worksQueriesClient = {
   checkSlug: (slug: string): QueryDef<{ exists: boolean }> => ({
     queryKey: worksQueryKeys.checkSlug(slug),
     queryFn: () => fetchWorkCheckSlug(slug),
+  }),
+  workCategories: (): QueryDef<WorkCategoriesResponse> => ({
+    queryKey: worksQueryKeys.workCategories(),
+    queryFn: () => fetchWorkCategories(),
   }),
 };

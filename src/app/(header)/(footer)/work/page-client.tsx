@@ -1,26 +1,22 @@
 "use client";
 
-import categories from "@ts/categories";
-import { toTitleCase } from "@utils/Text";
 import Link from "next/link";
 import * as Styles from "./style.css";
 import { useMemo, useState } from "react";
 import MoreButton from "@components/ui/Button/More/MoreButton";
 import MediaHoverOverlay from "@components/ui/Media/HoverOverlay/HoverOverlay";
-import { WorkCategory } from "@domain/work";
 import FloatingButton, {
   FloatingButtonContainer,
 } from "@components/ui/Button/FloatingButton/FloatingButton";
 import { useRouter } from "nextjs-toploader/app";
-import { useAppInfiniteQuery } from "@controllers/common";
+import { useAppInfiniteQuery, useAppQuery } from "@controllers/common";
 import { worksQueriesClient } from "@controllers/works/query.client";
 import MediaCard from "@components/ui/Media/MediaCard/MediaCard";
 
 const WorkPageClient = () => {
   const router = useRouter();
-  const [selectedCategory, setSelectedCategory] = useState<
-    WorkCategory | "Everything"
-  >("Everything");
+  const [selectedCategory, setSelectedCategory] =
+    useState<string>("Everything");
 
   const {
     data: works,
@@ -28,16 +24,17 @@ const WorkPageClient = () => {
     hasNextPage,
     isLoading,
   } = useAppInfiniteQuery(worksQueriesClient.workList(selectedCategory));
-
-  const categoryGroups = useMemo(
-    () =>
-      Array.from(
-        { length: Math.ceil(categories.length / 4) },
-        (_, i) =>
-          categories.slice(i * 4, i * 4 + 4) as (WorkCategory | "Everything")[],
-      ),
-    [],
+  const { data: workCategories } = useAppQuery(
+    worksQueriesClient.workCategories(),
   );
+
+  const categoryGroups = useMemo(() => {
+    const workCategoriesList = ["Everything", ...(workCategories?.list ?? [])];
+    return Array.from(
+      { length: Math.ceil(workCategoriesList.length / 4) },
+      (_, i) => workCategoriesList.slice(i * 4, i * 4 + 4),
+    );
+  }, [workCategories?.list]);
 
   return (
     <>

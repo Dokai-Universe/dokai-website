@@ -2,7 +2,6 @@ import TitleInputValidate from "@components/ui/Edit/TitleInputValidate/TitleInpu
 import { useFormContext } from "react-hook-form";
 import { WorkInput } from "./work";
 import TitleSelect from "@components/ui/Edit/TitleSelect/TitleSelect";
-import { WorkCategoryList } from "./work";
 import TitleTextArea from "@components/ui/Edit/TitleTextArea/TitleTextArea";
 import EditPublished from "@components/ui/Edit/EditPublished/EditPublished";
 import * as Styles from "./style.css";
@@ -11,9 +10,15 @@ import { MediaSource } from "@domain/media";
 import { fetchWorkCheckSlug } from "@controllers/works/fetch";
 import { ApiError } from "@controllers/common";
 import ErrorText from "@components/ui/Edit/ErrorText/ErrorText";
+import { useAppQuery } from "@controllers/common";
+import { worksQueriesClient } from "@controllers/works/query.client";
 
 const WorkEditInfo = () => {
   const form = useFormContext<WorkInput>();
+
+  const { data: workCategories } = useAppQuery(
+    worksQueriesClient.workCategories(),
+  );
 
   const {
     watch,
@@ -71,7 +76,7 @@ const WorkEditInfo = () => {
           placeholder="Select a category."
           form={form}
           name="category"
-          options={WorkCategoryList}
+          options={workCategories?.list ?? []}
         />
         <TitleTextArea
           title="Summary"

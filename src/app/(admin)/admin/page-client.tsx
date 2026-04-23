@@ -5,6 +5,7 @@ import * as Styles from "./style.css";
 import DashboardSection from "@components/pages/admin/Dashboard";
 import MembersSection from "@components/pages/admin/members/Section";
 import AdminTabs, { AdminTab } from "@components/pages/admin/Tabs";
+import WorksSection from "@components/pages/admin/works/Section";
 
 // import WorksSection from "./WorksSection";
 
@@ -22,7 +23,7 @@ const AdminPageClient = () => {
 
       {activeTab === "Dashboard" && <DashboardSection />}
       {activeTab === "Members" && <MembersSection />}
-      {/* {activeTab === "Works" && <WorksSection />} */}
+      {activeTab === "Works" && <WorksSection />}
     </div>
   );
 };

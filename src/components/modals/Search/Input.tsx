@@ -5,8 +5,8 @@ import SearchSVG from "@assets/icons/search.svg";
 import useElementRect from "@hooks/useElementRect";
 import { normalize } from "@utils/Text";
 import { getRandomColor, getReadableTextColor } from "@utils/Color";
-
-const Tags = ["Branding", "2D", "3D", "Character"];
+import { useAppQuery } from "@controllers/common";
+import { worksQueriesClient } from "@controllers/works/query.client";
 
 const SearchInput = ({
   queries,
@@ -17,6 +17,9 @@ const SearchInput = ({
   addQuery: (value: string) => boolean;
   removeQuery: (value: string) => void;
 }) => {
+  const { data: workCategories } = useAppQuery(
+    worksQueriesClient.workCategories(),
+  );
   const [inputValue, setInputValue] = useState("");
 
   const { elementRef: inputContainerRef, height: inputContainerHeight } =
@@ -57,7 +60,7 @@ const SearchInput = ({
   useEffect(() => {
     //eslint-disable-next-line react-hooks/exhaustive-deps
     setTagHoverColors(
-      Tags.reduce(
+      workCategories?.list?.reduce(
         (acc, tag) => {
           const randomColor = getRandomColor();
           acc[tag] = {
@@ -67,9 +70,9 @@ const SearchInput = ({
           return acc;
         },
         {} as Record<string, { bg: string; fg: string }>,
-      ),
+      ) ?? {},
     );
-  }, []);
+  }, [workCategories?.list]);
 
   useEffect(() => {
     inputContainerRef.current?.style.setProperty(
@@ -118,7 +121,7 @@ const SearchInput = ({
         </label>
       </form>
       <div className={Styles.TagContainer} data-has-query={hasQuery}>
-        {Tags.map((tag) => (
+        {workCategories?.list?.map((tag) => (
           <button
             key={`SEARCH_TAG_${tag}`}
             className={Styles.Tag}

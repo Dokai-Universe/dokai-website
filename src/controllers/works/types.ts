@@ -33,6 +33,11 @@ export type WorkDetailResponse = {
   updatedAt: string;
 };
 
+export type WorkCategoriesResponse = {
+  type: string;
+  list: string[];
+};
+
 // ===== Requests =====
 
 export type WorkUpsertRequest = {

@@ -6,10 +6,12 @@ export const worksQueryKeys = {
   workSearch: (queries: string[]) => ["works", "search", ...queries] as const,
   workDetail: (slug: string) => ["works", "detail", slug] as const,
   checkSlug: (slug: string) => ["works", "check-slug", slug] as const,
+  workCategories: () => ["categories"] as const,
 };
 
 export const worksMutationKeys = {
   createWork: () => ["works", "create"] as const,
   updateWork: () => ["works", "update"] as const,
   deleteWork: () => ["works", "delete"] as const,
+  categoriesUpdate: () => ["categories", "update-work"] as const,
 };

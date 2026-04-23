@@ -1,11 +1,7 @@
 import * as Styles from "./style.css";
-import categories, { Category } from "@ts/categories";
 import { toTitleCase } from "@utils/Text";
 import MediaHoverOverlay from "@components/ui/Media/HoverOverlay/HoverOverlay";
-import { useWorksInfiniteQuery } from "@controllers/work/query";
 import { useMemo, useState } from "react";
-import { WorkCard } from "@domain/work";
-import Link from "next/link";
 import CloseLink from "@components/ui/Link/CloseLink";
 import { worksQueriesClient } from "@controllers/works/query.client";
 import { useAppInfiniteQuery } from "@controllers/common";

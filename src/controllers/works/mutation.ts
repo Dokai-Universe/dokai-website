@@ -1,4 +1,9 @@
-import { fetchWorkCreate, fetchWorkDelete, fetchWorkUpdate } from "./fetch";
+import {
+  fetchWorkCategoriesUpdate,
+  fetchWorkCreate,
+  fetchWorkDelete,
+  fetchWorkUpdate,
+} from "./fetch";
 import { worksMutationKeys, worksQueryKeys } from "./keys";
 import { WorkUpsertRequest } from "./types";
 
@@ -18,6 +23,12 @@ export const worksMutations = {
   deleteWork: (id: string) => ({
     mutationKey: worksMutationKeys.deleteWork(),
     mutationFn: () => fetchWorkDelete(id),
+    invalidateQueryKeys: [worksQueryKeys.all()],
+  }),
+
+  categoriesUpdate: () => ({
+    mutationKey: worksMutationKeys.categoriesUpdate(),
+    mutationFn: (list: string[]) => fetchWorkCategoriesUpdate(list),
     invalidateQueryKeys: [worksQueryKeys.all()],
   }),
 };

@@ -1,4 +1,5 @@
 import type {
+  WorkCategoriesResponse,
   WorkDetailResponse,
   WorkListInfiniteResponse,
   WorkListResponse,
@@ -86,4 +87,17 @@ export const fetchWorkUpdate = (id: string, body: WorkUpsertRequest) =>
 export const fetchWorkDelete = (id: string) =>
   fetchApi<void>(`/api/admin/works/${id}`, {
     method: "DELETE",
+  });
+
+//
+
+export const fetchWorkCategories = () =>
+  fetchApi<WorkCategoriesResponse>(`/api/public/categories?type=works`, {
+    method: "GET",
+  });
+
+export const fetchWorkCategoriesUpdate = (list: string[]) =>
+  fetchApi<void, { type: "works"; list: string[] }>(`/api/admin/categories`, {
+    method: "PATCH",
+    body: { type: "works", list },
   });

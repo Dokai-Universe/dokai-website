@@ -1,18 +1,6 @@
 import z from "zod";
 
-export const WorkCategoryList = [
-  "Branding",
-  "Exhibition",
-  "OOH",
-  "Animate",
-  "Award",
-  "Film",
-  "Social Contents",
-] as const;
-
 const mediaSourceSchema = z.unknown();
-
-export const workCategorySchema = z.enum(WorkCategoryList);
 
 export const profileContactSchema = z.object({
   name: z.string().min(1),
@@ -46,7 +34,7 @@ export const workSchema = z.object({
   thumbnail: mediaSourceSchema
     .nullable()
     .refine((v) => !!v, "Thumbnail is required"),
-  category: workCategorySchema,
+  category: z.string().min(1, "Category is required"),
   summary: z.string().min(1, "Summary is required"),
   productionDate: z
     .object({

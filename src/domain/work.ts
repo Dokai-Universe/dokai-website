@@ -1,14 +1,4 @@
-import { Category } from "@ts/categories";
 import type { MediaSource } from "./media";
-
-export type WorkCategory =
-  | "Branding"
-  | "Exhibition"
-  | "OOH"
-  | "Animate"
-  | "Award"
-  | "Film"
-  | "Social Contents";
 
 export type WorkMetaField = {
   name: string;
@@ -31,7 +21,7 @@ export type WorkProductionDate = {
 export type Work = {
   title: string;
   thumbnail: MediaSource | null;
-  category: WorkCategory;
+  category: string;
   summary: string;
   productionDate: WorkProductionDate;
   productionType: string;
@@ -52,6 +42,6 @@ export type WorkCard = {
   title: string;
   thumbnail: MediaSource | null;
   summary: string;
-  category: Category;
+  category: string;
   fixedAt: string | null;
 };
