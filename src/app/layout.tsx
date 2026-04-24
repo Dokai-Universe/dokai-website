@@ -17,13 +17,6 @@ const dmSans = DM_Sans({
   display: "swap",
 });
 
-const sourceSans3 = Source_Sans_3({
-  subsets: ["latin"],
-  variable: "--font-source-sans-3",
-  weight: ["300", "400", "500", "600", "700"],
-  display: "swap",
-});
-
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || ""),
   title: {
@@ -54,7 +47,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={lightThemeClass}>
-      <body className={`${dmSans.variable} ${sourceSans3.variable}`}>
+      <body className={`${dmSans.variable}`}>
         <NextTopLoader
           showSpinner={true}
           height={4}

@@ -16,7 +16,7 @@ globalStyle("html", {
 
 globalStyle("body", {
   fontFamily:
-    'var(--font-source-sans-3), var(--font-dm-sans), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"',
+    'var(--font-dm-sans), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"',
   lineHeight: 1.5,
   WebkitFontSmoothing: "antialiased",
   MozOsxFontSmoothing: "grayscale",
