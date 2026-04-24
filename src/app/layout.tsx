@@ -33,6 +33,8 @@ export const metadata: Metadata = {
     locale: "ko_KR",
     type: "website",
     images: "/og-image.png",
+    url: "https://dokaiuniverse.ai",
+    siteName: "DOKAI UNIVERSE",
   },
   twitter: {
     card: "summary_large_image",
