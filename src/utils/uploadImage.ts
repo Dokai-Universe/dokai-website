@@ -19,6 +19,8 @@ export const uploadImage = async (file: File) => {
     }),
   });
 
+  console.log("여기 folder 수정해야함!!");
+
   const presign = await res.json();
 
   if (presign.error) throw new Error(presign.error);

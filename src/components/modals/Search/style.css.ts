@@ -238,6 +238,8 @@ export const TagContainer = style({
   gap: "0.5rem",
   transition: "opacity 0.5s ease-in-out",
   margin: "0 1rem",
+  background: vars.color.bg,
+  paddingBottom: "1rem",
 
   selectors: {
     '&[data-has-query="true"]': {
@@ -266,7 +268,7 @@ export const Tag = style({
   background: vars.color.bg,
   borderRadius: vars.radius.full,
   transition:
-    "background 0.2s ease-in-out, color 0.2s ease-in-out, opacity 0.2s ease-in-out, border-color 0.2s ease-in-out",
+    "background 0.2s ease-in-out, color 0.2s ease-in-out, opacity 0.2s ease-in-out",
   border: `1px solid ${vars.color.fg}`,
 
   selectors: {
@@ -450,7 +452,7 @@ export const ResultItem = style({
 export const ResultItemMedia = style({
   width: "100%",
   height: "auto",
-  aspectRatio: "6 / 7",
+  aspectRatio: "16 / 9",
   overflow: "hidden",
 
   fontSize: vars.fontSize.lg,
@@ -461,7 +463,7 @@ export const ResultItemMedia = style({
 
   "@media": {
     [media.tablet]: {
-      aspectRatio: "4 / 3",
+      aspectRatio: "16 / 9",
     },
   },
 });

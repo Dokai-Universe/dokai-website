@@ -153,5 +153,5 @@ export const ItemTextContent = style({
 });
 
 export const ItemTextSummary = style({
-  color: vars.color.border,
+  opacity: "0.3",
 });
