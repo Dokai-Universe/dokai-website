@@ -1,0 +1,64 @@
+import { InfiniteQueryDef, QueryDef } from "../common";
+import {
+  fetchAdminFixedWorks,
+  fetchAdminWorkSearch,
+  fetchMainWorks,
+  fetchWorkCategories,
+  fetchWorkCheckSlug,
+  fetchWorkDetail,
+  fetchWorkList,
+  fetchWorkSearch,
+} from "./fetch";
+import { worksQueryKeys } from "./keys";
+import {
+  AdminWorkListInfiniteResponse,
+  AdminWorkListItem,
+  WorkCategoriesResponse,
+  WorkDetailResponse,
+  WorkListInfiniteResponse,
+  WorkListResponse,
+} from "./types";
+
+export const worksQueriesClient = {
+  mainWorks: (): QueryDef<WorkListResponse> => ({
+    queryKey: worksQueryKeys.mainWorks(),
+    queryFn: () => fetchMainWorks(),
+  }),
+  workList: (
+    category?: string,
+  ): InfiniteQueryDef<WorkListInfiniteResponse> => ({
+    queryKey: worksQueryKeys.workList(category),
+    queryFn: ({ pageParam }) =>
+      fetchWorkList({ category, page: pageParam, limit: 16 }),
+  }),
+  workSearch: (
+    queries: string[],
+  ): InfiniteQueryDef<WorkListInfiniteResponse> => ({
+    queryKey: worksQueryKeys.workSearch(queries),
+    queryFn: ({ pageParam }) =>
+      fetchWorkSearch({ queries, page: pageParam, limit: 12 }),
+  }),
+  adminWorkSearch: (
+    query?: string,
+  ): InfiniteQueryDef<AdminWorkListInfiniteResponse> => ({
+    queryKey: worksQueryKeys.adminWorkSearch(query),
+    queryFn: ({ pageParam }) =>
+      fetchAdminWorkSearch({ query, page: pageParam, limit: 12 }),
+  }),
+  adminFixedWorks: (): QueryDef<{ items: AdminWorkListItem[] }> => ({
+    queryKey: worksQueryKeys.adminFixedWorks(),
+    queryFn: () => fetchAdminFixedWorks(),
+  }),
+  workDetail: (slug: string): QueryDef<WorkDetailResponse> => ({
+    queryKey: worksQueryKeys.workDetail(slug),
+    queryFn: () => fetchWorkDetail(slug),
+  }),
+  checkSlug: (slug: string): QueryDef<{ exists: boolean }> => ({
+    queryKey: worksQueryKeys.checkSlug(slug),
+    queryFn: () => fetchWorkCheckSlug(slug),
+  }),
+  workCategories: (): QueryDef<WorkCategoriesResponse> => ({
+    queryKey: worksQueryKeys.workCategories(),
+    queryFn: () => fetchWorkCategories(),
+  }),
+};
