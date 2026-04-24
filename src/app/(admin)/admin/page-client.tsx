@@ -10,7 +10,7 @@ import WorksSection from "@components/pages/admin/works/Section";
 // import WorksSection from "./WorksSection";
 
 const AdminPageClient = () => {
-  const [activeTab, setActiveTab] = useState<AdminTab>("Works");
+  const [activeTab, setActiveTab] = useState<AdminTab>("Dashboard");
 
   return (
     <div className={Styles.Container}>
