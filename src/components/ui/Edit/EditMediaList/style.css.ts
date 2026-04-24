@@ -1,3 +1,4 @@
+import { vars } from "@styles/theme.css";
 import { style } from "@vanilla-extract/css";
 
 export const Container = style({
@@ -23,8 +24,9 @@ export const AddMedia = style({
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  background: "white",
-  border: "2px solid #bbb",
+  background: vars.color.bg,
+  border: "2px solid",
+  borderColor: vars.color.border,
   opacity: "0.4",
   borderRadius: "0.5rem",
 

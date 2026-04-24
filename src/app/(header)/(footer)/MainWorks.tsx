@@ -166,7 +166,7 @@ const MainWorks = () => {
             <>
               <p>{data.category}</p>
               <div className={Styles.ItemTextContent}>
-                <p>{data.title}</p>
+                <p className={Styles.ItemTextTitle}>{data.title}</p>
                 <p className={Styles.ItemTextSummary}>{data.summary}</p>
               </div>
             </>

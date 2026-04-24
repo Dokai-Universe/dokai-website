@@ -7,7 +7,8 @@ export const Container = style({
   maxHeight: "4rem",
   justifyContent: "space-between",
   transition: "max-height 0.3s ease-in-out",
-  borderBottom: "1px solid rgba(0,0,0,0.12)",
+  borderBottom: "1px solid",
+  borderColor: vars.color.border,
   overflow: "hidden",
 
   selectors: {
@@ -47,6 +48,7 @@ export const BackButtonIcon = style({
   width: "1.5rem",
   height: "auto",
   aspectRatio: "1 / 1",
+  stroke: vars.color.fg,
 });
 
 export const Email = style({
@@ -77,7 +79,8 @@ export const ToggleButton = style({
   top: "1rem",
   right: "1rem",
   padding: "0.25rem",
-  border: "1px solid rgba(0,0,0,0.12)",
+  border: "1px solid",
+  borderColor: vars.color.border,
   borderRadius: "999px",
   transition: "transform 0.3s ease-in-out",
 
@@ -92,4 +95,5 @@ export const ToggleButtonIcon = style({
   width: "1.5rem",
   height: "auto",
   aspectRatio: "1 / 1",
+  fill: vars.color.fg,
 });

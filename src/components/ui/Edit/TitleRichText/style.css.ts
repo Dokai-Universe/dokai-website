@@ -19,6 +19,7 @@ export const Content = style({
   borderRadius: "0.25rem",
   padding: "0.5rem",
   transition: "border-color 0.1s ease-in-out",
+  background: vars.color.input,
 
   selectors: {
     "&:hover, &:focus-within": {

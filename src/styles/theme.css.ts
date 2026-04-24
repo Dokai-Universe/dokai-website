@@ -28,7 +28,7 @@ export const lightThemeClass = createTheme(vars, {
     text: grayscale.black,
     border: grayscale.gray300,
     lightGray: grayscale.gray300,
-    input: "#EFEFEF",
+    input: grayscale.white,
   },
   radius: {
     full: "999px",

@@ -484,6 +484,12 @@ export const ResultItemText = style({
   letterSpacing: "0.04rem",
   transition: "opacity 0.2s ease-in-out",
   textAlign: "left",
+  textOverflow: "ellipsis",
+  overflow: "hidden",
+  wordBreak: "break-word",
+  display: "-webkit-box",
+  WebkitLineClamp: 2,
+  WebkitBoxOrient: "vertical",
 });
 
 globalStyle(`${ResultItem}:hover > p`, {

@@ -34,7 +34,7 @@ type OrderChangePayload = {
 
 type Props = {
   profiles: ProfileListItem[];
-  onChangeOrder?: (payload: OrderChangePayload) => void;
+  onOrderChange?: (profiles: ProfileListItem[]) => void;
 };
 
 const SortableProfileItem = ({ profile }: { profile: ProfileListItem }) => {
@@ -80,11 +80,8 @@ const SortableProfileItem = ({ profile }: { profile: ProfileListItem }) => {
   );
 };
 
-const CareersPageEditProfileList = ({ profiles, onChangeOrder }: Props) => {
+const CareersPageEditProfileList = ({ profiles, onOrderChange }: Props) => {
   const [items, setItems] = useState(profiles);
-  const { mutateAsync: mutateUpdateProfileOrder } = useAppMutation(
-    careersMutations.updateProfileOrder(),
-  );
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -107,34 +104,11 @@ const CareersPageEditProfileList = ({ profiles, onChangeOrder }: Props) => {
       const oldIndex = prev.findIndex((item) => item.email === active.id);
       const newIndex = prev.findIndex((item) => item.email === over.id);
 
-      const movedProfile = prev[oldIndex];
-
       const nextItems = arrayMove(prev, oldIndex, newIndex);
 
-      onChangeOrder?.({
-        profile: movedProfile,
-        from: oldIndex,
-        to: newIndex,
-        items: nextItems,
-      });
+      onOrderChange?.(nextItems);
 
       return nextItems;
-    });
-  };
-
-  const isDirty = items.some(
-    (item, index) => item.email !== profiles[index]?.email,
-  );
-
-  const { push } = useModalStackStore();
-
-  const handleSave = () => {
-    push("API", {
-      title: "Update Profile Order",
-      onFetch: async () =>
-        mutateUpdateProfileOrder({
-          emails: items.map((profile) => profile.email),
-        }),
     });
   };
 
@@ -149,18 +123,9 @@ const CareersPageEditProfileList = ({ profiles, onChangeOrder }: Props) => {
         strategy={rectSortingStrategy}
       >
         <div className={Styles.ProfileListContainer}>
-          <div className={Styles.ProfileListSaveButtonContainer}>
-            <button
-              onClick={handleSave}
-              disabled={!isDirty}
-              className={Styles.ProfileListSaveButton}
-            >
-              Save
-            </button>
-          </div>
-          {items.map((profile, idx) => (
+          {items.map((profile) => (
             <SortableProfileItem
-              key={`CAREERS_${profile.email}_${idx}`}
+              key={`CAREERS_${profile.email}`}
               profile={profile}
             />
           ))}

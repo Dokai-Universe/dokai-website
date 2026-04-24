@@ -14,7 +14,7 @@ import {
   careersPageSchema,
   initalCareersPage,
 } from "@components/pages/careers/career";
-import { CareerPageDetail } from "@domain/careers";
+import { CareerPageDetail, ProfileListItem } from "@domain/careers";
 import CareersPageContent from "@components/pages/careers/Content";
 import CareersPageEditContent from "@components/pages/careers/EditContent";
 import AddButton from "@components/ui/Edit/AddButton/AddButton";
@@ -28,6 +28,7 @@ import CareersPageEditProfileList from "@components/pages/careers/EditProfileLis
 const CareersPageEditPageClient = () => {
   const router = useRouter();
   const [mode, setMode] = useState<"VIEW" | "EDIT">("EDIT");
+  const [orderedProfiles, setOrderedProfiles] = useState<ProfileListItem[]>([]);
 
   const { data: profiles } = useAppQuery(careersQueriesClient.profileList());
   const { data: pageDetail } = useAppQuery(
@@ -35,6 +36,9 @@ const CareersPageEditPageClient = () => {
   );
   const { mutateAsync: mutateUpdateCareersPage } = useAppMutation(
     careersMutations.updateCareersPage(),
+  );
+  const { mutateAsync: mutateUpdateProfileOrder } = useAppMutation(
+    careersMutations.updateProfileOrder(),
   );
 
   const form = useForm<CareersPageFormInput>({
@@ -55,6 +59,11 @@ const CareersPageEditPageClient = () => {
     }
   }, [pageDetail, reset]);
 
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    setOrderedProfiles(profiles?.items ?? []);
+  }, [profiles]);
+
   const handleAddContent = () => {
     const contents = getValues("contents") ?? [];
     setValue("contents", [
@@ -66,6 +75,10 @@ const CareersPageEditPageClient = () => {
       },
     ]);
   };
+
+  const isProfileOrderDirty =
+    orderedProfiles.map((item) => item.email).join("|") !==
+    (profiles?.items ?? []).map((item) => item.email).join("|");
 
   const { push } = useModalStackStore();
 
@@ -79,10 +92,17 @@ const CareersPageEditPageClient = () => {
 
     push("API", {
       title: "Update Careers Page",
-      onFetch: async () =>
-        mutateUpdateCareersPage({
+      onFetch: async () => {
+        await mutateUpdateCareersPage({
           data: nextCareerPageDetail,
-        }),
+        });
+
+        if (isProfileOrderDirty) {
+          await mutateUpdateProfileOrder({
+            emails: orderedProfiles.map((profile) => profile.email),
+          });
+        }
+      },
       onConfirm: () => {
         router.replace(`/careers`);
       },
@@ -117,7 +137,10 @@ const CareersPageEditPageClient = () => {
               onClick={handleAddContent}
               className={Styles.AddButton}
             />
-            <CareersPageEditProfileList profiles={profiles?.items ?? []} />
+            <CareersPageEditProfileList
+              profiles={profiles?.items ?? []}
+              onOrderChange={setOrderedProfiles}
+            />
           </FormProvider>
         )}
       </div>

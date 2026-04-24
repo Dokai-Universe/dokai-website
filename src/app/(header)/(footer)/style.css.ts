@@ -152,6 +152,21 @@ export const ItemTextContent = style({
   },
 });
 
+export const ItemTextTitle = style({
+  textOverflow: "ellipsis",
+  overflow: "hidden",
+  wordBreak: "break-word",
+  display: "-webkit-box",
+  WebkitLineClamp: 2,
+  WebkitBoxOrient: "vertical",
+});
+
 export const ItemTextSummary = style({
+  textOverflow: "ellipsis",
+  overflow: "hidden",
+  wordBreak: "break-word",
+  display: "-webkit-box",
+  WebkitLineClamp: 2,
+  WebkitBoxOrient: "vertical",
   opacity: "0.3",
 });
