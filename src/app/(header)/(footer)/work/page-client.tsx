@@ -2,8 +2,7 @@
 
 import Link from "next/link";
 import * as Styles from "./style.css";
-import { useMemo, useState } from "react";
-import MoreButton from "@components/ui/Button/More/MoreButton";
+import { useEffect, useMemo, useRef, useState } from "react";
 import MediaHoverOverlay from "@components/ui/Media/HoverOverlay/HoverOverlay";
 import FloatingButton, {
   FloatingButtonContainer,
@@ -15,6 +14,8 @@ import MediaCard from "@components/ui/Media/MediaCard/MediaCard";
 
 const WorkPageClient = () => {
   const router = useRouter();
+  const observerRef = useRef<HTMLDivElement | null>(null);
+
   const [selectedCategory, setSelectedCategory] =
     useState<string>("Everything");
 
@@ -23,18 +24,47 @@ const WorkPageClient = () => {
     fetchNextPage,
     hasNextPage,
     isLoading,
+    isFetchingNextPage,
   } = useAppInfiniteQuery(worksQueriesClient.workList(selectedCategory));
+
   const { data: workCategories } = useAppQuery(
     worksQueriesClient.workCategories(),
   );
 
   const categoryGroups = useMemo(() => {
     const workCategoriesList = ["Everything", ...(workCategories?.list ?? [])];
+
     return Array.from(
       { length: Math.ceil(workCategoriesList.length / 4) },
       (_, i) => workCategoriesList.slice(i * 4, i * 4 + 4),
     );
   }, [workCategories?.list]);
+
+  useEffect(() => {
+    const target = observerRef.current;
+    if (!target) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        if (!hasNextPage) return;
+        if (isFetchingNextPage) return;
+
+        fetchNextPage();
+      },
+      {
+        root: null,
+        rootMargin: "-100px",
+        threshold: 0,
+      },
+    );
+
+    observer.observe(target);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
 
   return (
     <>
@@ -64,6 +94,7 @@ const WorkPageClient = () => {
             </div>
           ))}
         </div>
+
         <div className={Styles.WorkItemsContainer}>
           {isLoading
             ? Array.from({ length: 16 }).map((_, idx) => (
@@ -85,6 +116,7 @@ const WorkPageClient = () => {
                     <MediaHoverOverlay
                       media={item.data.thumbnail!}
                       className={Styles.WorkItemMedia}
+                      priority
                     >
                       <div className={Styles.WorkItemMediaOverlay}>
                         <p>{item.data.summary}</p>
@@ -93,9 +125,31 @@ const WorkPageClient = () => {
                     <p className={Styles.WorkItemText}>{item.data.title}</p>
                   </Link>
                 ))}
+
+          {hasNextPage && (
+            <>
+              <div ref={observerRef} className={Styles.WorkItem}>
+                <MediaCard className={Styles.WorkItemMedia} />
+                <p className={Styles.WorkItemText}>
+                  <br />
+                </p>
+              </div>
+              {Array.from({ length: 3 }).map((_, idx) => (
+                <div
+                  key={`WORK_NEXT_LOADING_${idx}`}
+                  className={Styles.WorkItem}
+                >
+                  <MediaCard className={Styles.WorkItemMedia} />
+                  <p className={Styles.WorkItemText}>
+                    <br />
+                  </p>
+                </div>
+              ))}
+            </>
+          )}
         </div>
-        {hasNextPage && <MoreButton onClick={() => fetchNextPage()} />}
       </div>
+
       <FloatingButtonContainer role={["admin"]}>
         <FloatingButton
           type="ADD"

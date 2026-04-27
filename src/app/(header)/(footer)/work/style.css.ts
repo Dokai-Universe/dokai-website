@@ -143,6 +143,12 @@ export const WorkItemText = style({
   textAlign: "left",
 });
 
+export const InfiniteScrollObserver = style({
+  // display: "none",
+  width: "100%",
+  height: "1px",
+});
+
 globalStyle(`${WorkItem}:hover ${WorkItemText}`, {
   opacity: 0.5,
 });
