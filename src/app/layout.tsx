@@ -20,25 +20,27 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || ""),
   title: {
-    default: "DOKAI",
-    template: "%s | DOKAI",
+    default: "DOKAI UNIVERSE",
+    template: "%s | DOKAI UNIVERSE",
   },
   description: "Image Beyond AI. Create with Humanity",
   icons: {
     icon: "/dokai.svg",
   },
   openGraph: {
-    title: "DOKAI",
+    title: "DOKAI UNIVERSE",
     description: "Image Beyond AI. Create with Humanity",
     locale: "ko_KR",
     type: "website",
-    images: "/og-image.png",
+    images: "/dokai-og-image.png",
     url: "https://dokaiuniverse.ai",
     siteName: "DOKAI UNIVERSE",
   },
   twitter: {
     card: "summary_large_image",
-    images: "/og-image.png",
+    title: "DOKAI UNIVERSE",
+    description: "Image Beyond AI. Create with Humanity",
+    images: "/dokai-og-image.png",
   },
 };
 
