@@ -202,13 +202,15 @@ export const ContentItem = style({
 
 export const ContentItemName = style({
   fontSize: vars.fontSize.sm,
-  color: vars.color.border,
+  color: vars.color.fg,
+  opacity: "0.6",
   lineHeight: "1.83",
 });
 
 export const ContentItemText = style({
   fontSize: vars.fontSize.sm,
   fontWeight: "300",
+  wordBreak: "break-word",
 });
 
 export const ContentItemList = style({
@@ -217,6 +219,7 @@ export const ContentItemList = style({
   padding: "0",
   margin: "0",
   gap: "0.5rem",
+  flexWrap: "wrap",
 });
 
 export const ContentItemListItem = style({
@@ -226,6 +229,9 @@ export const ContentItemListItem = style({
   background: vars.color.bgSub,
   borderRadius: "0.25em",
   lineHeight: "1",
+  whiteSpace: "nowrap",
+  textOverflow: "ellipsis",
+  overflow: "hidden",
 });
 
 export const MediaContainer = style({
@@ -290,7 +296,7 @@ export const ContentEditButton = style({
   padding: "0.25rem",
   borderRadius: "0.5rem",
   background: "white",
-  margin: "0.5rem",
+  margin: "0rem",
   opacity: "0.5",
   transition: "opacity 0.2s ease-in-out",
   border: "1px solid #999",

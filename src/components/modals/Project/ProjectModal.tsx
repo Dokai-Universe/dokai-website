@@ -90,7 +90,11 @@ type Props = {
 const initialProject: Project & { isPublished: boolean } = {
   title: "",
   thumbnail: null,
-  contents: [],
+  contents: [
+    { type: "TEXT", name: "My role", value: "" },
+    { type: "TEXT", name: "Project description", value: "" },
+    { type: "LIST", name: "Skills and deliverables", value: [] },
+  ],
   medias: [],
   isPublished: false,
 };
