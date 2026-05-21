@@ -10,15 +10,6 @@ export const Layout = style({
   position: "relative",
 });
 
-export const HeadContent = style({
-  fontSize: "11px",
-  opacity: 0.6,
-  gridColumn: "1 / -1",
-  position: "absolute",
-  zIndex: "-1",
-  color: vars.color.bg,
-});
-
 // Logo
 
 export const LogoContainer = style({

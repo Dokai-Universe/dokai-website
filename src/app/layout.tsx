@@ -25,13 +25,15 @@ export const metadata: Metadata = {
     default: "DOKAI UNIVERSE",
     template: "%s | DOKAI UNIVERSE",
   },
-  description: "Image Beyond AI. Create with Humanity",
+  description:
+    "Image Beyond AI. Create with Humanity\n도카이(DOKAI)는 AI를 매개로 예술적 가치와 시각 문화를 확장하는 크리에이티브 스튜디오입니다.",
   icons: {
     icon: "/dokai.svg",
   },
   openGraph: {
     title: "DOKAI UNIVERSE",
-    description: "Image Beyond AI. Create with Humanity",
+    description:
+      "Image Beyond AI. Create with Humanity\n도카이(DOKAI)는 AI를 매개로 예술적 가치와 시각 문화를 확장하는 크리에이티브 스튜디오입니다.",
     url: "https://dokaiuniverse.ai",
     siteName: "DOKAI UNIVERSE",
     type: "website",
@@ -41,7 +43,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "DOKAI UNIVERSE",
-    description: "Image Beyond AI. Create with Humanity",
+    description:
+      "Image Beyond AI. Create with Humanity\n도카이(DOKAI)는 AI를 매개로 예술적 가치와 시각 문화를 확장하는 크리에이티브 스튜디오입니다.",
     images: "/dokai-og-image.png",
   },
 };
@@ -60,7 +63,8 @@ const jsonLd = [
     ],
     url: "https://dokaiuniverse.ai",
     logo: "https://dokaiuniverse.ai/dokai.svg",
-    description: "Image Beyond AI. Create with Humanity",
+    description:
+      "Image Beyond AI. Create with Humanity\n도카이(DOKAI)는 AI를 매개로 예술적 가치와 시각 문화를 확장하는 크리에이티브 스튜디오입니다.",
   },
   {
     "@context": "https://schema.org",
