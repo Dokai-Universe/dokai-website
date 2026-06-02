@@ -449,6 +449,7 @@ export const EditMediasContainer = recipe({
   base: {
     position: "relative",
     gridRowStart: "1",
+    width: "100%",
   },
   variants: {
     size: {
