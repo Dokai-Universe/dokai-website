@@ -59,7 +59,7 @@ export const ProfileListContainer = style({
     },
     [media.mobile]: {
       gridColumn: "1 / -1",
-      gridTemplateColumns: "repeat(1, 1fr)",
+      gridTemplateColumns: "repeat(2, 1fr)",
     },
   },
 });
