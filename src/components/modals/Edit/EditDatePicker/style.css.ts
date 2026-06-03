@@ -179,6 +179,29 @@ export const OptionFormatContainer = style({
   flexDirection: "column",
   gap: "0.5rem",
   overflow: "auto",
+  paddingRight: '0.25rem',
+
+  selectors: {
+    "&::-webkit-scrollbar": {
+      width: "0.5rem",
+
+      "@media": {
+        [media.tablet]: {
+          width: "8px",
+        },
+      },
+    },
+    "&::-webkit-scrollbar-track": {
+      background: "transparent",
+    },
+    "&::-webkit-scrollbar-thumb": {
+      background: vars.color.bg100,
+      borderRadius: "999px",
+    },
+    "&::-webkit-scrollbar-thumb:hover": {
+      background: vars.color.border,
+    },
+  },
 
   "@media": {
     [media.mobile]: {
@@ -187,6 +210,33 @@ export const OptionFormatContainer = style({
     },
   },
 });
+
+
+// export const Container = style({
+//   position: "sticky",
+//   gridColumn: "1 / span 3",
+//   fontSize: vars.fontSize.md,
+//   display: "grid",
+//   gridTemplateColumns: "repeat(8, 1fr)",
+//   rowGap: "1rem",
+//   columnGap: "1rem",
+//   height: "fit-content",
+//   top: `calc(2rem + var(--title-height))`,
+//   maxHeight: `calc(100dvh - 60px - 2rem - 1.5rem - var(--title-height) - 2rem)`,
+//   overflowX: "hidden",
+//   overflowY: "auto",
+//   paddingRight: "0.5rem",
+//   paddingBottom: "2rem",
+
+//   "@media": {
+//     [media.tablet]: {
+//       gridColumn: "1 / -1",
+//       rowGap: "1.5rem",
+//     },
+//   },
+
+// });
+
 
 export const OptionFormatItemContainer = style({
   display: "flex",

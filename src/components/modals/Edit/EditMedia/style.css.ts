@@ -1,5 +1,5 @@
 import { darkThemeClass, vars } from "@styles/theme.css";
-import { style, globalStyle } from "@vanilla-extract/css";
+import { style } from "@vanilla-extract/css";
 
 // List
 

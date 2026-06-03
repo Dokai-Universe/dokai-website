@@ -34,11 +34,12 @@ globalStyle("img, picture, video, canvas, svg", {
   maxWidth: "100%",
 });
 
-globalStyle("input, button, textarea, select", {
+globalStyle("input, button, textarea, select, option", {
   font: "inherit",
   color: vars.color.fg,
   background: vars.color.input,
 });
+
 
 globalStyle("a", {
   color: "inherit",
